@@ -59,7 +59,7 @@ MonoBehaviour:
     attackCooldown: 0.1
     attackAngle: 180
   weponTransform: {fileID: 4773649876002357056}
-  itemEquipped: {fileID: 11400000, guid: bcac8fd8a270be2468e6dbbb4b7356cd, type: 2}
+  itemEquipped: {fileID: 0}
   groundDiscludeMask:
     serializedVersion: 2
     m_Bits: 64

@@ -131,18 +131,19 @@ public class Player : MonoBehaviour, IHitReciever
         isAttackOnCooldown = true;
         weponTransform.gameObject.SetActive(true);
 
-        weponTransform.localRotation = Quaternion.identity;
-
         var posInCameraSpace = (Vector2)Camera.main.WorldToScreenPoint(transform.position);
         var mousePos = Mouse.current.position.ReadValue();
 
         var mousePosNormal = (posInCameraSpace - mousePos).normalized;
 
+        weponTransform.localRotation = mousePosNormal.x > 0 ? Quaternion.identity : Quaternion.Euler(0, 0, 180);
+        float rotationAngle = mousePosNormal.x > 0 ? stats.attackAngle : -stats.attackAngle;
+
         weponTransform.localScale = new Vector3(1, 1 * (mousePosNormal.x > 0 ? 1 : -1), 1);
 
         var seq = DOTween.Sequence();
         seq.Append(
-            weponTransform.DORotate(Vector3.forward * stats.attackAngle, stats.attackTime, RotateMode.LocalAxisAdd)
+            weponTransform.DORotate(Vector3.forward * rotationAngle, stats.attackTime, RotateMode.LocalAxisAdd)
             //.SetEase(Ease.OutExpo)
         );
         seq.AppendCallback(() =>
