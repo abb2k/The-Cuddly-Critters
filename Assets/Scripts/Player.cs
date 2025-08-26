@@ -1,4 +1,5 @@
 using DG.Tweening;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,33 +10,51 @@ public class Player : MonoBehaviour, IHitReciever
     [SerializeField] private Transform weponTransform;
     [SerializeField] private SpecialItem itemEquipped;
     [SerializeField] LayerMask groundDiscludeMask;
+    [SerializeField] private SpriteRenderer itemBodyVisual;
+    [SerializeField] private SpriteRenderer itemWeponVisual;
+    [SerializeField] private int belowPlayerSorting;
+    [SerializeField] private int abovePlayerSorting;
     private Rigidbody2D rb;
     private bool isOnGround = false;
-    private bool doubleJumpAvailable = false;
     private bool isAttacking = false;
     private bool isAttackOnCooldown = false;
 
     private Vector2 movementVec;
-
-    bool lastMovedLeft = false;
+    private bool lastMovedLeft = false;
+    
+    private bool isHoldingJump = false;
+    private int currentJumpsLeft;
+    private float isCurrentJumpOngoing = 0;
 
     void Start()
     {
         defaultStats = stats;
-        CreateModifiedStats();
+        EquipItem(itemEquipped);
         rb = GetComponent<Rigidbody2D>();
     }
 
-    void CreateModifiedStats()
+    void EquipItem(SpecialItem item)
     {
+        itemEquipped = item;
+
         stats = defaultStats.Clone();
-        if (itemEquipped)
-            stats += itemEquipped.modifyedStats;
+        if (itemEquipped == null) return;
+
+        stats += itemEquipped.modifyedStats;
+
+        itemBodyVisual.gameObject.SetActive(itemEquipped.bodyVisual != null);
+        itemBodyVisual.sprite = itemEquipped.bodyVisual;
+        itemBodyVisual.sortingOrder = itemEquipped.bodyVisualSorting == ItemVisualSorting.BelowPlayer ? belowPlayerSorting : abovePlayerSorting;
+
+        itemWeponVisual.gameObject.SetActive(itemEquipped.weponVisual != null);
+        itemWeponVisual.sprite = itemEquipped.weponVisual;
+        itemWeponVisual.sortingOrder = itemEquipped.weponVisualSorting == ItemVisualSorting.BelowPlayer ? belowPlayerSorting : abovePlayerSorting;
     }
 
     void FixedUpdate()
     {
         Movement();
+        Jumping();
     }
 
     void OnMove(InputValue input)
@@ -52,16 +71,32 @@ public class Player : MonoBehaviour, IHitReciever
             lastMovedLeft = true;
     }
 
-    void OnJump()
+    void OnJump(InputValue input)
     {
+        isHoldingJump = input.isPressed;
+        if (!input.isPressed)
+            JumpKeyReleased();
+        else
+            JumpKeyPressed();
+    }
+    void Jumping()
+    {
+        if (currentJumpsLeft <= 0 || !isHoldingJump || isCurrentJumpOngoing <= 0) return;
+        
+        rb.linearVelocityY = stats.jumpForce;
+        isCurrentJumpOngoing -= Time.fixedDeltaTime;
+    }
+
+    void JumpKeyPressed()
+    {
+        isCurrentJumpOngoing = stats.jumpTime;
         if (isOnGround)
-        {
-            rb.linearVelocityY = stats.jumpHight;
-        }
-        else if (doubleJumpAvailable && stats.canDoubleJump) {
-            rb.linearVelocityY = stats.jumpHight;
-            doubleJumpAvailable = false;
-        }
+            currentJumpsLeft++;
+    }
+
+    void JumpKeyReleased()
+    {
+        currentJumpsLeft = math.max(0, currentJumpsLeft - 1);
     }
 
     public void HitRecieved(int hitID, IHitReciever.HitType type, bool isTriggerHit, Colliders other)
@@ -73,7 +108,7 @@ public class Player : MonoBehaviour, IHitReciever
             else if (hitID == 1)
                 OnWeponHit(other.collider2D);
         }
-        
+
     }
 
     void OnFeetHit(Collider2D other, IHitReciever.HitType type)
@@ -82,7 +117,11 @@ public class Player : MonoBehaviour, IHitReciever
 
         isOnGround = type != IHitReciever.HitType.Exit;
         if (isOnGround)
-            doubleJumpAvailable = true;
+        {
+            currentJumpsLeft = stats.airJumpsAllowed;
+            if (isHoldingJump)
+                currentJumpsLeft++;
+        }
     }
 
     void OnAttack()

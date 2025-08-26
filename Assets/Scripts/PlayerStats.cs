@@ -5,9 +5,9 @@ public class PlayerStats
 {
     [Header("Movement")]
     public float movementSpeed;
-    public float jumpHight;
-
-    public bool canDoubleJump = false;
+    public float jumpForce;
+    public float jumpTime;
+    public int airJumpsAllowed;
     [Header("Attack")]
     public float attackTime;
     public float attackCooldown;
@@ -23,8 +23,9 @@ public class PlayerStats
         return new PlayerStats
         {
             movementSpeed = a.movementSpeed + b.movementSpeed,
-            jumpHight = a.jumpHight + b.jumpHight,
-            canDoubleJump = b.canDoubleJump,
+            jumpForce = a.jumpForce + b.jumpForce,
+            jumpTime = a.jumpTime + b.jumpTime,
+            airJumpsAllowed = a.airJumpsAllowed + b.airJumpsAllowed,
             attackTime = a.attackTime + b.attackTime,
             attackCooldown = a.attackCooldown + b.attackCooldown,
             attackAngle = a.attackAngle + b.attackAngle
