@@ -3,6 +3,7 @@ using DG.Tweening;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering.Universal;
 
 public class Player : Singleton<Player>, IHitReciever
 {
@@ -15,6 +16,9 @@ public class Player : Singleton<Player>, IHitReciever
     [SerializeField] private SpriteRenderer itemWeponVisual;
     [SerializeField] private int belowPlayerSorting;
     [SerializeField] private int abovePlayerSorting;
+    [SerializeField] private Light2D myLight;
+    [SerializeField] private float lightIntensity;
+    [SerializeField] private float lightTransitionTime;
 
 
     private Rigidbody2D rb;
@@ -30,11 +34,21 @@ public class Player : Singleton<Player>, IHitReciever
     private float isCurrentJumpOngoing = 0;
     private Coroutine cyotieRourine = null;
 
+    protected override bool CreateIfNone => false;
+
     void Start()
     {
         defaultStats = stats;
         EquipItem(itemEquipped);
         rb = GetComponent<Rigidbody2D>();
+    }
+
+    public void TurnLight(bool on)
+    {
+        if (on)
+            DOTween.To(() => myLight.intensity, x => myLight.intensity = x, lightIntensity, lightTransitionTime);
+        else
+            DOTween.To(() => myLight.intensity, x => myLight.intensity = x, 0, lightTransitionTime);
     }
 
     void EquipItem(SpecialItem item)

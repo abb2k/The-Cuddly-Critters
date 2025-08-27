@@ -115,7 +115,7 @@ MonoBehaviour:
   exitOffset: {x: 5, y: 10}
   swoopCenterPos: {x: 0, y: 0}
   swoopDistance: 8
-  swoopEntryTime: 1
+  swoopEntryTime: 2
   swoopTime: 2
   swoopBranchShakeTime: 1
   lightDetectRadius: 20
