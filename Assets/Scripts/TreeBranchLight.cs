@@ -1,0 +1,38 @@
+using DG.Tweening;
+using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.Rendering.Universal;
+
+public class TreeBranchLight : MonoBehaviour, IHittable
+{
+    [SerializeField] private Light2D myLight;
+    private Tween tunTween = null;
+    public bool isOn;
+
+    public event UnityAction<TreeBranchLight, bool> OnLightStateChanged;
+
+    public void OnHit(DamageInfo info)
+    {
+        if (info.damageSource.layer != LayerMask.NameToLayer("Player")) return;
+
+        TurnOn();
+    }
+
+    public void TurnOn()
+    {
+        tunTween?.Kill();
+        tunTween = DOTween.To(() => myLight.intensity, x => myLight.intensity = x, 1f, 2f);
+        isOn = true;
+
+        OnLightStateChanged?.Invoke(this, true);
+    }
+
+    public void TurnOff()
+    {
+        tunTween?.Kill();
+        tunTween = DOTween.To(() => myLight.intensity, x => myLight.intensity = x, 0, .5f);
+        isOn = false;
+
+        OnLightStateChanged?.Invoke(this, false);
+    }
+}

@@ -1,19 +1,22 @@
+using System.Collections;
 using DG.Tweening;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Player : MonoBehaviour, IHitReciever
+public class Player : Singleton<Player>, IHitReciever
 {
     [SerializeField] private PlayerStats stats;
     private PlayerStats defaultStats;
     [SerializeField] private Transform weponTransform;
     [SerializeField] private SpecialItem itemEquipped;
-    [SerializeField] LayerMask groundDiscludeMask;
+    [SerializeField] private LayerMask groundDiscludeMask;
     [SerializeField] private SpriteRenderer itemBodyVisual;
     [SerializeField] private SpriteRenderer itemWeponVisual;
     [SerializeField] private int belowPlayerSorting;
     [SerializeField] private int abovePlayerSorting;
+
+
     private Rigidbody2D rb;
     private bool isOnGround = false;
     private bool isAttacking = false;
@@ -21,10 +24,11 @@ public class Player : MonoBehaviour, IHitReciever
 
     private Vector2 movementVec;
     private bool lastMovedLeft = false;
-    
+
     private bool isHoldingJump = false;
     private int currentJumpsLeft;
     private float isCurrentJumpOngoing = 0;
+    private Coroutine cyotieRourine = null;
 
     void Start()
     {
@@ -82,7 +86,7 @@ public class Player : MonoBehaviour, IHitReciever
     void Jumping()
     {
         if (currentJumpsLeft <= 0 || !isHoldingJump || isCurrentJumpOngoing <= 0) return;
-        
+
         rb.linearVelocityY = stats.jumpForce;
         isCurrentJumpOngoing -= Time.fixedDeltaTime;
     }
@@ -96,7 +100,8 @@ public class Player : MonoBehaviour, IHitReciever
 
     void JumpKeyReleased()
     {
-        currentJumpsLeft = math.max(0, currentJumpsLeft - 1);
+        currentJumpsLeft -= 1;
+        if (currentJumpsLeft < 0) currentJumpsLeft = 0;
     }
 
     public void HitRecieved(int hitID, IHitReciever.HitType type, bool isTriggerHit, Colliders other)
@@ -115,13 +120,33 @@ public class Player : MonoBehaviour, IHitReciever
     {
         if ((groundDiscludeMask & (1 << other.gameObject.layer)) != 0) return;
 
-        isOnGround = type != IHitReciever.HitType.Exit;
+        if (type != IHitReciever.HitType.Exit)
+        {
+            if (cyotieRourine != null)
+            {
+                StopCoroutine(cyotieRourine);
+                cyotieRourine = null;
+            }
+            isOnGround = true;
+        }
+        else
+        {
+            if (cyotieRourine == null)
+                cyotieRourine = StartCoroutine(cyotieTimer());
+        }
         if (isOnGround)
         {
             currentJumpsLeft = stats.airJumpsAllowed;
             if (isHoldingJump)
                 currentJumpsLeft++;
         }
+    }
+
+    IEnumerator cyotieTimer()
+    {
+        yield return new WaitForSeconds(stats.cyotieTime);
+        isOnGround = false;
+        cyotieRourine = null;
     }
 
     void OnAttack()
@@ -144,7 +169,7 @@ public class Player : MonoBehaviour, IHitReciever
         var seq = DOTween.Sequence();
         seq.Append(
             weponTransform.DORotate(Vector3.forward * rotationAngle, stats.attackTime, RotateMode.LocalAxisAdd)
-            //.SetEase(Ease.OutExpo)
+        //.SetEase(Ease.OutExpo)
         );
         seq.AppendCallback(() =>
         {
@@ -162,8 +187,24 @@ public class Player : MonoBehaviour, IHitReciever
 
     void OnWeponHit(Collider2D other)
     {
-        if (!isAttacking || !isAttacking && isAttackOnCooldown) return;
-        
+        if (!isAttacking || other.gameObject.layer == LayerMask.NameToLayer("Player") || !isAttacking && isAttackOnCooldown) return;
 
+        if (!other.TryGetComponent(out IHittable hittable)) return;
+
+        var currDamage = stats.damage;
+        currDamage.knockbackNormal = (other.transform.position - transform.position).normalized;
+        currDamage.damageSource = gameObject;
+
+        hittable.OnHit(currDamage);
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        foreach (ContactPoint2D contact in collision.contacts)
+        {
+            if (Vector3.Dot(contact.normal, Vector3.down) <= 0.5f) continue;
+            
+            isCurrentJumpOngoing = 0;
+        }
     }
 }

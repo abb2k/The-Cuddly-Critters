@@ -8,7 +8,9 @@ public class PlayerStats
     public float jumpForce;
     public float jumpTime;
     public int airJumpsAllowed;
+    public float cyotieTime = 0;
     [Header("Attack")]
+    public DamageInfo damage;
     public float attackTime;
     public float attackCooldown;
     public float attackAngle;

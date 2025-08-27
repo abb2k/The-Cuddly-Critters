@@ -5,7 +5,7 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     private static T _instance;
     private static readonly object _objLock = new();
 
-    protected virtual string SingletonName => "Singleton";
+    protected virtual string SingletonName => null;
 
     void Awake()
     {
@@ -16,7 +16,8 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
         }
 
         _instance = this as T;
-        _instance.gameObject.name = SingletonName;
+        if (SingletonName != null)
+            _instance.gameObject.name = SingletonName;
     }
 
     public static T Get()
