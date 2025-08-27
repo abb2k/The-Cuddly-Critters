@@ -2,11 +2,12 @@ using UnityEngine;
 
 public class BossbarManager : Singleton<BossbarManager>
 {
-    private BossbarCanvas bossbarCanvas;
-    void Start()
+    public BossbarCanvas bossbarCanvas;
+    protected override string SingletonName => "BossbarManager";
+    protected override void Awake()
     {
         bossbarCanvas = Instantiate(Resources.Load<GameObject>("bossbarCanvas"), transform).GetComponent<BossbarCanvas>();
-        bossbarCanvas.gameObject.SetActive(false);
+        bossbarCanvas.bossbarContainer.SetActive(false);
     }
 
     private Enemy attachedEnemy;
@@ -14,14 +15,14 @@ public class BossbarManager : Singleton<BossbarManager>
     {
         attachedEnemy = e;
         e.OnHurtEvent += UpdateBar;
-        bossbarCanvas.gameObject.SetActive(true);
+        bossbarCanvas.bossbarContainer.SetActive(true);
         UpdateBar(e);
     }
 
     void Update()
     {
         if (attachedEnemy == null)
-            bossbarCanvas.gameObject.SetActive(false);
+            bossbarCanvas.bossbarContainer.SetActive(false);
     }
 
     void UpdateBar(Enemy e)

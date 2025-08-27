@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Events;
 
 public enum OwlAttacks
 {
@@ -11,7 +12,7 @@ public enum OwlAttacks
     Nosedive
 }
 
-public class Owl : Enemy
+public class Owl : BossEnemy
 {
     [SerializeField] private float normalResistence;
     [SerializeField] private float wooshResistence;
@@ -22,6 +23,14 @@ public class Owl : Enemy
     [SerializeField] private Vector2 maxEdges;
 
     [SerializeField] private SpriteRenderer sr;
+
+    [Header("EntryAnimation")]
+    [SerializeField] private Vector2 entryPoint;
+    [SerializeField] private float entryDownOffset;
+    [SerializeField] private float entryWaitTime;
+    [SerializeField] private float entryFlyTime;
+    [SerializeField] private float entryStayTime;
+    private bool didAttackLoopStart;
 
     [Header("IdleAttack")]
     [SerializeField] private float idleUpSpeed;
@@ -47,19 +56,19 @@ public class Owl : Enemy
     [Header("Woosh")]
     [SerializeField] private float lightDetectRadius;
     [SerializeField] private int annoyingLightsAmount;
-    [SerializeField] private Vector2 wooshStayPos;
+    [SerializeField] private Vector2[] wooshStayPositions;
     [SerializeField] private float wooshEnterTime;
     [SerializeField] private float wooshRadius;
     [SerializeField] private float wooshCircleAngle;
     [SerializeField] private float wooshForce;
+    [SerializeField] private float wooshTime;
+    [SerializeField] private float wooshExitTime;
 
-    private int lightsOnInRange = 0;
+    private List<TreeBranchLight> lightsOnInRange = new();
     private bool isWooshing = false;
 
-    protected override async void Start()
+    async void StartAttackLoop()
     {
-        base.Start();
-
         BossbarManager.Get().AttachToEnemy(this);
 
         swoopCenter = new GameObject();
@@ -70,17 +79,19 @@ public class Owl : Enemy
         await Task.Delay(1000);
 
         NextAttack();
+        didAttackLoopStart = true;
+        invincible = false;
     }
 
     void FixedUpdate()
     {
-        lightsOnInRange = 0;
+        lightsOnInRange.Clear();
         var hits = Physics2D.OverlapCircleAll(transform.position, lightDetectRadius);
         foreach (var hit in hits)
         {
             if (!hit.transform.TryGetComponent(out TreeBranchLight light)) continue;
 
-            if (light.isOn) lightsOnInRange++;
+            if (light.isOn) lightsOnInRange.Add(light);
         }
 
         if (isWooshing)
@@ -98,8 +109,8 @@ public class Owl : Enemy
     {
         sr.DOKill();
         var seq = DOTween.Sequence();
-        seq.Append(sr.DOColor(Color.red, .5f));
-        seq.Append(sr.DOColor(Color.white, .5f));
+        seq.Append(sr.DOColor(Color.red, .05f));
+        seq.Append(sr.DOColor(Color.white, .3f));
 
         seq.Play();
     }
@@ -111,11 +122,16 @@ public class Owl : Enemy
         if (Player.Get().transform.position.y > -4.5f) // on branch
             possibleAttacks.Add(OwlAttacks.Swoop, 70);
 
-        if (lightsOnInRange >= annoyingLightsAmount)
-            possibleAttacks.Add(OwlAttacks.Woosh, 100);
+        if (lightsOnInRange.Count >= annoyingLightsAmount)
+            possibleAttacks.Add(OwlAttacks.Woosh, 140);
 
         possibleAttacks.Add(OwlAttacks.Idle, 25);
-        possibleAttacks.Add(OwlAttacks.Nosedive, 50);
+
+        float nodediveWeight = 50;
+        if (Player.Get().transform.position.y > transform.position.y)
+            nodediveWeight = 25;
+
+        possibleAttacks.Add(OwlAttacks.Nosedive, nodediveWeight);
 
         currentAttack = possibleAttacks.ChooseRandom();
 
@@ -165,8 +181,23 @@ public class Owl : Enemy
     {
         var seq = DOTween.Sequence();
 
-        seq.Append(transform.DOMove(wooshStayPos, wooshEnterTime).SetEase(Ease.InOutSine));
-        seq.AppendCallback(() => isWooshing = true);
+        var decidedPos = wooshStayPositions[Random.Range(0, wooshStayPositions.Length)];
+
+        seq.Append(transform.DOMove(decidedPos, wooshEnterTime).SetEase(Ease.InOutSine));
+        seq.AppendInterval(wooshTime);
+        seq.JoinCallback(async () =>
+        {
+            isWooshing = true;
+            await Task.Delay(500);
+
+            lightsOnInRange.ForEach(l => l.TurnOff());
+        });
+        seq.AppendInterval(wooshExitTime);
+        seq.JoinCallback(() =>
+        {
+            isWooshing = false;
+            OnAttackComplete();
+        });
     }
     void WooshUpdate()
     {
@@ -215,8 +246,6 @@ public class Owl : Enemy
             transform.DORotate(Vector3.zero, swoopEntryTime).SetEase(Ease.OutSine);
             OnAttackComplete();
         });
-
-        seq.Play();
     }
 
     void NosediveAttack()
@@ -260,8 +289,6 @@ public class Owl : Enemy
         );
         seq.Join(transform.DORotate(Vector3.zero, diveExitTime / 2f).SetEase(Ease.InOutSine));
         seq.AppendCallback(OnAttackComplete);
-
-        seq.Play();
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -270,5 +297,25 @@ public class Owl : Enemy
         {
             branch.ShakeFor(swoopBranchShakeTime);
         }
+    }
+
+    public override void RunEntryAnim(UnityAction<string> showName, UnityAction onEnded)
+    {
+        var seq = DOTween.Sequence();
+
+        invincible = true;
+
+        seq.Append(transform.DOMove(entryPoint - Vector2.down * entryDownOffset, 0));
+        seq.AppendInterval(entryWaitTime);
+        seq.Append(transform.DOMove(entryPoint, entryFlyTime).SetEase(Ease.OutBack));
+        seq.AppendInterval(entryStayTime);
+        seq.JoinCallback(() => showName?.Invoke("Owl"));
+        seq.AppendCallback(() =>
+        {
+            onEnded?.Invoke();
+            StartAttackLoop();
+        });
+
+        seq.Play();
     }
 }

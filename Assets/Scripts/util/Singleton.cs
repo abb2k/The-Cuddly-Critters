@@ -6,8 +6,9 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     private static readonly object _objLock = new();
 
     protected virtual string SingletonName => null;
+    protected virtual bool CreateIfNone => true;
 
-    void Awake()
+    protected virtual void Awake()
     {
         if (_instance)
         {
@@ -24,7 +25,17 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     {
         lock (_objLock)
         {
-            _instance ??= new GameObject().AddComponent<T>();
+            if (_instance == null)
+            {
+                _instance ??= new GameObject().AddComponent<T>();
+                var me = _instance.GetComponent<Singleton<T>>();
+                if (!me.CreateIfNone)
+                {
+                    Destroy(me.gameObject);
+                    _instance = null;
+                }
+            }
+            
 
             return _instance;
         }

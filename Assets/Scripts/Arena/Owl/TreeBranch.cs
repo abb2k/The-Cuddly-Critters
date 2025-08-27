@@ -6,7 +6,7 @@ public class TreeBranch : MonoBehaviour
 {
     private Collider2D branchCollider;
     private Coroutine disableRoutine = null;
-    void Start()
+    void Awake()
     {
         branchCollider = GetComponent<Collider2D>();
     }
@@ -15,8 +15,6 @@ public class TreeBranch : MonoBehaviour
     {
         if (disableRoutine != null) StopCoroutine(disableRoutine);
         disableRoutine = StartCoroutine(ShakeTimer(time));
-
-        transform.DOKill();
 
         transform.DOShakeRotation(time, new Vector3(2, 2, 20), 10, 10);
     }

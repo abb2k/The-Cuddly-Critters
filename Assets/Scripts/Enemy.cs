@@ -7,6 +7,7 @@ public class Enemy : MonoBehaviour, IHittable
     protected float health;
     public float maxHealth;
     protected float resistence;
+    protected bool invincible;
 
     public float Health => health;
 
@@ -20,7 +21,7 @@ public class Enemy : MonoBehaviour, IHittable
 
     public void OnHit(DamageInfo info)
     {
-        if (health == 0) return;
+        if (health == 0 || invincible) return;
 
         health -= info.damage / resistence;
         if (health < 0) health = 0;

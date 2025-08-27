@@ -14,6 +14,8 @@ public class PlayerStats
     public float attackTime;
     public float attackCooldown;
     public float attackAngle;
+    [Header("Health")]
+    public float maxHealth;
 
     public PlayerStats Clone()
     {

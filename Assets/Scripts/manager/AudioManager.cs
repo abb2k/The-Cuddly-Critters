@@ -69,7 +69,7 @@ public class AudioManager : Singleton<AudioManager>
         }
     }
 
-    void Awake()
+    protected override void Awake()
     {
         _mainMixer = Resources.Load<AudioMixer>("MainMixer");
         if (!_mainMixer) throw new System.Exception("No 'MainMixer' found.");
