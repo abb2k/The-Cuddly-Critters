@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering.Universal;
 
-public class Player : Singleton<Player>, IHitReciever
+public class Player : Singleton<Player>, IHitReciever, IHittable
 {
     [SerializeField] private PlayerStats stats;
     private PlayerStats defaultStats;
@@ -19,7 +19,7 @@ public class Player : Singleton<Player>, IHitReciever
     [SerializeField] private Light2D myLight;
     [SerializeField] private float lightIntensity;
     [SerializeField] private float lightTransitionTime;
-
+    [SerializeField] private Collider2D feet;
 
     private Rigidbody2D rb;
     private bool isOnGround = false;
@@ -136,6 +136,20 @@ public class Player : Singleton<Player>, IHitReciever
     {
         if ((groundDiscludeMask & (1 << other.gameObject.layer)) != 0) return;
 
+        if (other is BoxCollider2D)
+        {
+            Bounds otherBounds = other.bounds;
+            Bounds myBounds = feet.bounds;
+
+            float tolerance = 0.1f;
+            bool isAbove = myBounds.min.y >= otherBounds.max.y - tolerance;
+            
+            bool xOverlap = myBounds.max.x > otherBounds.min.x && myBounds.min.x < otherBounds.max.x;
+
+            if (!(isAbove && xOverlap)) return;
+        }
+        
+
         if (type != IHitReciever.HitType.Exit)
         {
             if (cyotieRourine != null)
@@ -219,11 +233,18 @@ public class Player : Singleton<Player>, IHitReciever
 
     void OnCollisionEnter2D(Collision2D collision)
     {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Platform")) return;
+
         foreach (ContactPoint2D contact in collision.contacts)
         {
             if (Vector3.Dot(contact.normal, Vector3.down) <= 0.5f) continue;
-            
+
             isCurrentJumpOngoing = 0;
         }
+    }
+
+    public void OnHit(DamageInfo info)
+    {
+        
     }
 }

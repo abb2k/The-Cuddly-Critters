@@ -11,6 +11,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/OwlArena.unity
     guid: bdc29bbcb5f42254bb201b0b1b385b65
+  - enabled: 1
+    path: Assets/Scenes/BunnyArena.unity
+    guid: 1930eb3448af6774ca4466f75261865d
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

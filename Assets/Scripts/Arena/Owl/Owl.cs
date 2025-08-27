@@ -79,7 +79,7 @@ public class Owl : BossEnemy
         ArenaManager.Get().OnArenaChanged += OnArenaChanged;
     }
 
-    async void StartAttackLoop()
+    void StartAttackLoop()
     {
         BossbarManager.Get().AttachToEnemy(this);
 
@@ -87,8 +87,6 @@ public class Owl : BossEnemy
         swoopCenter.name = "OwlSwoopCenter";
         swoopPos = Instantiate(swoopCenter, swoopCenter.transform).transform;
         swoopCenter.name = "SwoopPos";
-
-        await Task.Delay(1000);
 
         NextAttack();
         didAttackLoopStart = true;

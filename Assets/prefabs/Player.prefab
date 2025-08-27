@@ -70,7 +70,7 @@ MonoBehaviour:
   itemEquipped: {fileID: 0}
   groundDiscludeMask:
     serializedVersion: 2
-    m_Bits: 192
+    m_Bits: 1216
   itemBodyVisual: {fileID: 8045554838920843008}
   itemWeponVisual: {fileID: 2675447058860711894}
   belowPlayerSorting: -1
@@ -78,6 +78,7 @@ MonoBehaviour:
   myLight: {fileID: 6953656957564859050}
   lightIntensity: 1
   lightTransitionTime: 1
+  feet: {fileID: 5665010517146723244}
 --- !u!50 &8594046773561912488
 Rigidbody2D:
   serializedVersion: 5
@@ -182,7 +183,7 @@ GameObject:
   m_Component:
   - component: {fileID: 799620470502926776}
   - component: {fileID: 2675447058860711894}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: itemWeponVisual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -537,7 +538,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4257533512815996035}
   - component: {fileID: 4023669141336489861}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: weponSpr
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -716,7 +717,7 @@ GameObject:
   - component: {fileID: 4773649876002357056}
   - component: {fileID: 3555923905687228187}
   - component: {fileID: 505156077228219481}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Wepon
   m_TagString: Untagged
   m_Icon: {fileID: 0}

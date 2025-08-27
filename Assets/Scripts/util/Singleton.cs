@@ -32,6 +32,8 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
                 _instance ??= new GameObject().AddComponent<T>();
                 var me = _instance.GetComponent<Singleton<T>>();
                 DontDestroyOnLoad(_instance);
+                if (me.SingletonName != null)
+                    _instance.gameObject.name = me.SingletonName;
                 if (!me.CreateIfNone)
                 {
                     Destroy(me.gameObject);
