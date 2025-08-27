@@ -8,15 +8,19 @@ public class ArenaManager : Singleton<ArenaManager>
 {
     private ArenaHolder currentArena;
     private EnemyForArena enemyForArena;
+    public event UnityAction<string, string> OnArenaChanged;
     void Start()
     {
         enemyForArena = Resources.Load<EnemyForArena>("EnemyForArena");
 
         SpawnBossWithArena("OwlArena");
+
+        BossbarManager.Get();
     }
 
     public async Task OpenUpArena(string arena, UnityAction sceneLoaded = null)
     {
+        OnArenaChanged?.Invoke(currentArena.gameObject.scene.name, arena);
         if (currentArena != null)
         {
             await currentArena.RunExitAnim();

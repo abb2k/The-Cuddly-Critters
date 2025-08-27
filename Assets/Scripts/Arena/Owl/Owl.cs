@@ -72,6 +72,13 @@ public class Owl : BossEnemy
     private Coroutine currentIdleAttack = null;
     private Coroutine currentSwoopFollow = null;
 
+    protected override void Start()
+    {
+        base.Start();
+
+        ArenaManager.Get().OnArenaChanged += OnArenaChanged;
+    }
+
     async void StartAttackLoop()
     {
         BossbarManager.Get().AttachToEnemy(this);
@@ -169,7 +176,7 @@ public class Owl : BossEnemy
         float sideSpeed = Random.Range(idleSideSpeedMinMax.x, idleSideSpeedMinMax.y);
 
         if (currentIdleAttack != null)
-                StopCoroutine(currentIdleAttack);
+            StopCoroutine(currentIdleAttack);
         currentIdleAttack = StartCoroutine(IdleAttackTimer(idleTime, sideSpeed));
     }
 
@@ -362,5 +369,11 @@ public class Owl : BossEnemy
             StopCoroutine(currentSwoopFollow);
 
         await ArenaManager.Get().OpenUpArena("");
+    }
+
+    void OnArenaChanged(string oldArena, string newArena)
+    {
+        if (didAttackLoopStart && oldArena.Equals("OwlArena"))
+            OnDeath();
     }
 }

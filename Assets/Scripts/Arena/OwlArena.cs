@@ -35,6 +35,7 @@ public class OwlArena : ArenaHolder
         {
             float t = 1.5f;
             branch.ShakeFor(t);
+            if (!Application.isPlaying) return;
             branch.transform.DOMoveY(originalPoses[branch].y, t).SetEase(Ease.OutQuad);
             await Task.Delay(100);
         }
@@ -54,6 +55,7 @@ public class OwlArena : ArenaHolder
             float t = 1.5f;
             branch.ShakeFor(t);
             doEnd++;
+            if (!Application.isPlaying) return;
             var seq = DOTween.Sequence();
             seq.Append(branch.transform.DOMoveY(branch.transform.position.y - downDistance, t).SetEase(Ease.InQuad));
             seq.AppendCallback(() => doEnd--);
@@ -63,6 +65,8 @@ public class OwlArena : ArenaHolder
         while (true)
         {
             if (doEnd <= 0) break;
+
+            if (!Application.isPlaying) return;
 
             await Task.Yield();
         }

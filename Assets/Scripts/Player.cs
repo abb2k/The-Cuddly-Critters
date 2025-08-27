@@ -36,6 +36,8 @@ public class Player : Singleton<Player>, IHitReciever
 
     protected override bool CreateIfNone => false;
 
+    private readonly object cyotieObjLock = new();
+
     void Start()
     {
         defaultStats = stats;
@@ -145,8 +147,11 @@ public class Player : Singleton<Player>, IHitReciever
         }
         else
         {
-            if (cyotieRourine == null)
-                cyotieRourine = StartCoroutine(cyotieTimer());
+            lock (cyotieObjLock)
+            {
+                if (cyotieRourine == null && gameObject.activeInHierarchy)
+                    cyotieRourine = StartCoroutine(cyotieTimer());
+            }
         }
         if (isOnGround)
         {
