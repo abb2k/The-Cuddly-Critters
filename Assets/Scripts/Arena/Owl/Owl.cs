@@ -168,6 +168,8 @@ public class Owl : BossEnemy
         float idleTime = Random.Range(minMaxIdleTime.x, minMaxIdleTime.y);
         float sideSpeed = Random.Range(idleSideSpeedMinMax.x, idleSideSpeedMinMax.y);
 
+        if (currentIdleAttack != null)
+                StopCoroutine(currentIdleAttack);
         currentIdleAttack = StartCoroutine(IdleAttackTimer(idleTime, sideSpeed));
     }
 
@@ -239,6 +241,12 @@ public class Owl : BossEnemy
         swoopCenter.transform.localRotation = Quaternion.Euler(0, 0, Random.Range(0, 360));
 
         currentSeq = DOTween.Sequence();
+
+        if (currentSwoopFollow != null)
+        {
+            StopCoroutine(currentSwoopFollow);
+            currentSwoopFollow = null;
+        }
 
         currentSeq.Append(transform.DOMove(swoopPos.position, swoopEntryTime).SetEase(Ease.OutSine));
         currentSeq.Join(transform.DORotate(swoopCenter.transform.eulerAngles, swoopEntryTime).SetEase(Ease.OutSine));

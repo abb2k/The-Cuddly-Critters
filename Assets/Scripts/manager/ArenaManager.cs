@@ -24,6 +24,8 @@ public class ArenaManager : Singleton<ArenaManager>
             await SceneManager.UnloadSceneAsync(currentArena.gameObject.scene);
         }
 
+        if (string.IsNullOrEmpty(arena) || !Application.CanStreamedLevelBeLoaded(arena)) return;
+
         await SceneManager.LoadSceneAsync(arena, LoadSceneMode.Additive);
 
         var arenaHolder = GetObjectOfTypeInScene<ArenaHolder>(arena);
