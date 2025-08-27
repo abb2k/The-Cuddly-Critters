@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using DG.Tweening;
@@ -66,6 +67,10 @@ public class Owl : BossEnemy
 
     private List<TreeBranchLight> lightsOnInRange = new();
     private bool isWooshing = false;
+
+    private Sequence currentSeq;
+    private Coroutine currentIdleAttack = null;
+    private Coroutine currentSwoopFollow = null;
 
     async void StartAttackLoop()
     {
@@ -154,14 +159,20 @@ public class Owl : BossEnemy
 
     void OnAttackComplete()
     {
-        NextAttack();
+        if (didAttackLoopStart)
+            NextAttack();
     }
 
-    async void IdleAttack()
+    void IdleAttack()
     {
         float idleTime = Random.Range(minMaxIdleTime.x, minMaxIdleTime.y);
         float sideSpeed = Random.Range(idleSideSpeedMinMax.x, idleSideSpeedMinMax.y);
 
+        currentIdleAttack = StartCoroutine(IdleAttackTimer(idleTime, sideSpeed));
+    }
+
+    IEnumerator IdleAttackTimer(float idleTime, float sideSpeed)
+    {
         for (float t = 0; t < idleTime; t += Time.deltaTime)
         {
             if (transform.position.y < maxHeight)
@@ -171,34 +182,38 @@ public class Owl : BossEnemy
             if (transform.position.x < maxEdges.y && transform.position.x > maxEdges.x)
                 transform.position += Vector3.right * sideSpeed * Time.deltaTime;
 
-            await Task.Yield();
+            yield return null;
         }
+
+        currentIdleAttack = null;
 
         OnAttackComplete();
     }
 
     void WooshAttack()
     {
-        var seq = DOTween.Sequence();
+        currentSeq = DOTween.Sequence();
 
         var decidedPos = wooshStayPositions[Random.Range(0, wooshStayPositions.Length)];
 
-        seq.Append(transform.DOMove(decidedPos, wooshEnterTime).SetEase(Ease.InOutSine));
-        seq.AppendInterval(wooshTime);
-        seq.JoinCallback(async () =>
+        currentSeq.Append(transform.DOMove(decidedPos, wooshEnterTime).SetEase(Ease.InOutSine));
+        currentSeq.AppendInterval(wooshTime);
+        currentSeq.JoinCallback(async () =>
         {
             isWooshing = true;
             await Task.Delay(500);
 
+            lightsOnInRange.RemoveAll(l => l == null);
             lightsOnInRange.ForEach(l => l.TurnOff());
         });
-        seq.AppendInterval(wooshExitTime);
-        seq.JoinCallback(() =>
+        currentSeq.AppendInterval(wooshExitTime);
+        currentSeq.JoinCallback(() =>
         {
             isWooshing = false;
             OnAttackComplete();
         });
     }
+
     void WooshUpdate()
     {
         var hits = Physics2D.OverlapCircleAll(transform.position, wooshRadius);
@@ -223,35 +238,41 @@ public class Owl : BossEnemy
 
         swoopCenter.transform.localRotation = Quaternion.Euler(0, 0, Random.Range(0, 360));
 
-        var seq = DOTween.Sequence();
+        currentSeq = DOTween.Sequence();
 
-        seq.Append(transform.DOMove(swoopPos.position, swoopEntryTime).SetEase(Ease.OutSine));
-        seq.Join(transform.DORotate(swoopCenter.transform.eulerAngles, swoopEntryTime).SetEase(Ease.OutSine));
-        seq.Append(swoopCenter.transform.DORotate(new Vector3(0, 0, 360), swoopTime, RotateMode.LocalAxisAdd));
-        seq.JoinCallback(async () =>
+        currentSeq.Append(transform.DOMove(swoopPos.position, swoopEntryTime).SetEase(Ease.OutSine));
+        currentSeq.Join(transform.DORotate(swoopCenter.transform.eulerAngles, swoopEntryTime).SetEase(Ease.OutSine));
+        currentSeq.Append(swoopCenter.transform.DORotate(new Vector3(0, 0, 360), swoopTime, RotateMode.LocalAxisAdd));
+        currentSeq.JoinCallback(() =>
         {
             isSwooping = true;
 
-            for (float t = 0; t < swoopTime; t += Time.deltaTime)
-            {
-                if (transform == null) break;
-                transform.position = swoopPos.position;
-                transform.rotation = swoopCenter.transform.rotation;
-                await Task.Yield();
-            }
+            currentSwoopFollow = StartCoroutine(FollowSwoopPos());
         });
-        seq.AppendCallback(() =>
+        currentSeq.AppendCallback(() =>
         {
             isSwooping = false;
             transform.DORotate(Vector3.zero, swoopEntryTime).SetEase(Ease.OutSine);
             OnAttackComplete();
         });
     }
+    IEnumerator FollowSwoopPos()
+    {
+        for (float t = 0; t < swoopTime; t += Time.deltaTime)
+        {
+            if (transform == null) break;
+            transform.position = swoopPos.position;
+            transform.rotation = swoopCenter.transform.rotation;
+            yield return null;
+        }
+
+        currentSwoopFollow = null;
+    }
 
     void NosediveAttack()
     {
         var playerPos = Player.Get().transform.position;
-        var seq = DOTween.Sequence();
+        currentSeq = DOTween.Sequence();
 
         Vector2 dirToPlayer = playerPos - transform.position;
 
@@ -269,26 +290,26 @@ public class Owl : BossEnemy
 
         float angleToPlayer = Mathf.Atan2(dirToPlayer.y, dirToPlayer.x) * Mathf.Rad2Deg;
 
-        seq.Append(transform.DORotate(new Vector3(0, 0, angleToPlayer), divePrepTime).SetEase(Ease.InOutSine));
-        seq.Join(transform.DOMove(transform.position - (Vector3)(dirToPlayer.normalized * divePrepMoveAmount), divePrepTime).SetEase(Ease.InOutSine));
-        seq.Append(
+        currentSeq.Append(transform.DORotate(new Vector3(0, 0, angleToPlayer), divePrepTime).SetEase(Ease.InOutSine));
+        currentSeq.Join(transform.DOMove(transform.position - (Vector3)(dirToPlayer.normalized * divePrepMoveAmount), divePrepTime).SetEase(Ease.InOutSine));
+        currentSeq.Append(
             transform.DOMoveX(playerPos.x, diveEntryTime)
                 .SetEase(Ease.InBack)
         );
-        seq.Join(
+        currentSeq.Join(
             transform.DOMoveY(playerPos.y, diveEntryTime / 1.1f)
                 .SetEase(Ease.InOutSine)
         );
-        seq.Append(
+        currentSeq.Append(
             transform.DOMoveX(exitpos, diveExitTime)
                 .SetEase(Ease.OutBack)
         );
-        seq.Join(
+        currentSeq.Join(
             transform.DOMoveY(Mathf.Min(maxHeight, playerPos.y + exitOffset.y), diveExitTime / 1.2f)
                 .SetEase(Ease.InOutSine)
         );
-        seq.Join(transform.DORotate(Vector3.zero, diveExitTime / 2f).SetEase(Ease.InOutSine));
-        seq.AppendCallback(OnAttackComplete);
+        currentSeq.Join(transform.DORotate(Vector3.zero, diveExitTime / 2f).SetEase(Ease.InOutSine));
+        currentSeq.AppendCallback(OnAttackComplete);
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -317,5 +338,21 @@ public class Owl : BossEnemy
         });
 
         seq.Play();
+    }
+
+    protected override async void OnDeath()
+    {
+        invincible = true;
+        didAttackLoopStart = false;
+
+        transform.DOKill();
+        if (currentSeq != null)
+            currentSeq.Kill();
+        if (currentIdleAttack != null)
+            StopCoroutine(currentIdleAttack);
+        if (currentSwoopFollow != null)
+            StopCoroutine(currentSwoopFollow);
+
+        await ArenaManager.Get().OpenUpArena("");
     }
 }
