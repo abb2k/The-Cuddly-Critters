@@ -19,6 +19,8 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
         _instance = this as T;
         if (SingletonName != null)
             _instance.gameObject.name = SingletonName;
+
+        DontDestroyOnLoad(_instance);
     }
 
     public static T Get()
@@ -29,6 +31,7 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
             {
                 _instance ??= new GameObject().AddComponent<T>();
                 var me = _instance.GetComponent<Singleton<T>>();
+                DontDestroyOnLoad(_instance);
                 if (!me.CreateIfNone)
                 {
                     Destroy(me.gameObject);

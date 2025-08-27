@@ -179,7 +179,7 @@ GameObject:
   m_Component:
   - component: {fileID: 799620470502926776}
   - component: {fileID: 2675447058860711894}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: itemWeponVisual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -534,7 +534,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4257533512815996035}
   - component: {fileID: 4023669141336489861}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: weponSpr
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -713,7 +713,7 @@ GameObject:
   - component: {fileID: 4773649876002357056}
   - component: {fileID: 3555923905687228187}
   - component: {fileID: 505156077228219481}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Wepon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
