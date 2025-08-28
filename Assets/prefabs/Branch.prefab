@@ -680,6 +680,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65c4f11be60482d44ad04758ca1e75f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TreeBranch
+  myLight: {fileID: 2774524887638487380}
 --- !u!61 &4309630844296197544
 BoxCollider2D:
   m_ObjectHideFlags: 0

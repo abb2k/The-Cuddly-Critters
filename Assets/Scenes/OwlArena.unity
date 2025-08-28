@@ -153,7 +153,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2071652320}
+  m_Father: {fileID: 1408594628}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!483693784 &110359686
 TilemapRenderer:
@@ -1714,7 +1714,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 110359684}
-  m_BodyType: 2
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -1731,7 +1731,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!19719996 &110359690
 TilemapCollider2D:
@@ -4227,7 +4227,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5471490772307139287, guid: cbdf4eb597521b849946828063b99e4b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.45
+      value: -2.17
       objectReference: {fileID: 0}
     - target: {fileID: 5471490772307139287, guid: cbdf4eb597521b849946828063b99e4b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -6539,7 +6539,9 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1748213243}
-  - {fileID: 2071652320}
+  - {fileID: 110359685}
+  - {fileID: 1704794950}
+  - {fileID: 1676095159}
   m_Father: {fileID: 1845218925}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1575880767 stripped
@@ -6970,6 +6972,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5471490772307139287, guid: cbdf4eb597521b849946828063b99e4b, type: 3}
   m_PrefabInstance: {fileID: 1663282616}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1663282618 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 780347137751749380, guid: cbdf4eb597521b849946828063b99e4b, type: 3}
+  m_PrefabInstance: {fileID: 1663282616}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65c4f11be60482d44ad04758ca1e75f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TreeBranch
 --- !u!1 &1676095158
 GameObject:
   m_ObjectHideFlags: 0
@@ -7001,7 +7014,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2071652320}
+  m_Father: {fileID: 1408594628}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!483693784 &1676095160
 TilemapRenderer:
@@ -7679,7 +7692,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2071652320}
+  m_Father: {fileID: 1408594628}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!483693784 &1704794951
 TilemapRenderer:
@@ -9080,9 +9093,12 @@ MonoBehaviour:
   - {fileID: 1002443011}
   - {fileID: 1388154107}
   - {fileID: 364209160}
+  - {fileID: 1663282618}
   riseWithBranches:
   - {fileID: 1748213243}
-  - {fileID: 2071652320}
+  - {fileID: 110359685}
+  - {fileID: 1704794950}
+  - {fileID: 1676095159}
   downDistance: 20
 --- !u!4 &1920846010 stripped
 Transform:
@@ -9135,40 +9151,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 2.8158636, y: 0.32845974}
   m_EdgeRadius: 0
---- !u!1 &2071652319
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2071652320}
-  m_Layer: 0
-  m_Name: ground
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2071652320
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2071652319}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 110359685}
-  - {fileID: 1704794950}
-  - {fileID: 1676095159}
-  m_Father: {fileID: 1408594628}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1036318254624751571
 PrefabInstance:
   m_ObjectHideFlags: 0

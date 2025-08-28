@@ -98,7 +98,7 @@ MonoBehaviour:
   wooshResistence: 1
   currentAttack: 0
   maxHeight: 7.5
-  maxEdges: {x: -12, y: 12}
+  maxEdges: {x: -21.5, y: 21.5}
   sr: {fileID: 5422962804920549967}
   anim: {fileID: 5644086437345962854}
   entryPoint: {x: 0, y: 5}

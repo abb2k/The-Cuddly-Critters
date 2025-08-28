@@ -7,7 +7,7 @@ using UnityEngine.Rendering.Universal;
 
 public class OwlArena : ArenaHolder
 {
-    [SerializeField] private TreeBranch[] branches;
+    public TreeBranch[] branches;
     [SerializeField] private Transform[] riseWithBranches;
     [SerializeField] private float downDistance;
     private Light2D globalLight;
@@ -22,8 +22,22 @@ public class OwlArena : ArenaHolder
 
         foreach (var other in riseWithBranches)
         {
-            originalPoses.Add(other, other.position);
-            other.DOMoveY(other.position.y - downDistance, 0);
+            Vector3 pos = other.TryGetComponent(out Rigidbody2D rb) ? rb.position : other.position;
+            originalPoses.Add(other, pos);
+            if (rb != null)
+            {
+                DOTween.To(
+                    () => rb.position.y, x =>
+                    {
+                        var pos = rb.position;
+                        pos.y = x;
+                        rb.position = pos;
+                    },
+                    pos.y - downDistance,
+                    0
+                );
+            }
+            else other.DOMoveY(pos.y - downDistance, 0);
         }
 
         Player.Get().TurnLight(true);
@@ -39,7 +53,30 @@ public class OwlArena : ArenaHolder
         }
 
         float t = 1.5f;
+        foreach (var other in riseWithBranches)
+        {
+            if (!Application.isPlaying) return;
+            if (other.TryGetComponent(out Rigidbody2D rb))
+            {
+                DOTween.To(
+                    () => rb.position.y, x =>
+                    {
+                        var pos = rb.position;
+                        pos.y = x;
+                        rb.position = pos;
+                    },
+                    originalPoses[other].y,
+                    t
+                ).SetEase(Ease.OutQuad);
+            }
+            else
+            {
+                other.DOMoveY(originalPoses[other].y, t).SetEase(Ease.OutQuad);
+            }
+        }
+
         float additionalTime = 0;
+        
         foreach (var branch in branches)
         {
             branch.ShakeFor(t);
@@ -48,15 +85,7 @@ public class OwlArena : ArenaHolder
             additionalTime += .1f;
         }
 
-        additionalTime = 0;
-
-        foreach (var other in riseWithBranches)
-        {
-
-            if (!Application.isPlaying) return;
-            other.DOMoveY(originalPoses[other].y, t + additionalTime).SetEase(Ease.OutQuad);
-            additionalTime += .1f;
-        }
+        await Task.Delay((int)(additionalTime * 1000));
     }
 
     public override async Task RunExitAnim()
@@ -86,10 +115,27 @@ public class OwlArena : ArenaHolder
         {
             doEnd++;
             if (!Application.isPlaying) return;
+
+            
             var seq = DOTween.Sequence();
-            seq.Append(other.DOMoveY(other.position.y - downDistance, t + additionalTime).SetEase(Ease.InQuad));
+            if (other.TryGetComponent(out Rigidbody2D rb))
+            {
+                seq.Append(DOTween.To(
+                    () => rb.position.y, x =>
+                    {
+                        var pos = rb.position;
+                        pos.y = x;
+                        rb.position = pos;
+                    },
+                    rb.position.y - downDistance,
+                    t
+                ).SetEase(Ease.InQuad));
+            }
+            else
+            {
+                seq.Append(other.DOMoveY(other.position.y - downDistance, t).SetEase(Ease.InQuad));
+            }
             seq.AppendCallback(() => doEnd--);
-            additionalTime += .1f;
         }
 
         while (true)

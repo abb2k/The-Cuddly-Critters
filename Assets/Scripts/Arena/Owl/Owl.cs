@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
@@ -67,12 +68,14 @@ public class Owl : BossEnemy
     [SerializeField] private float wooshTime;
     [SerializeField] private float wooshExitTime;
 
-    private List<TreeBranchLight> lightsOnInRange = new();
+    private List<TreeBranchLight> lightsInScene = new();
     private bool isWooshing = false;
 
     private Sequence currentSeq;
     private Coroutine currentIdleAttack = null;
     private Coroutine currentSwoopFollow = null;
+
+    private OwlArena owlArena;
 
     protected override void Start()
     {
@@ -84,6 +87,10 @@ public class Owl : BossEnemy
     void StartAttackLoop()
     {
         BossbarManager.Get().AttachToEnemy(this);
+
+        owlArena = ArenaManager.Get().GetCurrentArena<OwlArena>();
+        lightsInScene = owlArena.branches.Select(b => b.GetLight()).ToList();
+        lightsInScene.RemoveAll(l => l == null);
 
         swoopCenter = new GameObject();
         swoopCenter.name = "OwlSwoopCenter";
@@ -101,15 +108,6 @@ public class Owl : BossEnemy
             sr.transform.localEulerAngles = new Vector3(0, 180, 0);
         else
             sr.transform.localEulerAngles = new Vector3(0, 0, 0);
-
-        lightsOnInRange.Clear();
-        var hits = Physics2D.OverlapCircleAll(transform.position, lightDetectRadius);
-        foreach (var hit in hits)
-        {
-            if (!hit.transform.TryGetComponent(out TreeBranchLight light)) continue;
-
-            if (light.isOn) lightsOnInRange.Add(light);
-        }
 
         if (isWooshing)
         {
@@ -139,7 +137,9 @@ public class Owl : BossEnemy
         if (Player.Get().transform.position.y > -4.5f) // on branch
             possibleAttacks.Add(OwlAttacks.Swoop, 70);
 
-        if (lightsOnInRange.Count >= annoyingLightsAmount)
+        int lightsOn = lightsInScene.Sum(l => l.isOn ? 1 : 0);
+
+        if (lightsOn >= annoyingLightsAmount)
             possibleAttacks.Add(OwlAttacks.Woosh, 140);
 
         possibleAttacks.Add(OwlAttacks.Idle, 25);
@@ -211,7 +211,7 @@ public class Owl : BossEnemy
     void WooshAttack()
     {
         anim.Play("OwlFly");
-        
+
         currentSeq = DOTween.Sequence();
 
         var decidedPos = wooshStayPositions[Random.Range(0, wooshStayPositions.Length)];
@@ -221,10 +221,8 @@ public class Owl : BossEnemy
         currentSeq.JoinCallback(async () =>
         {
             isWooshing = true;
-            await Task.Delay(500);
-
-            lightsOnInRange.RemoveAll(l => l == null);
-            lightsOnInRange.ForEach(l => l.TurnOff());
+            await Task.Delay(1000);
+            lightsInScene.ForEach(l => l.TurnOff());
         });
         currentSeq.AppendInterval(wooshExitTime);
         currentSeq.JoinCallback(() =>
@@ -273,6 +271,7 @@ public class Owl : BossEnemy
         currentSeq.Append(swoopCenter.transform.DORotate(new Vector3(0, 0, 360), swoopTime, RotateMode.LocalAxisAdd));
         currentSeq.JoinCallback(() =>
         {
+            foreach (var branch in owlArena.branches) branch.ShakeFor(swoopBranchShakeTime);
             isSwooping = true;
 
             currentSwoopFollow = StartCoroutine(FollowSwoopPos());
@@ -346,14 +345,6 @@ public class Owl : BossEnemy
             anim.Play("OwlOpenWings");
         });
         currentSeq.AppendCallback(OnAttackComplete);
-    }
-
-    void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (isSwooping && collision.gameObject.TryGetComponent(out TreeBranch branch))
-        {
-            branch.ShakeFor(swoopBranchShakeTime);
-        }
     }
 
     public override void RunEntryAnim(UnityAction<string> showName, UnityAction onEnded)
