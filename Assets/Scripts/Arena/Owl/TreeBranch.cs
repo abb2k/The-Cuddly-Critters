@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class TreeBranch : MonoBehaviour
 {
-    private Collider2D branchCollider;
+    private Collider2D[] branchColliders;
     private Coroutine disableRoutine = null;
     private readonly object objLock = new();
     Tweener shake;
     void Awake()
     {
-        branchCollider = GetComponent<Collider2D>();
+        branchColliders = GetComponents<Collider2D>();
     }
 
     public void ShakeFor(float time)
@@ -30,9 +30,9 @@ public class TreeBranch : MonoBehaviour
 
     IEnumerator ShakeTimer(float time)
     {
-        branchCollider.enabled = false;
+        foreach (var collider in branchColliders) collider.enabled = false;
         yield return new WaitForSeconds(time);
-        branchCollider.enabled = true;
+        foreach (var collider in branchColliders) collider.enabled = true;
         disableRoutine = null;
     }
 }
