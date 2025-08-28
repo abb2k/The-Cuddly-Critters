@@ -1,19 +1,19 @@
 fileFormatVersion: 2
-guid: 7d118fa839c3b2645a1993f11c248b19
+guid: 6bac36ef072272249b0b577ae824da1c
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8789314883650169831
-    second: light-Sheet-Sheet_0
+      213: -2779680413796932129
+    second: owl_flyloop_0
   - first:
-      213: 8906413733038196313
-    second: light-Sheet-Sheet_1
+      213: 5072335820567257857
+    second: owl_flyloop_1
   - first:
-      213: 548289537647827226
-    second: light-Sheet-Sheet_2
+      213: 4648383463051999122
+    second: owl_flyloop_2
   - first:
-      213: 8949172253529644565
-    second: light-Sheet-Sheet_3
+      213: 7214404115911511092
+    second: owl_flyloop_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +46,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -60,7 +60,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 8
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -84,7 +84,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -109,89 +109,89 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: light-Sheet-Sheet_0
+      name: owl_flyloop_0
       rect:
         serializedVersion: 2
-        x: 1
-        y: 2
-        width: 7
-        height: 6
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 7eba503a15be9f970800000000000000
-      internalID: 8789314883650169831
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: light-Sheet-Sheet_1
-      rect:
-        serializedVersion: 2
-        x: 9
-        y: 1
-        width: 9
-        height: 7
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 956076c1a10f99b70800000000000000
-      internalID: 8906413733038196313
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: light-Sheet-Sheet_2
-      rect:
-        serializedVersion: 2
-        x: 18
+        x: 0
         y: 0
-        width: 9
-        height: 8
+        width: 77
+        height: 47
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a19df85fd6aeb9700800000000000000
-      internalID: 548289537647827226
+      spriteID: fd5e58a14679c69d0800000000000000
+      internalID: -2779680413796932129
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: light-Sheet-Sheet_3
+      name: owl_flyloop_1
       rect:
         serializedVersion: 2
-        x: 28
-        y: 2
-        width: 7
-        height: 6
+        x: 77
+        y: 0
+        width: 77
+        height: 47
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 51e9a65ffb8d13c70800000000000000
-      internalID: 8949172253529644565
+      spriteID: 103a66eed8e846640800000000000000
+      internalID: 5072335820567257857
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: owl_flyloop_2
+      rect:
+        serializedVersion: 2
+        x: 154
+        y: 0
+        width: 77
+        height: 47
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 297b307a120628040800000000000000
+      internalID: 4648383463051999122
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: owl_flyloop_3
+      rect:
+        serializedVersion: 2
+        x: 231
+        y: 0
+        width: 77
+        height: 47
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 43c8503e156be1460800000000000000
+      internalID: 7214404115911511092
       vertices: []
       indices: 
       edges: []
@@ -200,7 +200,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: e90b5f465a437ab4da6496b2196763b7
     internalID: 0
     vertices: []
     indices: 
@@ -208,12 +208,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":77.0,"y":47.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      light-Sheet-Sheet_0: 8789314883650169831
-      light-Sheet-Sheet_1: 8906413733038196313
-      light-Sheet-Sheet_2: 548289537647827226
-      light-Sheet-Sheet_3: 8949172253529644565
+      owl_flyloop_0: -2779680413796932129
+      owl_flyloop_1: 5072335820567257857
+      owl_flyloop_2: 4648383463051999122
+      owl_flyloop_3: 7214404115911511092
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
