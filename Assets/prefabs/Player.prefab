@@ -70,7 +70,7 @@ MonoBehaviour:
   itemEquipped: {fileID: 0}
   groundDiscludeMask:
     serializedVersion: 2
-    m_Bits: 1216
+    m_Bits: 1728
   itemBodyVisual: {fileID: 8045554838920843008}
   itemWeponVisual: {fileID: 2675447058860711894}
   belowPlayerSorting: -1
@@ -145,7 +145,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.07146454, y: -0.45941496}
+  m_Offset: {x: 0.07146454, y: -0.49541175}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -155,7 +155,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.8570709, y: 0.9183264}
+  m_Size: {x: 0.8570709, y: 0.99031997}
   m_EdgeRadius: 0
 --- !u!114 &3199372065058750585
 MonoBehaviour:
@@ -699,7 +699,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.07146454, y: -0.4737084}
+  m_Offset: {x: 0.07146454, y: -0.50790536}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -709,7 +709,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.8570709, y: 0.94691324}
+  m_Size: {x: 0.8570709, y: 1.0153072}
   m_EdgeRadius: 0
 --- !u!114 &3266055968150399841
 MonoBehaviour:

@@ -129,8 +129,8 @@ GameObject:
   m_Component:
   - component: {fileID: 55254565}
   - component: {fileID: 55254564}
-  - component: {fileID: 55254566}
   - component: {fileID: 55254567}
+  - component: {fileID: 55254568}
   m_Layer: 0
   m_Name: ditMoundLeft
   m_TagString: Untagged
@@ -205,15 +205,28 @@ Transform:
   m_GameObject: {fileID: 55254563}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -15.5, y: -9.65, z: 0}
-  m_LocalScale: {x: 16.53, y: 12.75, z: 5.77}
+  m_LocalPosition: {x: -23, y: -13.3, z: 0}
+  m_LocalScale: {x: 16.53, y: 6.92, z: 5.77}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1208612204}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!70 &55254566
-CapsuleCollider2D:
+--- !u!114 &55254567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 55254563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 804511e4f0d91cf4b8541482a3177ee7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  exitPoint: {fileID: 1208612204}
+--- !u!60 &55254568
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -246,22 +259,39 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.0000000019961839, y: -0.02170967}
-  m_Size: {x: 1.0000002, y: 0.94579095}
-  m_Direction: 1
---- !u!114 &55254567
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 55254563}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 804511e4f0d91cf4b8541482a3177ee7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
-  exitPoint: {fileID: 1208612204}
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0, y: 0.5}
+      - {x: -0.15234375, y: 0.47265625}
+      - {x: -0.29296875, y: 0.40234375}
+      - {x: -0.40234375, y: 0.29296875}
+      - {x: -0.47265625, y: 0.15234375}
+      - {x: -0.5, y: 0}
+      - {x: -0.47265625, y: -0.15234375}
+      - {x: -0.40234375, y: -0.29296875}
+      - {x: -0.29296875, y: -0.40234375}
+      - {x: -0.15234375, y: -0.47265625}
+      - {x: 0, y: -0.5}
+      - {x: 0.15234375, y: -0.47265625}
+      - {x: 0.29296875, y: -0.40234375}
+      - {x: 0.40234375, y: -0.29296875}
+      - {x: 0.47265625, y: -0.15234375}
+      - {x: 0.5, y: 0}
+      - {x: 0.47265625, y: 0.15234375}
+      - {x: 0.40234375, y: 0.29296875}
+      - {x: 0.29296875, y: 0.40234375}
+      - {x: 0.15234375, y: 0.47265625}
+  m_UseDelaunayMesh: 0
 --- !u!1 &251753856
 GameObject:
   m_ObjectHideFlags: 0
@@ -587,7 +617,7 @@ GameObject:
   - component: {fileID: 982168211}
   - component: {fileID: 982168213}
   - component: {fileID: 982168210}
-  - component: {fileID: 982168212}
+  - component: {fileID: 982168214}
   m_Layer: 0
   m_Name: ditMoundright
   m_TagString: Untagged
@@ -662,15 +692,28 @@ Transform:
   m_GameObject: {fileID: 982168209}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 15.5, y: -9.65, z: 0}
-  m_LocalScale: {x: 16.53, y: 12.75, z: 5.77}
+  m_LocalPosition: {x: 23, y: -13.3, z: 0}
+  m_LocalScale: {x: -16.53, y: 6.92, z: 5.77}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1453447021}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!70 &982168212
-CapsuleCollider2D:
+--- !u!114 &982168213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 982168209}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 804511e4f0d91cf4b8541482a3177ee7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BunnyDirtMound
+  exitPoint: {fileID: 1453447021}
+--- !u!60 &982168214
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -703,22 +746,39 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.0000000019961839, y: -0.02170967}
-  m_Size: {x: 1.0000002, y: 0.94579095}
-  m_Direction: 1
---- !u!114 &982168213
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 982168209}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 804511e4f0d91cf4b8541482a3177ee7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BunnyDirtMound
-  exitPoint: {fileID: 1453447021}
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0, y: 0.5}
+      - {x: -0.15234375, y: 0.47265625}
+      - {x: -0.29296875, y: 0.40234375}
+      - {x: -0.40234375, y: 0.29296875}
+      - {x: -0.47265625, y: 0.15234375}
+      - {x: -0.5, y: 0}
+      - {x: -0.47265625, y: -0.15234375}
+      - {x: -0.40234375, y: -0.29296875}
+      - {x: -0.29296875, y: -0.40234375}
+      - {x: -0.15234375, y: -0.47265625}
+      - {x: 0, y: -0.5}
+      - {x: 0.15234375, y: -0.47265625}
+      - {x: 0.29296875, y: -0.40234375}
+      - {x: 0.40234375, y: -0.29296875}
+      - {x: 0.47265625, y: -0.15234375}
+      - {x: 0.5, y: 0}
+      - {x: 0.47265625, y: 0.15234375}
+      - {x: 0.40234375, y: 0.29296875}
+      - {x: 0.29296875, y: 0.40234375}
+      - {x: 0.15234375, y: 0.47265625}
+  m_UseDelaunayMesh: 0
 --- !u!1 &1044502234
 GameObject:
   m_ObjectHideFlags: 0

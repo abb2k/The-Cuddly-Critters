@@ -3,11 +3,15 @@ using UnityEngine;
 public class FallingCarrot : MonoBehaviour
 {
     private DamageInfo myDamage;
-    public void Setup(DamageInfo damage, Vector2 position)
+    private bool killOnHit;
+    public void Setup(DamageInfo damage, Vector2 position, bool killOnHit = true, bool isFalling = true)
     {
         transform.position = position;
 
         myDamage = damage;
+
+        this.killOnHit = killOnHit;
+        GetComponent<Rigidbody2D>().bodyType = isFalling ? RigidbodyType2D.Dynamic : RigidbodyType2D.Kinematic;
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -19,6 +23,7 @@ public class FallingCarrot : MonoBehaviour
             player.GetComponent<IHittable>().OnHit(myDamage);
         }
 
-        Destroy(gameObject);
+        if (killOnHit)
+            Destroy(gameObject);
     }
 }

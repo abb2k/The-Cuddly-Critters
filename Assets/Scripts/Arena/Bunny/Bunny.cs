@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
@@ -26,11 +27,11 @@ public class Bunny : BossEnemy, IHitReciever
     private Collider2D hitbox;
     private bool isOnGround;
     [Header("EntryTransition")]
-    [SerializeField] private Vector2[] startPoints; 
-    [SerializeField] private Vector2 targetStartPos; 
-    [SerializeField] private float startDelay; 
-    [SerializeField] private float startWalkTime; 
-    [SerializeField] private float startNameWait; 
+    [SerializeField] private Vector2[] startPoints;
+    [SerializeField] private Vector2 targetStartPos;
+    [SerializeField] private float startDelay;
+    [SerializeField] private float startWalkTime;
+    [SerializeField] private float startNameWait;
 
     [Header("IdleState")]
     [SerializeField] private Vector2 minMaxIdleTime;
@@ -38,6 +39,7 @@ public class Bunny : BossEnemy, IHitReciever
     [SerializeField] private float idleWalkSpeed;
 
     [Header("BurrowState")]
+    [SerializeField] private Vector2 burrowBarageAmount;
     [SerializeField] private float burrowPrepTime;
     [SerializeField] private float burrowPrepMoveAMount;
     [SerializeField] private float burrowEntryTime;
@@ -46,13 +48,10 @@ public class Bunny : BossEnemy, IHitReciever
     [SerializeField] private float burrowExitStayOffset;
     [SerializeField] private Vector2 burrowWarnTime;
     [Space]
-    [SerializeField] private Vector2 burrowMinExitPos;
-    [SerializeField] private Vector2 burrowMaxExitPos;
-    [SerializeField] private float burrowLeftSide;
-    [SerializeField] private float BurrowRightSide;
     [SerializeField] private Vector2 burrowExitForce;
     [SerializeField] private GameObject burrowWarning;
     [SerializeField] private float burrowExitDelay;
+    private GameObject burrowHitboxFix;
 
     [Header("JumpState")]
     [SerializeField] private float jumpPrepTime;
@@ -62,6 +61,7 @@ public class Bunny : BossEnemy, IHitReciever
     [SerializeField] private float jumpBoomForce;
     [SerializeField] private float jumpExitDelayTime;
     [SerializeField] private float jumpPlatDisableTime;
+    [SerializeField] private GameObject shockwavePrefab;
     private bool disPlatsOnNextHit;
     private BunnyArena bunnyArena;
 
@@ -84,6 +84,7 @@ public class Bunny : BossEnemy, IHitReciever
 
     private int currentTirenessLevel = 0;
     private int lastSelectedTirePoint;
+    private bool isOnPlat;
 
     private Sequence currentOngoingState = null;
 
@@ -92,6 +93,8 @@ public class Bunny : BossEnemy, IHitReciever
         rb = GetComponent<Rigidbody2D>();
         hitbox = GetComponent<Collider2D>();
     }
+
+    public bool IsOnPlats() => Player.Get().transform.position.y >= -4.5f;
 
     protected override void Start()
     {
@@ -162,7 +165,7 @@ public class Bunny : BossEnemy, IHitReciever
         possibleAttacks.Add(BunnyStates.Idle, 25);
         possibleAttacks.Add(BunnyStates.Jump, 35);
 
-        if (pPos.y < -3.5)//ground area
+        if (!IsOnPlats())//ground area
             possibleAttacks.Add(BunnyStates.burrow, 35);
         else //sky area
             possibleAttacks.Add(BunnyStates.CarrotShower, 35);
@@ -204,60 +207,93 @@ public class Bunny : BossEnemy, IHitReciever
             .AppendCallback(OnStateEnded);
     }
 
-    void BurrowState()
+    void BurrowState(int iteration = -100)
     {
+        if (iteration == 0)
+        {
+            OnStateEnded();
+            return;
+        }
+        float warnTime = Random.Range(burrowWarnTime.x, burrowWarnTime.y);
+
+        Vector2 dir = Vector2.up;
+
+        GameObject hitGround = null;
+
+        if (iteration == -100)
+            iteration = Random.Range((int)burrowBarageAmount.x, (int)burrowBarageAmount.y + 1);
+
+        if (IsOnPlats())
+        {
+            JumpState(() => BurrowState(iteration - 1));
+            return;
+        }
+
         rb.bodyType = RigidbodyType2D.Kinematic;
         hitbox.isTrigger = true;
         rb.linearVelocity = Vector2.zero;
-
-        var exitPos = burrowMinExitPos;
-        exitPos.x = Random.Range(burrowMinExitPos.x, burrowMaxExitPos.x);
-
-        float exitAngle = 0;
-
-        if (exitPos.x < burrowLeftSide)
-        {
-            exitPos = bunnyArena.leftMound.exitPoint.position;
-            exitAngle = bunnyArena.leftMound.exitPoint.eulerAngles.z;
-        }
-        if (exitPos.x > BurrowRightSide)
-        {
-            exitPos = bunnyArena.rightMound.exitPoint.position;
-            exitAngle = bunnyArena.rightMound.exitPoint.eulerAngles.z;
-        }
-
-        float warnTime = Random.Range(burrowWarnTime.x, burrowWarnTime.y);
-
-        float rad = (exitAngle - 90f) * Mathf.Deg2Rad;
-
-        Vector2 dir = new Vector2(Mathf.Cos(rad), Mathf.Sin(rad));
-        Vector2 force = -dir.normalized * Random.Range(burrowExitForce.x, burrowExitForce.y);
-
+        
         currentOngoingState = DOTween.Sequence()
-            .Append(transform.DOMoveY(transform.position.y + burrowPrepMoveAMount, burrowPrepTime).SetEase(Ease.OutSine))
+            .AppendCallback(() =>
+            {
+                
+            })
+            .AppendCallback(() =>
+            {
+                transform.DOMoveY(burrowPrepMoveAMount, burrowPrepTime).SetRelative(true).SetEase(Ease.OutSine);
+            })
+            .AppendInterval(burrowPrepTime)
             .Append(transform.DOMoveY(burrowUndergroundYLevel, burrowEntryTime).SetEase(Ease.OutExpo))
             .AppendInterval(Random.Range(burrowStayTime.x, burrowStayTime.y))
-            .Join(transform.DOMove(exitPos + dir.normalized * burrowExitStayOffset, 0))
-            .AppendInterval(warnTime)
-            .JoinCallback(() =>
+            .AppendCallback(() =>
             {
+                var pos = Player.Get().transform.position;
+
+                ContactFilter2D filter = default(ContactFilter2D);
+                filter.useTriggers = false;
+                filter.SetLayerMask(~LayerMask.GetMask("Platform", "Enemy", "Player"));
+
+                List<RaycastHit2D> hits = new();
+
+                Vector2 hitPoint = transform.position;
+                float hitAngle = 0;
+
+                Physics2D.Raycast(pos, Vector2.down, filter, hits);
+                if (hits.Count != 0)
+                {
+                    hitPoint = hits[0].point;
+                    hitAngle = Vector2.Angle(Vector2.down, hits[0].normal);
+                    hitGround = hits[0].transform.gameObject;
+                }
+
+                hitAngle -= 90;
+
+                dir = new Vector2(Mathf.Cos(hitAngle * Mathf.Deg2Rad), Mathf.Sin(hitAngle * Mathf.Deg2Rad));
+
+                transform.DOMove(hitPoint + -dir.normalized * burrowExitStayOffset, 0);
+
                 var burrowing = Instantiate(burrowWarning).GetComponent<BunnyBurrowWarning>();
                 burrowing.Startup(warnTime);
-                burrowing.transform.position = exitPos;
-                burrowing.transform.rotation = Quaternion.Euler(0, 0, exitAngle);
+                burrowing.transform.position = hitPoint;
+                burrowing.transform.rotation = Quaternion.Euler(0, 0, hitAngle - 90);
             })
+            .AppendInterval(warnTime)
             .AppendCallback(() =>
             {
                 rb.bodyType = RigidbodyType2D.Dynamic;
                 rb.WakeUp();
-                rb.AddForce(force);
-                hitbox.isTrigger = false;
+                rb.AddForce(dir.normalized * Random.Range(burrowExitForce.x, burrowExitForce.y));
+                burrowHitboxFix = hitGround;
+                if (!burrowHitboxFix) hitbox.isTrigger = false;
             })
             .AppendInterval(burrowExitDelay)
-            .AppendCallback(OnStateEnded);
+            .AppendCallback(() =>
+            {
+                BurrowState(iteration - 1);
+            });
     }
 
-    async void JumpState()
+    async void JumpState(UnityAction callback = null)
     {
         while (!isOnGround) await Task.Yield();
 
@@ -270,53 +306,7 @@ public class Bunny : BossEnemy, IHitReciever
                 rb.linearVelocity = Vector2.zero;
             })
             .AppendInterval(jumpPrepTime)
-            .AppendCallback(() =>
-            {
-                var startPos = transform.position;
-
-                DOVirtual.Float(0, 1, jumpEntryTime / 1.15f, t =>
-                {
-                    playerPos = Player.Get().transform.position;
-
-                    Vector3 targetPos = new Vector3(
-                        playerPos.x,
-                        playerPos.y + jumpHeightOffset,
-                        transform.position.z
-                    );
-                    var myPos = transform.position;
-                    myPos.y = Mathf.Lerp(startPos.y, targetPos.y, t);
-                    transform.position = myPos;
-                }).SetEase(Ease.OutSine);
-
-                DOVirtual.Float(0, 1, jumpEntryTime, t =>
-                {
-                    playerPos = Player.Get().transform.position;
-
-                    Vector3 targetPos = new Vector3(
-                        playerPos.x,
-                        playerPos.y + jumpHeightOffset,
-                        transform.position.z
-                    );
-                    var myPos = transform.position;
-                    myPos.x = Mathf.Lerp(startPos.x, targetPos.x, t);
-                    transform.position = myPos;
-                }).SetEase(Ease.OutSine);
-            })
-            .AppendInterval(jumpEntryTime)
-            .AppendCallback(() =>
-            {
-                DOVirtual.Float(0, 1, jumpStayTime, t =>
-                {
-                    playerPos = Player.Get().transform.position;
-
-                    Vector3 targetPos = new Vector3(
-                        playerPos.x,
-                        playerPos.y + jumpHeightOffset,
-                        transform.position.z
-                    );
-                    transform.position = Vector3.Lerp(transform.position, targetPos, 0.2f);
-                }).SetEase(Ease.Linear);
-            })
+            .Append(transform.DOMoveY(jumpHeightOffset, jumpEntryTime).SetRelative(true).SetEase(Ease.OutExpo))
             .AppendInterval(jumpStayTime)
             .AppendCallback(() =>
             {
@@ -326,7 +316,12 @@ public class Bunny : BossEnemy, IHitReciever
                 disPlatsOnNextHit = true;
             })
             .AppendInterval(jumpExitDelayTime)
-            .AppendCallback(OnStateEnded);
+            .AppendCallback(() =>
+            {
+                callback?.Invoke();
+                if (callback == null)
+                    OnStateEnded();
+            });
     }
 
     void CarrotShowerState()
@@ -390,13 +385,20 @@ public class Bunny : BossEnemy, IHitReciever
         {
             disPlatsOnNextHit = false;
             bunnyArena.DisablePlats(jumpPlatDisableTime);
+            if (!isOnPlat)
+                RunShockwave();
             ArenaManager.Get().RunCamChake(.2f, 1, 20, 1);
         }
     }
 
+    void RunShockwave()
+    {
+        Instantiate(shockwavePrefab).transform.position = transform.position;
+    }
+
     public void HitRecieved(int hitID, IHitReciever.HitType type, bool isTriggerHit, Colliders other)
     {
-        LayerMask myMask = LayerMask.GetMask("Enemy", "Player", "NotGround");
+        LayerMask myMask = LayerMask.GetMask("Enemy", "Player", "NotGround", "NoHitEachother");
 
         if (hitID == 0 && isTriggerHit && (myMask & (1 << other.collider2D.gameObject.layer)) == 0)
         {
@@ -407,15 +409,17 @@ public class Bunny : BossEnemy, IHitReciever
 
                 float tolerance = 0.1f;
                 bool isAbove = myBounds.min.y >= otherBounds.max.y - tolerance;
-                
+
                 bool xOverlap = myBounds.max.x > otherBounds.min.x && myBounds.min.x < otherBounds.max.x;
 
                 if (!(isAbove && xOverlap)) return;
             }
+            isOnPlat = other.collider2D.gameObject.layer == LayerMask.NameToLayer("Platform");
+
             isOnGround = type != IHitReciever.HitType.Exit;
         }
     }
-    
+
     protected override async void OnDeath()
     {
         invincible = true;
@@ -434,5 +438,14 @@ public class Bunny : BossEnemy, IHitReciever
     {
         if (didAttackLoopStart && oldArena.Equals("BunnyArena"))
             OnDeath();
+    }
+
+    void OnTriggerExit2D(Collider2D collision)
+    {
+        if (burrowHitboxFix == collision.gameObject)
+        {
+            burrowHitboxFix = null;
+            hitbox.isTrigger = false;        
+        }
     }
 }

@@ -77,7 +77,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.95, y: 0.01}
+  m_Size: {x: 0.99, y: 0.01}
   m_EdgeRadius: 0
 --- !u!114 &5593733737971977388
 MonoBehaviour:
@@ -251,17 +251,14 @@ MonoBehaviour:
   minMaxIdleTime: {x: 0.5, y: 2}
   idleTransitionTime: 0.15
   idleWalkSpeed: 6
+  burrowBarageAmount: {x: 2, y: 5}
   burrowPrepTime: 0.5
   burrowPrepMoveAMount: 4
   burrowEntryTime: 0.5
-  burrowUndergroundYLevel: -10.5
+  burrowUndergroundYLevel: -14.05
   burrowStayTime: {x: 0, y: 0.1}
   burrowExitStayOffset: 1.5
   burrowWarnTime: {x: 0.5, y: 1}
-  burrowMinExitPos: {x: -12, y: -9.5}
-  burrowMaxExitPos: {x: 12, y: -9.5}
-  burrowLeftSide: -7
-  BurrowRightSide: 7
   burrowExitForce: {x: 1000, y: 1600}
   burrowWarning: {fileID: 3588591884276843084, guid: 74140fc276ce1f24797c87c5dc920b8c, type: 3}
   burrowExitDelay: 0.5
@@ -272,6 +269,7 @@ MonoBehaviour:
   jumpBoomForce: 30
   jumpExitDelayTime: 1
   jumpPlatDisableTime: 2
+  shockwavePrefab: {fileID: 3588693670324172719, guid: 5ae44ac085c330144a994d2efab08a8a, type: 3}
   CSPos: {x: 0, y: 8}
   CSEntryTime: 1.5
   CSStayTime: 8

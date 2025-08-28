@@ -17,7 +17,7 @@ public class ArenaManager : Singleton<ArenaManager>
     {
         enemyForArena = Resources.Load<EnemyForArena>("EnemyForArena");
 
-        SpawnBossWithArena("OwlArena");
+        SpawnBossWithArena("BunnyArena");
 
         mainCam = Camera.main;
 
