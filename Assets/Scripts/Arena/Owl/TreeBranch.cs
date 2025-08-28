@@ -7,6 +7,7 @@ public class TreeBranch : MonoBehaviour
     private Collider2D branchCollider;
     private Coroutine disableRoutine = null;
     private readonly object objLock = new();
+    Tweener shake;
     void Awake()
     {
         branchCollider = GetComponent<Collider2D>();
@@ -21,7 +22,8 @@ public class TreeBranch : MonoBehaviour
             {
                 disableRoutine = StartCoroutine(ShakeTimer(time));
 
-                transform.DOShakeRotation(time, new Vector3(2, 2, 20), 10, 10);
+                if (shake == null || !shake.IsPlaying())
+                    shake = transform.DOShakeRotation(time, new Vector3(2, 2, 20), 10, 10, true, ShakeRandomnessMode.Harmonic);
             }
         }
     }

@@ -25,6 +25,8 @@ public class Owl : BossEnemy
 
     [SerializeField] private SpriteRenderer sr;
 
+    [SerializeField] private Animator anim;
+
     [Header("EntryAnimation")]
     [SerializeField] private Vector2 entryPoint;
     [SerializeField] private float entryDownOffset;
@@ -95,6 +97,11 @@ public class Owl : BossEnemy
 
     void FixedUpdate()
     {
+        if ((Player.Get().transform.position - transform.position).x > 0)
+            sr.transform.localEulerAngles = new Vector3(0, 180, 0);
+        else
+            sr.transform.localEulerAngles = new Vector3(0, 0, 0);
+
         lightsOnInRange.Clear();
         var hits = Physics2D.OverlapCircleAll(transform.position, lightDetectRadius);
         foreach (var hit in hits)
@@ -170,6 +177,10 @@ public class Owl : BossEnemy
 
     void IdleAttack()
     {
+        if (Random.value < .5f)
+            anim.Play("OwlFly");
+        else
+            anim.Play("OwlLookAround");
         float idleTime = Random.Range(minMaxIdleTime.x, minMaxIdleTime.y);
         float sideSpeed = Random.Range(idleSideSpeedMinMax.x, idleSideSpeedMinMax.y);
 
@@ -241,7 +252,7 @@ public class Owl : BossEnemy
     void SwoopAttack()
     {
         swoopCenter.transform.position = swoopCenterPos;
-        swoopPos.position = Vector3.right * swoopDistance;
+        swoopPos.localPosition = Vector3.right * swoopDistance;
 
         swoopCenter.transform.localRotation = Quaternion.Euler(0, 0, Random.Range(0, 360));
 
@@ -253,8 +264,10 @@ public class Owl : BossEnemy
             currentSwoopFollow = null;
         }
 
+        anim.Play("OwlOpenWings");
+
         currentSeq.Append(transform.DOMove(swoopPos.position, swoopEntryTime).SetEase(Ease.OutSine));
-        currentSeq.Join(transform.DORotate(swoopCenter.transform.eulerAngles, swoopEntryTime).SetEase(Ease.OutSine));
+        currentSeq.Join(transform.DORotateQuaternion(swoopCenter.transform.rotation, swoopEntryTime).SetEase(Ease.OutSine));
         currentSeq.Append(swoopCenter.transform.DORotate(new Vector3(0, 0, 360), swoopTime, RotateMode.LocalAxisAdd));
         currentSeq.JoinCallback(() =>
         {
@@ -265,7 +278,7 @@ public class Owl : BossEnemy
         currentSeq.AppendCallback(() =>
         {
             isSwooping = false;
-            transform.DORotate(Vector3.zero, swoopEntryTime).SetEase(Ease.OutSine);
+            transform.DORotateQuaternion(Quaternion.identity, .1f).SetEase(Ease.OutSine);
             OnAttackComplete();
         });
     }
@@ -275,7 +288,7 @@ public class Owl : BossEnemy
         {
             if (transform == null) break;
             transform.position = swoopPos.position;
-            transform.rotation = swoopCenter.transform.rotation;
+            transform.eulerAngles = swoopCenter.transform.eulerAngles + new Vector3(0, 0, 0);
             yield return null;
         }
 
@@ -309,6 +322,10 @@ public class Owl : BossEnemy
             transform.DOMoveX(playerPos.x, diveEntryTime)
                 .SetEase(Ease.InBack)
         );
+        currentSeq.JoinCallback(() => {
+            transform.eulerAngles = (Player.Get().transform.position - transform.position).x > 0 ? new Vector3(0, 0, 90) : new Vector3(0, 0, -90);
+            anim.Play("OwlDive");
+        });
         currentSeq.Join(
             transform.DOMoveY(playerPos.y, diveEntryTime / 1.1f)
                 .SetEase(Ease.InOutSine)
@@ -322,6 +339,10 @@ public class Owl : BossEnemy
                 .SetEase(Ease.InOutSine)
         );
         currentSeq.Join(transform.DORotate(Vector3.zero, diveExitTime / 2f).SetEase(Ease.InOutSine));
+        currentSeq.JoinCallback(() => {
+            transform.eulerAngles = new Vector3(0, 0, 0);
+            anim.Play("OwlOpenWings");
+        });
         currentSeq.AppendCallback(OnAttackComplete);
     }
 
@@ -343,7 +364,10 @@ public class Owl : BossEnemy
         seq.AppendInterval(entryWaitTime);
         seq.Append(transform.DOMove(entryPoint, entryFlyTime).SetEase(Ease.OutBack));
         seq.AppendInterval(entryStayTime);
-        seq.JoinCallback(() => showName?.Invoke("Owl"));
+        seq.JoinCallback(() => {
+            anim.Play("OwlLookAround");
+            showName?.Invoke("Owl");
+        });
         seq.AppendCallback(() =>
         {
             onEnded?.Invoke();

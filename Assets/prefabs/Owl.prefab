@@ -100,6 +100,7 @@ MonoBehaviour:
   maxHeight: 7.5
   maxEdges: {x: -12, y: 12}
   sr: {fileID: 5422962804920549967}
+  anim: {fileID: 5644086437345962854}
   entryPoint: {x: 0, y: 5}
   entryDownOffset: -20
   entryWaitTime: 0.5
@@ -183,7 +184,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4702310845811118701}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
