@@ -94,7 +94,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   maxHealth: 100
-  normalResistence: 5
+  normalResistence: 10
   wooshResistence: 1
   currentAttack: 0
   maxHeight: 7.5

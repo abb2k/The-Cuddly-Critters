@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3410768534007369598}
   - component: {fileID: 884425321851033522}
   - component: {fileID: 8594046773561912488}
-  - component: {fileID: 6747636440054923414}
+  - component: {fileID: 411084901820412545}
   - component: {fileID: 3199372065058750585}
   m_Layer: 6
   m_Name: Player
@@ -78,7 +78,7 @@ MonoBehaviour:
   myLight: {fileID: 6953656957564859050}
   lightIntensity: 1
   lightTransitionTime: 1
-  feet: {fileID: 5665010517146723244}
+  feet: {fileID: 3928752663084397175}
 --- !u!50 &8594046773561912488
 Rigidbody2D:
   serializedVersion: 5
@@ -94,7 +94,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 3
+  m_GravityScale: 3.5
   m_Material: {fileID: 6200000, guid: bd92312e58668b449a73b6e69580fdce, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
@@ -106,8 +106,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!70 &6747636440054923414
-CapsuleCollider2D:
+--- !u!61 &411084901820412545
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -140,9 +140,18 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1, y: 2}
-  m_Direction: 0
+  m_Offset: {x: 0.07146454, y: -0.45941496}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 0.8570709, y: 0.9183264}
+  m_EdgeRadius: 0
 --- !u!114 &3199372065058750585
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -627,7 +636,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3856053226088406078}
-  - component: {fileID: 5665010517146723244}
+  - component: {fileID: 3928752663084397175}
   - component: {fileID: 3266055968150399841}
   m_Layer: 6
   m_Name: Feet
@@ -651,8 +660,8 @@ Transform:
   m_Children: []
   m_Father: {fileID: 3410768534007369598}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!70 &5665010517146723244
-CapsuleCollider2D:
+--- !u!61 &3928752663084397175
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -685,9 +694,18 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: -0.01}
-  m_Size: {x: 0.98, y: 2}
-  m_Direction: 0
+  m_Offset: {x: 0.07146454, y: -0.4737084}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 0.8570709, y: 0.94691324}
+  m_EdgeRadius: 0
 --- !u!114 &3266055968150399841
 MonoBehaviour:
   m_ObjectHideFlags: 0
