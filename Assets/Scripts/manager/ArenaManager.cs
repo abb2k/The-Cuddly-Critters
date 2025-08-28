@@ -10,6 +10,7 @@ public class ArenaManager : Singleton<ArenaManager>
     private ArenaHolder currentArena;
     private EnemyForArena enemyForArena;
     public event UnityAction<string, string> OnArenaChanged;
+    public event UnityAction<string, string> OnArenaChangedStart;
     public bool IsLoadingArena { get; private set; }
     private Camera mainCam;
     void Start()
@@ -25,6 +26,7 @@ public class ArenaManager : Singleton<ArenaManager>
 
     public async Task OpenUpArena(string arena, UnityAction sceneLoaded = null)
     {
+        OnArenaChangedStart?.Invoke(currentArena == null ? null : currentArena.gameObject.scene.name, arena);
         if (currentArena != null)
         {
             await currentArena.RunExitAnim();
@@ -32,7 +34,10 @@ public class ArenaManager : Singleton<ArenaManager>
             await SceneManager.UnloadSceneAsync(currentArena.gameObject.scene);
         }
 
-        if (string.IsNullOrEmpty(arena) || !Application.CanStreamedLevelBeLoaded(arena)) return;
+        if (string.IsNullOrEmpty(arena) || !Application.CanStreamedLevelBeLoaded(arena))
+        {
+            return;
+        }
 
         IsLoadingArena = true;
 

@@ -33,6 +33,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 8941133135877986821}
+  - {fileID: 3747904861832121392}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &6635318923727710424
@@ -79,7 +80,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 3.0830112, y: 3.9476938}
+  m_Size: {x: 1.93, y: 2.69}
   m_EdgeRadius: 0
 --- !u!114 &2794797493209240024
 MonoBehaviour:
@@ -109,16 +110,31 @@ MonoBehaviour:
   idleUpSpeed: 2
   idleSideSpeedMinMax: {x: -10, y: 10}
   minMaxIdleTime: {x: 1, y: 3}
+  idleInfo:
+    damageSource: {fileID: 0}
+    damage: 3
+    knockbackNormal: {x: 0, y: 0}
+    knockbackStrength: 0
   divePrepTime: 0.5
   divePrepMoveAmount: 4
   diveEntryTime: 0.75
   diveExitTime: 1.5
   exitOffset: {x: 5, y: 10}
+  nosediveInfo:
+    damageSource: {fileID: 0}
+    damage: 10
+    knockbackNormal: {x: 0, y: 0}
+    knockbackStrength: 0
   swoopCenterPos: {x: 0, y: 0}
   swoopDistance: 8
   swoopEntryTime: 2
   swoopTime: 2
   swoopBranchShakeTime: 1
+  swoopInfo:
+    damageSource: {fileID: 0}
+    damage: 10
+    knockbackNormal: {x: 0, y: 0}
+    knockbackStrength: 0
   lightDetectRadius: 20
   annoyingLightsAmount: 4
   wooshStayPositions:
@@ -132,6 +148,11 @@ MonoBehaviour:
   wooshForce: 100
   wooshTime: 7
   wooshExitTime: 1
+  wooshInfo:
+    damageSource: {fileID: 0}
+    damage: 8
+    knockbackNormal: {x: 0, y: 0}
+    knockbackStrength: 0
   escapeHeight: 18.2
   escapeTime: 1.5
   deathHeight: -17
@@ -276,3 +297,90 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!1 &9130454863410757310
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3747904861832121392}
+  - component: {fileID: 4178833491879225759}
+  - component: {fileID: 8898506534608780332}
+  m_Layer: 0
+  m_Name: attackBox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3747904861832121392
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9130454863410757310}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7355384207542605231}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &4178833491879225759
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9130454863410757310}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_Radius: 1.16
+--- !u!114 &8898506534608780332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9130454863410757310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ab8db49e997278478623c60c1c7f74d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HitSender
+  hitReciever: {fileID: 1333736031344954063}
+  hitID: 0
+  getEnter: 1
+  getStay: 0
+  getExit: 0
+  isTrigger: 1

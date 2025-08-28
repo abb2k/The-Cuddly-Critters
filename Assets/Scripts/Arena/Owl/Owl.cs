@@ -14,7 +14,7 @@ public enum OwlAttacks
     Nosedive
 }
 
-public class Owl : BossEnemy
+public class Owl : BossEnemy, IHitReciever
 {
     [SerializeField] private float normalResistence;
     [SerializeField] private float wooshResistence;
@@ -40,18 +40,23 @@ public class Owl : BossEnemy
     [SerializeField] private float idleUpSpeed;
     [SerializeField] private Vector2 idleSideSpeedMinMax;
     [SerializeField] private Vector2 minMaxIdleTime;
+    [SerializeField] private DamageInfo idleInfo;
+
     [Header("Nosedive")]
     [SerializeField] private float divePrepTime;
     [SerializeField] private float divePrepMoveAmount;
     [SerializeField] private float diveEntryTime;
     [SerializeField] private float diveExitTime;
     [SerializeField] private Vector2 exitOffset;
+    [SerializeField] private DamageInfo nosediveInfo;
+
     [Header("Swoop")]
     [SerializeField] private Vector2 swoopCenterPos;
     [SerializeField] private float swoopDistance;
     [SerializeField] private float swoopEntryTime;
     [SerializeField] private float swoopTime;
     [SerializeField] private float swoopBranchShakeTime;
+    [SerializeField] private DamageInfo swoopInfo;
 
     private GameObject swoopCenter;
     private Transform swoopPos;
@@ -67,6 +72,7 @@ public class Owl : BossEnemy
     [SerializeField] private float wooshForce;
     [SerializeField] private float wooshTime;
     [SerializeField] private float wooshExitTime;
+    [SerializeField] private DamageInfo wooshInfo;
 
     private List<TreeBranchLight> lightsInScene = new();
     private bool isWooshing = false;
@@ -87,7 +93,7 @@ public class Owl : BossEnemy
     {
         base.Start();
 
-        ArenaManager.Get().OnArenaChanged += OnArenaChanged;
+        ArenaManager.Get().OnArenaChangedStart += OnArenaChanged;
     }
 
     void StartAttackLoop()
@@ -295,7 +301,7 @@ public class Owl : BossEnemy
         {
             if (transform == null) break;
             transform.position = swoopPos.position;
-            transform.eulerAngles = swoopCenter.transform.eulerAngles + new Vector3(0, 0, 0);
+            transform.eulerAngles = swoopCenter.transform.eulerAngles;
             yield return null;
         }
 
@@ -398,8 +404,11 @@ public class Owl : BossEnemy
 
         anim.Play("OwlDeath");
 
+        transform.eulerAngles = new Vector3(0, 0, 0);
+
         DOTween.Sequence()
             .Append(transform.DOMoveY(deathHeight, deathTime).SetEase(Ease.InBack))
+            .Join(transform.DORotateQuaternion(Quaternion.identity, .5f))
             .AppendCallback(() => Destroy(gameObject));
     }
 
@@ -409,8 +418,13 @@ public class Owl : BossEnemy
 
         anim.Play("OwlFly");
 
+        transform.DOKill();
+
+        transform.eulerAngles = new Vector3(0, 0, 0);
+
         DOTween.Sequence()
             .Append(transform.DOMoveY(escapeHeight, escapeTime).SetEase(Ease.InSine))
+            .Join(transform.DORotateQuaternion(Quaternion.identity, .5f))
             .AppendCallback(() => Destroy(gameObject));
     }
 
@@ -418,5 +432,31 @@ public class Owl : BossEnemy
     {
         if (didAttackLoopStart && oldArena.Equals("OwlArena"))
             RunAway();
+    }
+
+    public void HitRecieved(int hitID, IHitReciever.HitType type, bool isTriggerHit, Colliders other)
+    {
+        if (hitID == 0 && isTriggerHit && other.collider2D.TryGetComponent(out Player player))
+        {
+            DamageInfo damage;
+
+            switch (currentAttack)
+            {
+                case OwlAttacks.Swoop:
+                    damage = swoopInfo;
+                    break;
+                case OwlAttacks.Nosedive:
+                    damage = nosediveInfo;
+                    break;
+                case OwlAttacks.Woosh:
+                    damage = wooshInfo;
+                    break;
+                default:
+                    damage = idleInfo;
+                    break;
+            }
+
+            player.GetComponent<IHittable>().OnHit(damage);
+        }
     }
 }

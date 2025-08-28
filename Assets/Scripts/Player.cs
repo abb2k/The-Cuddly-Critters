@@ -22,6 +22,8 @@ public class Player : Singleton<Player>, IHitReciever, IHittable
     [SerializeField] private Collider2D feet;
     [SerializeField] private Transform visualsCont;
 
+    [SerializeField] private float health;
+
     private Rigidbody2D rb;
     private bool isOnGround = false;
     private bool isAttacking = false;
@@ -44,6 +46,7 @@ public class Player : Singleton<Player>, IHitReciever, IHittable
         defaultStats = stats;
         EquipItem(itemEquipped);
         rb = GetComponent<Rigidbody2D>();
+        health = stats.maxHealth;
     }
 
     public void TurnLight(bool on)
@@ -146,12 +149,12 @@ public class Player : Singleton<Player>, IHitReciever, IHittable
 
             float tolerance = 0.1f;
             bool isAbove = myBounds.min.y >= otherBounds.max.y - tolerance;
-            
+
             bool xOverlap = myBounds.max.x > otherBounds.min.x && myBounds.min.x < otherBounds.max.x;
 
             if (!(isAbove && xOverlap)) return;
         }
-        
+
 
         if (type != IHitReciever.HitType.Exit)
         {
@@ -248,6 +251,25 @@ public class Player : Singleton<Player>, IHitReciever, IHittable
 
     public void OnHit(DamageInfo info)
     {
+        if (health == 0) return;
         
+        health -= info.damage;
+        if (health < 0) health = 0;
+
+        OnDamaged();
+        if (health == 0)
+        {
+            OnDeath();
+        }
+    }
+
+    void OnDamaged()
+    {
+        
+    }
+
+    void OnDeath()
+    {
+        ArenaManager.Get().OpenUpArena("");
     }
 }
