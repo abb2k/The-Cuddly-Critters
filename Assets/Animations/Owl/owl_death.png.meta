@@ -1,19 +1,22 @@
 fileFormatVersion: 2
-guid: 720a7c2e1c5468f44b461c85a259aa5f
+guid: 8ef1f7df0f15b2f4984e8097cb20a611
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5151288650718147086
-    second: owl_dive_0
+      213: -5856169768219686400
+    second: owl_death_0
   - first:
-      213: 506882911739158878
-    second: owl_dive_1
+      213: -5018249144233699879
+    second: owl_death_1
   - first:
-      213: 2702684157419879653
-    second: owl_dive_2
+      213: -3437937782853022729
+    second: owl_death_2
   - first:
-      213: -7470903411560990714
-    second: owl_dive_3
+      213: -8543434341641581802
+    second: owl_death_3
+  - first:
+      213: -5138988419964903037
+    second: owl_death_4
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +49,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -60,7 +63,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 8
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -84,7 +87,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -109,13 +112,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: owl_dive_0
+      name: owl_death_0
       rect:
         serializedVersion: 2
         x: 27
-        y: 2
+        y: 0
         width: 23
-        height: 31
+        height: 30
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,20 +127,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 2fd817ec342f288b0800000000000000
-      internalID: -5151288650718147086
+      spriteID: 00a42e48f94babea0800000000000000
+      internalID: -5856169768219686400
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: owl_dive_1
+      name: owl_death_1
       rect:
         serializedVersion: 2
         x: 104
-        y: 2
+        y: 0
         width: 23
-        height: 31
+        height: 28
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -146,20 +149,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e51ade8925fc80700800000000000000
-      internalID: 506882911739158878
+      spriteID: 9d5da8bbdf89b5ab0800000000000000
+      internalID: -5018249144233699879
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: owl_dive_2
+      name: owl_death_2
       rect:
         serializedVersion: 2
-        x: 181
-        y: 3
-        width: 23
-        height: 29
+        x: 178
+        y: 0
+        width: 27
+        height: 30
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -168,20 +171,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5ec7617fbecd18520800000000000000
-      internalID: 2702684157419879653
+      spriteID: 7fbc62d2dcdf940d0800000000000000
+      internalID: -3437937782853022729
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: owl_dive_3
+      name: owl_death_3
       rect:
         serializedVersion: 2
-        x: 258
-        y: 3
-        width: 23
-        height: 29
+        x: 254
+        y: 0
+        width: 29
+        height: 23
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -190,8 +193,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 60837a20ee4025890800000000000000
-      internalID: -7470903411560990714
+      spriteID: 61b84983bbf9f6980800000000000000
+      internalID: -8543434341641581802
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: owl_death_4
+      rect:
+        serializedVersion: 2
+        x: 331
+        y: 0
+        width: 29
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 38165237245aea8b0800000000000000
+      internalID: -5138988419964903037
       vertices: []
       indices: 
       edges: []
@@ -210,10 +235,11 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      owl_dive_0: -5151288650718147086
-      owl_dive_1: 506882911739158878
-      owl_dive_2: 2702684157419879653
-      owl_dive_3: -7470903411560990714
+      owl_death_0: -5856169768219686400
+      owl_death_1: -5018249144233699879
+      owl_death_2: -3437937782853022729
+      owl_death_3: -8543434341641581802
+      owl_death_4: -5138988419964903037
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
