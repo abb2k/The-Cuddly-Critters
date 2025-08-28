@@ -21,6 +21,7 @@ public class Player : Singleton<Player>, IHitReciever, IHittable
     [SerializeField] private float lightTransitionTime;
     [SerializeField] private Collider2D feet;
     [SerializeField] private Transform visualsCont;
+    [SerializeField] private SpriteRenderer[] flashOnHurt;
 
     [SerializeField] private float health;
 
@@ -265,7 +266,12 @@ public class Player : Singleton<Player>, IHitReciever, IHittable
 
     void OnDamaged()
     {
-        
+        foreach (var sr in flashOnHurt)
+        {
+            DOTween.Sequence()
+                .Append(sr.DOColor(Color.red, 0))
+                .Append(sr.DOColor(Color.white, .5f));
+        }
     }
 
     void OnDeath()

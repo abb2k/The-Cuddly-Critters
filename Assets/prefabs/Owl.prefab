@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7355384207542605231}
-  - component: {fileID: 6635318923727710424}
+  - component: {fileID: 6271518961698940759}
   - component: {fileID: 2794797493209240024}
   - component: {fileID: 5664054814649799611}
   m_Layer: 7
@@ -36,8 +36,8 @@ Transform:
   - {fileID: 3747904861832121392}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &6635318923727710424
-BoxCollider2D:
+--- !u!58 &6271518961698940759
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -70,18 +70,8 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.10604596, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Size: {x: 1.93, y: 2.69}
-  m_EdgeRadius: 0
+  m_Offset: {x: -0.09, y: 0}
+  m_Radius: 1.76
 --- !u!114 &2794797493209240024
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -364,8 +354,8 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Radius: 1.16
+  m_Offset: {x: -0.09, y: 0}
+  m_Radius: 1.34
 --- !u!114 &8898506534608780332
 MonoBehaviour:
   m_ObjectHideFlags: 0
