@@ -210,6 +210,8 @@ public class Owl : BossEnemy
 
     void WooshAttack()
     {
+        anim.Play("OwlFly");
+        
         currentSeq = DOTween.Sequence();
 
         var decidedPos = wooshStayPositions[Random.Range(0, wooshStayPositions.Length)];
