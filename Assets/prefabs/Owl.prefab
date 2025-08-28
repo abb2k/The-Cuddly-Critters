@@ -122,9 +122,10 @@ MonoBehaviour:
   lightDetectRadius: 20
   annoyingLightsAmount: 4
   wooshStayPositions:
-  - {x: 4.75, y: 7}
-  - {x: -4, y: 4.45}
-  - {x: 2.17, y: 2.48}
+  - {x: 3.18, y: 3.48}
+  - {x: -2.89, y: 8.83}
+  - {x: 9.08, y: 5.9}
+  - {x: -10.82, y: 5.9}
   wooshEnterTime: 1
   wooshRadius: 20
   wooshCircleAngle: 180
