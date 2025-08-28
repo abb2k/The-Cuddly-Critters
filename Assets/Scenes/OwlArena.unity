@@ -9099,7 +9099,7 @@ MonoBehaviour:
   - {fileID: 110359685}
   - {fileID: 1704794950}
   - {fileID: 1676095159}
-  downDistance: 20
+  downDistance: 32
 --- !u!4 &1920846010 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5471490772307139287, guid: cbdf4eb597521b849946828063b99e4b, type: 3}

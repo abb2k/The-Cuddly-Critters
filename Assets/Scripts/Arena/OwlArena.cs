@@ -61,9 +61,10 @@ public class OwlArena : ArenaHolder
                 DOTween.To(
                     () => rb.position.y, x =>
                     {
+                        
                         var pos = rb.position;
                         pos.y = x;
-                        rb.position = pos;
+                        rb.MovePosition(pos);
                     },
                     originalPoses[other].y,
                     t
@@ -125,7 +126,7 @@ public class OwlArena : ArenaHolder
                     {
                         var pos = rb.position;
                         pos.y = x;
-                        rb.position = pos;
+                        rb.MovePosition(pos);
                     },
                     rb.position.y - downDistance,
                     t
