@@ -31,11 +31,11 @@ public class CarrotShockwave : MonoBehaviour
             .AppendCallback(() =>
             {
                 var carrotRight = Instantiate(carrotPrefab).GetComponent<FallingCarrot>();
-                carrotRight.Setup(damage, transform.position + Vector3.right * distPerCarrot * i + Vector3.up * heightStep * i - Vector3.up, false, false);
+                carrotRight.Setup(damage, transform.position + Vector3.right * distPerCarrot * i + Vector3.up * heightStep * i - Vector3.up, Vector2.zero, false);
                 carrotRight.transform.eulerAngles = new Vector3(0, 0, 180);
 
                 var carrotLeft = Instantiate(carrotPrefab).GetComponent<FallingCarrot>();
-                carrotLeft.Setup(damage, transform.position + Vector3.left * distPerCarrot * i + Vector3.up * heightStep * i - Vector3.up, false, false);
+                carrotLeft.Setup(damage, transform.position + Vector3.left * distPerCarrot * i + Vector3.up * heightStep * i - Vector3.up, Vector2.zero, false);
                 carrotLeft.transform.eulerAngles = new Vector3(0, 0, 180);
 
                 RunStaySeq(carrotRight);

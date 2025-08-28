@@ -273,11 +273,11 @@ MonoBehaviour:
   CSPos: {x: 0, y: 8}
   CSEntryTime: 1.5
   CSStayTime: 8
-  minCarrotArea: {x: -11.46, y: 6.95}
-  maxCarrotArea: {x: 11.5, y: 7.88}
   carrotPrefab: {fileID: 6908905577258661311, guid: c2280fb0278f06a4a916daf059666bc5, type: 3}
-  SpawnCarrotPer: {x: 0.2, y: 0.6}
-  SpawnCarrotAmount: {x: 1, y: 3}
+  SpawnCarrotPer: 0.4
+  cloudMovementSpeed: 20
+  carrotMovementSpeed: 10
+  MinMaxCloudMovement: {x: -20, y: 20}
   carrotDamage:
     damageSource: {fileID: 0}
     damage: 0

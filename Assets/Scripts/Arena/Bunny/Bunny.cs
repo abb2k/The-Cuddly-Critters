@@ -69,11 +69,11 @@ public class Bunny : BossEnemy, IHitReciever
     [SerializeField] private Vector2 CSPos;
     [SerializeField] private float CSEntryTime;
     [SerializeField] private float CSStayTime;
-    [SerializeField] private Vector2 minCarrotArea;
-    [SerializeField] private Vector2 maxCarrotArea;
     [SerializeField] private GameObject carrotPrefab;
-    [SerializeField] private Vector2 SpawnCarrotPer;
-    [SerializeField] private Vector2 SpawnCarrotAmount;
+    [SerializeField] private float SpawnCarrotPer;
+    [SerializeField] private float cloudMovementSpeed;
+    [SerializeField] private float carrotMovementSpeed;
+    [SerializeField] private Vector2 MinMaxCloudMovement;
     [SerializeField] private DamageInfo carrotDamage;
     private Coroutine carrotSpawnRoutine;
 
@@ -329,36 +329,52 @@ public class Bunny : BossEnemy, IHitReciever
         rb.bodyType = RigidbodyType2D.Kinematic;
         rb.linearVelocity = Vector2.zero;
 
+        Tween carrSpwn = null;
+
         currentOngoingState = DOTween.Sequence()
-            .Append(transform.DOMove(CSPos, CSEntryTime))
-            .AppendCallback(() => carrotSpawnRoutine = StartCoroutine(SpawnSkyCarrots()))
+            .Append(transform.DOMoveY(CSPos.y, CSEntryTime))
+            .AppendCallback(() =>
+            {
+                carrotSpawnRoutine = StartCoroutine(SpawnSkyCarrots());
+                carrSpwn = DOTween.Sequence()
+                .AppendCallback(() =>
+                {
+                    var carrot = Instantiate(carrotPrefab).GetComponent<FallingCarrot>();
+                    var dir = (Player.Get().transform.position - transform.position).normalized;
+                    carrot.Setup(carrotDamage, transform.position, dir * carrotMovementSpeed);
+                })
+                .AppendInterval(SpawnCarrotPer).SetLoops(-1);
+            })
             .AppendInterval(CSStayTime)
             .AppendCallback(() =>
             {
                 if (carrotSpawnRoutine != null) StopCoroutine(carrotSpawnRoutine);
+                carrotSpawnRoutine = null;
                 rb.bodyType = RigidbodyType2D.Dynamic;
+                carrSpwn.Kill();
             })
             .AppendCallback(OnStateEnded);
     }
 
     IEnumerator SpawnSkyCarrots()
     {
+        
+
+        bool movingRight = Random.value > 0.5f;
+
         while (true)
         {
-            int amount = Random.Range((int)SpawnCarrotAmount.x, (int)SpawnCarrotAmount.y + 1);
+            var pos = transform.position;
+            pos.x += cloudMovementSpeed * Time.deltaTime * (movingRight ? 1 : -1);
+            transform.position = pos;
 
-            for (int i = 0; i < amount; i++)
-            {
-                var spawnPos = new Vector2(
-                    Random.Range(minCarrotArea.x, maxCarrotArea.x),
-                    Random.Range(minCarrotArea.y, maxCarrotArea.y)
-                );
+            if (pos.x > MinMaxCloudMovement.y && movingRight)
+                movingRight = false;
 
-                var carrot = Instantiate(carrotPrefab).GetComponent<FallingCarrot>();
-                carrot.Setup(carrotDamage, spawnPos);
-            }
+            if (pos.x < MinMaxCloudMovement.x && !movingRight)
+                movingRight = true;
 
-            yield return new WaitForSeconds(Random.Range(SpawnCarrotPer.x, SpawnCarrotPer.y));
+            yield return null;
         }
     }
 

@@ -4,14 +4,16 @@ public class FallingCarrot : MonoBehaviour
 {
     private DamageInfo myDamage;
     private bool killOnHit;
-    public void Setup(DamageInfo damage, Vector2 position, bool killOnHit = true, bool isFalling = true)
+    public void Setup(DamageInfo damage, Vector2 position, Vector2 direction, bool killOnHit = true)
     {
         transform.position = position;
 
         myDamage = damage;
 
         this.killOnHit = killOnHit;
-        GetComponent<Rigidbody2D>().bodyType = isFalling ? RigidbodyType2D.Dynamic : RigidbodyType2D.Kinematic;
+        GetComponent<Rigidbody2D>().linearVelocity = direction;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0f, 0f, angle + 90);
     }
 
     void OnCollisionEnter2D(Collision2D collision)
