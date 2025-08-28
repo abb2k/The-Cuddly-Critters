@@ -79,6 +79,7 @@ MonoBehaviour:
   lightIntensity: 1
   lightTransitionTime: 1
   feet: {fileID: 3928752663084397175}
+  visualsCont: {fileID: 1003304429801905308}
 --- !u!50 &8594046773561912488
 Rigidbody2D:
   serializedVersion: 5

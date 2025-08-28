@@ -20,6 +20,7 @@ public class Player : Singleton<Player>, IHitReciever, IHittable
     [SerializeField] private float lightIntensity;
     [SerializeField] private float lightTransitionTime;
     [SerializeField] private Collider2D feet;
+    [SerializeField] private Transform visualsCont;
 
     private Rigidbody2D rb;
     private bool isOnGround = false;
@@ -89,6 +90,8 @@ public class Player : Singleton<Player>, IHitReciever, IHittable
             lastMovedLeft = false;
         else if (rb.linearVelocityX < 0)
             lastMovedLeft = true;
+
+        visualsCont.localEulerAngles = new Vector3(0, lastMovedLeft ? 180 : 0, 0);
     }
 
     void OnJump(InputValue input)
