@@ -9,6 +9,9 @@ public class TreeBranchLight : MonoBehaviour, IHittable
     private Tween tunTween = null;
     public bool isOn;
 
+    //Light Sprite
+    public SpriteRenderer mySprite;
+
     public event UnityAction<TreeBranchLight, bool> OnLightStateChanged;
 
     public void OnHit(DamageInfo info)
@@ -24,6 +27,9 @@ public class TreeBranchLight : MonoBehaviour, IHittable
         tunTween = DOTween.To(() => myLight.intensity, x => myLight.intensity = x, 1f, 2f);
         isOn = true;
 
+        // Enable sprite
+        if (mySprite != null) mySprite.enabled = true;
+
         OnLightStateChanged?.Invoke(this, true);
     }
 
@@ -32,6 +38,9 @@ public class TreeBranchLight : MonoBehaviour, IHittable
         tunTween?.Kill();
         tunTween = DOTween.To(() => myLight.intensity, x => myLight.intensity = x, 0, .5f);
         isOn = false;
+
+        // Disable sprite
+        if (mySprite != null) mySprite.enabled = false;
 
         OnLightStateChanged?.Invoke(this, false);
     }
