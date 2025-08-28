@@ -132,6 +132,10 @@ MonoBehaviour:
   wooshForce: 100
   wooshTime: 7
   wooshExitTime: 1
+  escapeHeight: 18.2
+  escapeTime: 1.5
+  deathHeight: -17
+  deathTime: 2
 --- !u!50 &5664054814649799611
 Rigidbody2D:
   serializedVersion: 5

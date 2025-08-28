@@ -77,6 +77,12 @@ public class Owl : BossEnemy
 
     private OwlArena owlArena;
 
+    [Header("Death/Escape")]
+    [SerializeField] private float escapeHeight;
+    [SerializeField] private float escapeTime;
+    [SerializeField] private float deathHeight;
+    [SerializeField] private float deathTime;
+
     protected override void Start()
     {
         base.Start();
@@ -370,7 +376,7 @@ public class Owl : BossEnemy
         seq.Play();
     }
 
-    protected override async void OnDeath()
+    async void StopAll()
     {
         invincible = true;
         didAttackLoopStart = false;
@@ -386,9 +392,31 @@ public class Owl : BossEnemy
         await ArenaManager.Get().OpenUpArena("");
     }
 
+    protected override void OnDeath()
+    {
+        StopAll();
+
+        anim.Play("OwlDeath");
+
+        DOTween.Sequence()
+            .Append(transform.DOMoveY(deathHeight, deathTime).SetEase(Ease.InBack))
+            .AppendCallback(() => Destroy(gameObject));
+    }
+
+    void RunAway()
+    {
+        StopAll();
+
+        anim.Play("OwlFly");
+
+        DOTween.Sequence()
+            .Append(transform.DOMoveY(escapeHeight, escapeTime).SetEase(Ease.InSine))
+            .AppendCallback(() => Destroy(gameObject));
+    }
+
     void OnArenaChanged(string oldArena, string newArena)
     {
         if (didAttackLoopStart && oldArena.Equals("OwlArena"))
-            OnDeath();
+            RunAway();
     }
 }
