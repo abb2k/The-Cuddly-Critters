@@ -276,6 +276,7 @@ public class Player : Singleton<Player>, IHitReciever, IHittable
 
     void OnDeath()
     {
-        ArenaManager.Get().OpenUpArena("");
+        ArenaManager.Get().OpenUpArena("ItemPickupArena");
+        health = stats.maxHealth;
     }
 }

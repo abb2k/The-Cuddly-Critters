@@ -8,13 +8,6 @@ using UnityEngine.Pool;
 
 //note: all audio here uses special blend so if you put the source on another object and that object is far away, it will come from that direction and sound far away
 
-public enum AudioGroup
-{
-    Master,
-    Music,
-    SFX
-}
-
 public class AudioManager : Singleton<AudioManager>
 {
     private readonly Dictionary<string, AudioSource> _stableSources = new();
@@ -52,23 +45,6 @@ public class AudioManager : Singleton<AudioManager>
 
     private AudioMixer _mainMixer = null;
 
-    /// <summary>
-    /// AudioManager.Get()[AudioGroup.Master] = 100;
-    /// </summary>
-    /// <param name="group"></param>
-    /// <returns></returns>
-    public float this[AudioGroup group]
-    {
-        get
-        {
-            return _mainMixer.GetFloat(group.ToString() + "Volume", out var volume) ? volume : 0;
-        }
-        set
-        {
-            _mainMixer.SetFloat(group.ToString() + "Volume", Mathf.Clamp(value, 0, 100) - 80);
-        }
-    }
-
     protected override void Awake()
     {
         _mainMixer = Resources.Load<AudioMixer>("MainMixer");
@@ -84,7 +60,7 @@ public class AudioManager : Singleton<AudioManager>
     /// if this is false the function will return null when finding a source with the same name</param>
     /// <param name="audioOrigin">The origin of the audio, when null the source is the found audio listener</param>
     /// <returns>the newly created audio source</returns>
-    public static AudioSource CreateStableSource(string sourceName, AudioClip clip = null, AudioGroup group = AudioGroup.Music, bool overrideExistingSource = false, GameObject audioOrigin = null)
+    public static AudioSource CreateStableSource(string sourceName, AudioClip clip = null, bool overrideExistingSource = false, GameObject audioOrigin = null)
     {
         if (Get()._stableSources.TryGetValue(sourceName, out var sameNamedSource) && !overrideExistingSource)
             return null;
@@ -105,7 +81,7 @@ public class AudioManager : Singleton<AudioManager>
         var createdSource = audioObject.GetComponent<AudioSource>();
         createdSource.clip = clip;
         createdSource.volume = 1;
-        createdSource.outputAudioMixerGroup = Get()._mainMixer.FindMatchingGroups(group.ToString()).FirstOrDefault();
+        //createdSource.outputAudioMixerGroup = Get()._mainMixer.FindMatchingGroups(group.ToString()).FirstOrDefault();
 
         audioObject.GetComponent<FollowObject>().target = audioOrigin.transform;
 
@@ -148,7 +124,7 @@ public class AudioManager : Singleton<AudioManager>
     /// <param name="overrideExistingSource">If you play a temporary source when an already playing source has this the overrideKey, The playing source will be overwirtten by the new one</param>
     /// <param name="audioOrigin">The origin of the audio, when null the source is the found audio listener</param>
     /// <returns>The created audio source</returns>
-    public static AudioSource PlayTemporarySource(AudioClip clip, float volume = 1, AudioGroup group = AudioGroup.SFX, uint repeats = 1, string overrideExistingSource = null, GameObject audioOrigin = null)
+    public static AudioSource PlayTemporarySource(AudioClip clip, float volume = 1, uint repeats = 1, string overrideExistingSource = null, GameObject audioOrigin = null)
     {
         if (clip == null) return null;
 
@@ -168,7 +144,7 @@ public class AudioManager : Singleton<AudioManager>
         var createdSource = audioObject.GetComponent<AudioSource>();
         createdSource.clip = clip;
         createdSource.volume = volume;
-        createdSource.outputAudioMixerGroup = Get()._mainMixer.FindMatchingGroups(group.ToString()).FirstOrDefault();
+        //createdSource.outputAudioMixerGroup = Get()._mainMixer.FindMatchingGroups(group.ToString()).FirstOrDefault();
 
         audioObject.GetComponent<FollowObject>().target = audioOrigin.transform;
 
