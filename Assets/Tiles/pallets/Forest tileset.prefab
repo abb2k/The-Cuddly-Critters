@@ -913,7 +913,7 @@ GameObject:
   - component: {fileID: 4957069757133539742}
   - component: {fileID: 6852516079554563436}
   m_Layer: 0
-  m_Name: mid ground forest
+  m_Name: Forest tileset
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
