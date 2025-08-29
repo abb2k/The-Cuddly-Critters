@@ -16,7 +16,7 @@ public class FallingCarrot : MonoBehaviour
         transform.rotation = Quaternion.Euler(0f, 0f, angle + 90);
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.transform.TryGetComponent(out FallingCarrot _)) return;
         

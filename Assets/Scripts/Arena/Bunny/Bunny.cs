@@ -358,8 +358,6 @@ public class Bunny : BossEnemy, IHitReciever
 
     IEnumerator SpawnSkyCarrots()
     {
-        
-
         bool movingRight = Random.value > 0.5f;
 
         while (true)
@@ -447,7 +445,7 @@ public class Bunny : BossEnemy, IHitReciever
         if (currentOngoingState != null)
             currentOngoingState.Kill();
 
-        await ArenaManager.Get().OpenUpArena("");
+        await ArenaManager.Get().OpenUpArena("ItemPickupArena");
     }
 
     void OnArenaChanged(string oldArena, string newArena)

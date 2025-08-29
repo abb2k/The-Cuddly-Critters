@@ -33,12 +33,15 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
                 var me = _instance.GetComponent<Singleton<T>>();
                 DontDestroyOnLoad(_instance);
                 if (me.SingletonName != null)
+                {
                     _instance.gameObject.name = me.SingletonName;
+                }
                 if (!me.CreateIfNone)
                 {
                     Destroy(me.gameObject);
                     _instance = null;
                 }
+                else me.OnLoaded();
             }
             
 
@@ -55,4 +58,5 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     }
 
     protected virtual void OnSingletonDestroyed() {}
+    protected virtual void OnLoaded() {}
 }

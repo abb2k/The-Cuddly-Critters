@@ -12,10 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9047792ac72c0374a8b62615ff0876d9, type: 3}
   m_Name: chain
   m_EditorClassIdentifier: Assembly-CSharp::SpecialItem
+  description: Chain description
+  generalVisual: {fileID: 0}
+  bodyVisual: {fileID: 0}
+  bodyVisualSorting: 0
+  weponVisual: {fileID: 0}
+  weponVisualSorting: 0
   modifyedStats:
     movementSpeed: 0
-    jumpHight: 0
-    canDoubleJump: 0
+    jumpForce: 0
+    jumpTime: 0
+    airJumpsAllowed: 0
+    cyotieTime: 0
+    damage:
+      damageSource: {fileID: 0}
+      damage: 0
+      knockbackNormal: {x: 0, y: 0}
+      knockbackStrength: 0
     attackTime: 0
     attackCooldown: 0.2
     attackAngle: 180
+    maxHealth: 0
