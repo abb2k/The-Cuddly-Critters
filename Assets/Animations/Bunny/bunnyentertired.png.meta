@@ -1,0 +1,493 @@
+fileFormatVersion: 2
+guid: 373fefaf1183e3f4c908e67e3f6fd65f
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -8992503761643021682
+    second: bunnyentertired_0
+  - first:
+      213: 5586543202067280493
+    second: bunnyentertired_1
+  - first:
+      213: -9098419295298957344
+    second: bunnyentertired_2
+  - first:
+      213: 8921541855683490564
+    second: bunnyentertired_3
+  - first:
+      213: 9073698328688211293
+    second: bunnyentertired_4
+  - first:
+      213: -4280889397566018079
+    second: bunnyentertired_5
+  - first:
+      213: 6123413320670883213
+    second: bunnyentertired_6
+  - first:
+      213: -4678542006346693518
+    second: bunnyentertired_7
+  - first:
+      213: -1246221533673361502
+    second: bunnyentertired_8
+  - first:
+      213: 4888651415501578721
+    second: bunnyentertired_9
+  - first:
+      213: -1349026199393841125
+    second: bunnyentertired_10
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 0
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 8
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: bunnyentertired_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 26
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline:
+      - - {x: 0, y: -13}
+        - {x: 13, y: 0}
+        - {x: 0, y: 13}
+        - {x: -13, y: 0}
+      physicsShape:
+      - - {x: 0, y: -13}
+        - {x: 13, y: 0}
+        - {x: 0, y: 13}
+        - {x: -13, y: 0}
+      tessellationDetail: -1
+      bones: []
+      spriteID: e8a57ed1975343380800000000000000
+      internalID: -8992503761643021682
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bunnyentertired_1
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 0
+        width: 26
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline:
+      - - {x: 0, y: -13}
+        - {x: 13, y: 0}
+        - {x: 0, y: 13}
+        - {x: -13, y: 0}
+      physicsShape:
+      - - {x: 0, y: -13}
+        - {x: 13, y: 0}
+        - {x: 0, y: 13}
+        - {x: -13, y: 0}
+      tessellationDetail: -1
+      bones: []
+      spriteID: d62f7998173678d40800000000000000
+      internalID: 5586543202067280493
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bunnyentertired_2
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 0
+        width: 26
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline:
+      - - {x: 0, y: -13}
+        - {x: 13, y: 0}
+        - {x: 0, y: 13}
+        - {x: -13, y: 0}
+      physicsShape:
+      - - {x: 0, y: -13}
+        - {x: 13, y: 0}
+        - {x: 0, y: 13}
+        - {x: -13, y: 0}
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0ef452e3bdbebb180800000000000000
+      internalID: -9098419295298957344
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bunnyentertired_3
+      rect:
+        serializedVersion: 2
+        x: 78
+        y: 0
+        width: 26
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline:
+      - - {x: 0, y: -13}
+        - {x: 13, y: 0}
+        - {x: 0, y: 13}
+        - {x: -13, y: 0}
+      physicsShape:
+      - - {x: 0, y: -13}
+        - {x: 13, y: 0}
+        - {x: 0, y: 13}
+        - {x: -13, y: 0}
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4033bc4ac0fafcb70800000000000000
+      internalID: 8921541855683490564
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bunnyentertired_4
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 0
+        width: 26
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline:
+      - - {x: 0, y: -13}
+        - {x: 13, y: 0}
+        - {x: 0, y: 13}
+        - {x: -13, y: 0}
+      physicsShape:
+      - - {x: 0, y: -13}
+        - {x: 13, y: 0}
+        - {x: 0, y: 13}
+        - {x: -13, y: 0}
+      tessellationDetail: -1
+      bones: []
+      spriteID: d5534803e804ced70800000000000000
+      internalID: 9073698328688211293
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bunnyentertired_5
+      rect:
+        serializedVersion: 2
+        x: 130
+        y: 0
+        width: 26
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline:
+      - - {x: 0, y: -13}
+        - {x: 13, y: 0}
+        - {x: 0, y: 13}
+        - {x: -13, y: 0}
+      physicsShape:
+      - - {x: 0, y: -13}
+        - {x: 13, y: 0}
+        - {x: 0, y: 13}
+        - {x: -13, y: 0}
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1ed675726c93794c0800000000000000
+      internalID: -4280889397566018079
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bunnyentertired_6
+      rect:
+        serializedVersion: 2
+        x: 156
+        y: 0
+        width: 26
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline:
+      - - {x: 0, y: -13}
+        - {x: 13, y: 0}
+        - {x: 0, y: 13}
+        - {x: -13, y: 0}
+      physicsShape:
+      - - {x: 0, y: -13}
+        - {x: 13, y: 0}
+        - {x: 0, y: 13}
+        - {x: -13, y: 0}
+      tessellationDetail: -1
+      bones: []
+      spriteID: d8dab7fc8fbbaf450800000000000000
+      internalID: 6123413320670883213
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bunnyentertired_7
+      rect:
+        serializedVersion: 2
+        x: 182
+        y: 0
+        width: 26
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline:
+      - - {x: 0, y: -13}
+        - {x: 13, y: 0}
+        - {x: 0, y: 13}
+        - {x: -13, y: 0}
+      physicsShape:
+      - - {x: 0, y: -13}
+        - {x: 13, y: 0}
+        - {x: 0, y: 13}
+        - {x: -13, y: 0}
+      tessellationDetail: -1
+      bones: []
+      spriteID: 27446fc45da721fb0800000000000000
+      internalID: -4678542006346693518
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bunnyentertired_8
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 0
+        width: 26
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline:
+      - - {x: 0, y: -13}
+        - {x: 13, y: 0}
+        - {x: 0, y: 13}
+        - {x: -13, y: 0}
+      physicsShape:
+      - - {x: 0, y: -13}
+        - {x: 13, y: 0}
+        - {x: 0, y: 13}
+        - {x: -13, y: 0}
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2afe4fd2e1884bee0800000000000000
+      internalID: -1246221533673361502
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bunnyentertired_9
+      rect:
+        serializedVersion: 2
+        x: 234
+        y: 0
+        width: 26
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline:
+      - - {x: 0, y: -13}
+        - {x: 13, y: 0}
+        - {x: 0, y: 13}
+        - {x: -13, y: 0}
+      physicsShape:
+      - - {x: 0, y: -13}
+        - {x: 13, y: 0}
+        - {x: 0, y: 13}
+        - {x: -13, y: 0}
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1e1aeabaf8af7d340800000000000000
+      internalID: 4888651415501578721
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bunnyentertired_10
+      rect:
+        serializedVersion: 2
+        x: 260
+        y: 0
+        width: 26
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline:
+      - - {x: 0, y: -13}
+        - {x: 13, y: 0}
+        - {x: 0, y: 13}
+        - {x: -13, y: 0}
+      physicsShape:
+      - - {x: 0, y: -13}
+        - {x: 13, y: 0}
+        - {x: 0, y: 13}
+        - {x: -13, y: 0}
+      tessellationDetail: -1
+      bones: []
+      spriteID: b105f60b1db474de0800000000000000
+      internalID: -1349026199393841125
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 7b9925bfa796468438fca4e007c5dbe4
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":26.0,"y":26.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":3,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      bunnyentertired_0: -8992503761643021682
+      bunnyentertired_1: 5586543202067280493
+      bunnyentertired_10: -1349026199393841125
+      bunnyentertired_2: -9098419295298957344
+      bunnyentertired_3: 8921541855683490564
+      bunnyentertired_4: 9073698328688211293
+      bunnyentertired_5: -4280889397566018079
+      bunnyentertired_6: 6123413320670883213
+      bunnyentertired_7: -4678542006346693518
+      bunnyentertired_8: -1246221533673361502
+      bunnyentertired_9: 4888651415501578721
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

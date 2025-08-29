@@ -1,0 +1,425 @@
+fileFormatVersion: 2
+guid: 94efb3b56b662004bb70df42fccff4b5
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 8833800036441594179
+    second: bunny_idle_0
+  - first:
+      213: 6625427373797352129
+    second: bunny_idle_1
+  - first:
+      213: -1023177742392568174
+    second: bunny_idle_2
+  - first:
+      213: 675297207249847426
+    second: bunny_idle_3
+  - first:
+      213: 2709565039753369134
+    second: bunny_idle_4
+  - first:
+      213: 734583204796513145
+    second: bunny_idle_5
+  - first:
+      213: -944265144024995140
+    second: bunny_idle_6
+  - first:
+      213: 3556572530379372039
+    second: bunny_idle_7
+  - first:
+      213: 744837101356300826
+    second: bunny_idle_8
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 0
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 8
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: bunny_idle_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 26
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline:
+      - - {x: 0, y: -13}
+        - {x: 13, y: 0}
+        - {x: 0, y: 13}
+        - {x: -13, y: 0}
+      physicsShape:
+      - - {x: 0, y: -13}
+        - {x: 13, y: 0}
+        - {x: 0, y: 13}
+        - {x: -13, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 765ec8661f2ed63448613b4060bbb167
+      internalID: 8833800036441594179
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bunny_idle_1
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 0
+        width: 26
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline:
+      - - {x: 0, y: -13}
+        - {x: 13, y: 0}
+        - {x: 0, y: 13}
+        - {x: -13, y: 0}
+      physicsShape:
+      - - {x: 0, y: -13}
+        - {x: 13, y: 0}
+        - {x: 0, y: 13}
+        - {x: -13, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 28928ebfab2d64a4bad433451b65cb86
+      internalID: 6625427373797352129
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bunny_idle_2
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 0
+        width: 26
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline:
+      - - {x: 0, y: -13}
+        - {x: 13, y: 0}
+        - {x: 0, y: 13}
+        - {x: -13, y: 0}
+      physicsShape:
+      - - {x: 0, y: -13}
+        - {x: 13, y: 0}
+        - {x: 0, y: 13}
+        - {x: -13, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 58a3de8a2778e1b44a60fe0b0dde757b
+      internalID: -1023177742392568174
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bunny_idle_3
+      rect:
+        serializedVersion: 2
+        x: 78
+        y: 0
+        width: 26
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline:
+      - - {x: 0, y: -13}
+        - {x: 13, y: 0}
+        - {x: 0, y: 13}
+        - {x: -13, y: 0}
+      physicsShape:
+      - - {x: 0, y: -13}
+        - {x: 13, y: 0}
+        - {x: 0, y: 13}
+        - {x: -13, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4671a846165d82b448b95d829f2b353a
+      internalID: 675297207249847426
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bunny_idle_4
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 0
+        width: 26
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline:
+      - - {x: 0, y: -13}
+        - {x: 13, y: 0}
+        - {x: 0, y: 13}
+        - {x: -13, y: 0}
+      physicsShape:
+      - - {x: 0, y: -13}
+        - {x: 13, y: 0}
+        - {x: 0, y: 13}
+        - {x: -13, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 13ca54a8abdb2cc4c852c72737ae4850
+      internalID: 2709565039753369134
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bunny_idle_5
+      rect:
+        serializedVersion: 2
+        x: 130
+        y: 0
+        width: 26
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline:
+      - - {x: 0, y: -13}
+        - {x: 13, y: 0}
+        - {x: 0, y: 13}
+        - {x: -13, y: 0}
+      physicsShape:
+      - - {x: 0, y: -13}
+        - {x: 13, y: 0}
+        - {x: 0, y: 13}
+        - {x: -13, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7b8cea754fd06c14c8820146defc081e
+      internalID: 734583204796513145
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bunny_idle_6
+      rect:
+        serializedVersion: 2
+        x: 156
+        y: 0
+        width: 26
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline:
+      - - {x: 0, y: -13}
+        - {x: 13, y: 0}
+        - {x: 0, y: 13}
+        - {x: -13, y: 0}
+      physicsShape:
+      - - {x: 0, y: -13}
+        - {x: 13, y: 0}
+        - {x: 0, y: 13}
+        - {x: -13, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: d770b5ade26b3e24ca864ca1aeefa92c
+      internalID: -944265144024995140
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bunny_idle_7
+      rect:
+        serializedVersion: 2
+        x: 182
+        y: 0
+        width: 26
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline:
+      - - {x: 0, y: -13}
+        - {x: 13, y: 0}
+        - {x: 0, y: 13}
+        - {x: -13, y: 0}
+      physicsShape:
+      - - {x: 0, y: -13}
+        - {x: 13, y: 0}
+        - {x: 0, y: 13}
+        - {x: -13, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 399c23724f87ad74486a2d0d2a855d2c
+      internalID: 3556572530379372039
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bunny_idle_8
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 0
+        width: 26
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline:
+      - - {x: 0, y: -13}
+        - {x: 13, y: 0}
+        - {x: 0, y: 13}
+        - {x: -13, y: 0}
+      physicsShape:
+      - - {x: 0, y: -13}
+        - {x: 13, y: 0}
+        - {x: 0, y: 13}
+        - {x: -13, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3766a257206784148a89b16a987ecc66
+      internalID: 744837101356300826
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: db51e186a07c7654995727afad89449c
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":26.0,"y":26.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":3,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      bunny_idle_0: 8833800036441594179
+      bunny_idle_1: 6625427373797352129
+      bunny_idle_2: -1023177742392568174
+      bunny_idle_3: 675297207249847426
+      bunny_idle_4: 2709565039753369134
+      bunny_idle_5: 734583204796513145
+      bunny_idle_6: -944265144024995140
+      bunny_idle_7: 3556572530379372039
+      bunny_idle_8: 744837101356300826
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
