@@ -8,7 +8,7 @@ public class BunnyArena : ArenaHolder
     [SerializeField] private float downOffset;
     public BunnyDirtMound leftMound;
     public BunnyDirtMound rightMound;
-    public Collider2D[] platforms;
+    public Transform[] platforms;
     private Sequence platDisSeq = null;
     public override async Task RunEntryAnim()
     {
@@ -87,10 +87,12 @@ public class BunnyArena : ArenaHolder
         foreach (var plat in platforms)
         {
             if (plat == null) continue;
-            plat.enabled = false;
+            var colliders = plat.GetComponents<Collider2D>();
+            foreach (var col in colliders) col.enabled = false;
+            
             platDisSeq = DOTween.Sequence()
                 .Append(plat.transform.DOShakeRotation(time, new Vector3(2, 2, 20), 10, 10))
-                .AppendCallback(() => plat.enabled = true);
+                .AppendCallback(() => {foreach (var col in colliders) col.enabled = true;});
         }    
     }
 }

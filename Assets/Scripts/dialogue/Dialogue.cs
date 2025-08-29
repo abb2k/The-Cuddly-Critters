@@ -457,6 +457,7 @@ public class Dialogue : MonoBehaviour
     {
         animator.SetInteger("exitTransition", (int)settings.exitTransition);
         animator.SetBool("exiting", true);
+        textArea.gameObject.SetActive(false);
         stage = 4;
     }
 

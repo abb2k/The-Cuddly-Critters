@@ -17,27 +17,17 @@ public class OwlArena : ArenaHolder
         foreach (var branch in branches)
         {
             originalPoses.Add(branch.transform, branch.transform.position);
-            branch.transform.DOMoveY(branch.transform.position.y - downDistance, 0);
+            Vector3 pos = branch.transform.position;
+            pos.y -= downDistance;
+            branch.transform.position = pos;
         }
 
         foreach (var other in riseWithBranches)
         {
-            Vector3 pos = other.TryGetComponent(out Rigidbody2D rb) ? rb.position : other.position;
+            Vector3 pos = other.position;
             originalPoses.Add(other, pos);
-            if (rb != null)
-            {
-                DOTween.To(
-                    () => rb.position.y, x =>
-                    {
-                        var pos = rb.position;
-                        pos.y = x;
-                        rb.position = pos;
-                    },
-                    pos.y - downDistance,
-                    0
-                );
-            }
-            else other.DOMoveY(pos.y - downDistance, 0);
+            pos.y -= downDistance;
+            other.position = pos;
         }
 
         Player.Get().TurnLight(true);
