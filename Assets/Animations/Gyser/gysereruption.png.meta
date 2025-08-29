@@ -1,0 +1,493 @@
+fileFormatVersion: 2
+guid: 2ff603fb7a86c2348ac673b4a19eba9f
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -166348199306965905
+    second: gysereruption_0
+  - first:
+      213: -7501686831929671302
+    second: gysereruption_1
+  - first:
+      213: 161032984868891926
+    second: gysereruption_2
+  - first:
+      213: 5819087238656892706
+    second: gysereruption_3
+  - first:
+      213: 2886258658720855073
+    second: gysereruption_4
+  - first:
+      213: 5046539172034141923
+    second: gysereruption_5
+  - first:
+      213: -3665924581305017210
+    second: gysereruption_6
+  - first:
+      213: -6052423803006257215
+    second: gysereruption_7
+  - first:
+      213: 4122336119585042553
+    second: gysereruption_8
+  - first:
+      213: 4361727689360956028
+    second: gysereruption_9
+  - first:
+      213: -2741441536680015703
+    second: gysereruption_10
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 0
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 8
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: gysereruption_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline:
+      - - {x: 0, y: -10}
+        - {x: 10, y: 0}
+        - {x: 0, y: 10}
+        - {x: -10, y: 0}
+      physicsShape:
+      - - {x: 0, y: -10}
+        - {x: 10, y: 0}
+        - {x: 0, y: 10}
+        - {x: -10, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 946953cf39772b94fa9d1628e6f8cef4
+      internalID: -166348199306965905
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gysereruption_1
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 0
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline:
+      - - {x: 0, y: -10}
+        - {x: 10, y: 0}
+        - {x: 0, y: 10}
+        - {x: -10, y: 0}
+      physicsShape:
+      - - {x: 0, y: -10}
+        - {x: 10, y: 0}
+        - {x: 0, y: 10}
+        - {x: -10, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4a73e4555c5812543a9100e2185285d8
+      internalID: -7501686831929671302
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gysereruption_2
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 0
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline:
+      - - {x: 0, y: -10}
+        - {x: 10, y: 0}
+        - {x: 0, y: 10}
+        - {x: -10, y: 0}
+      physicsShape:
+      - - {x: 0, y: -10}
+        - {x: 10, y: 0}
+        - {x: 0, y: 10}
+        - {x: -10, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0c29aabf884b66f4b9b3fac952317c20
+      internalID: 161032984868891926
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gysereruption_3
+      rect:
+        serializedVersion: 2
+        x: 60
+        y: 0
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline:
+      - - {x: 0, y: -10}
+        - {x: 10, y: 0}
+        - {x: 0, y: 10}
+        - {x: -10, y: 0}
+      physicsShape:
+      - - {x: 0, y: -10}
+        - {x: 10, y: 0}
+        - {x: 0, y: 10}
+        - {x: -10, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 07c719dbb0442c540bfffcd0c5a21553
+      internalID: 5819087238656892706
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gysereruption_4
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 0
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline:
+      - - {x: 0, y: -10}
+        - {x: 10, y: 0}
+        - {x: 0, y: 10}
+        - {x: -10, y: 0}
+      physicsShape:
+      - - {x: 0, y: -10}
+        - {x: 10, y: 0}
+        - {x: 0, y: 10}
+        - {x: -10, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f20809f8f2b3574a9478f8506ddb0f0
+      internalID: 2886258658720855073
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gysereruption_5
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 0
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline:
+      - - {x: 0, y: -10}
+        - {x: 10, y: 0}
+        - {x: 0, y: 10}
+        - {x: -10, y: 0}
+      physicsShape:
+      - - {x: 0, y: -10}
+        - {x: 10, y: 0}
+        - {x: 0, y: 10}
+        - {x: -10, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: bb265c80de022bc4588fc88b3961f966
+      internalID: 5046539172034141923
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gysereruption_6
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 0
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline:
+      - - {x: 0, y: -10}
+        - {x: 10, y: 0}
+        - {x: 0, y: 10}
+        - {x: -10, y: 0}
+      physicsShape:
+      - - {x: 0, y: -10}
+        - {x: 10, y: 0}
+        - {x: 0, y: 10}
+        - {x: -10, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8441d128e6aad344899339370cbdc138
+      internalID: -3665924581305017210
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gysereruption_7
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 0
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline:
+      - - {x: 0, y: -10}
+        - {x: 10, y: 0}
+        - {x: 0, y: 10}
+        - {x: -10, y: 0}
+      physicsShape:
+      - - {x: 0, y: -10}
+        - {x: 10, y: 0}
+        - {x: 0, y: 10}
+        - {x: -10, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 14f5643fafbebb042a05e676ddba4871
+      internalID: -6052423803006257215
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gysereruption_8
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 0
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline:
+      - - {x: 0, y: -10}
+        - {x: 10, y: 0}
+        - {x: 0, y: 10}
+        - {x: -10, y: 0}
+      physicsShape:
+      - - {x: 0, y: -10}
+        - {x: 10, y: 0}
+        - {x: 0, y: 10}
+        - {x: -10, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8dc66d69ff229ac41b1e85965dba0717
+      internalID: 4122336119585042553
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gysereruption_9
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 0
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline:
+      - - {x: 0, y: -10}
+        - {x: 10, y: 0}
+        - {x: 0, y: 10}
+        - {x: -10, y: 0}
+      physicsShape:
+      - - {x: 0, y: -10}
+        - {x: 10, y: 0}
+        - {x: 0, y: 10}
+        - {x: -10, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1862ea8cae843bf4e8ed3ecdcab6e0ef
+      internalID: 4361727689360956028
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gysereruption_10
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 0
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline:
+      - - {x: 0, y: -10}
+        - {x: 10, y: 0}
+        - {x: 0, y: 10}
+        - {x: -10, y: 0}
+      physicsShape:
+      - - {x: 0, y: -10}
+        - {x: 10, y: 0}
+        - {x: 0, y: 10}
+        - {x: -10, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1e67a81607181d941b2e3482015c1cb3
+      internalID: -2741441536680015703
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: f6cd031000c311d4bb12842ff0913e9a
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":20.0,"y":20.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":3,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      gysereruption_0: -166348199306965905
+      gysereruption_1: -7501686831929671302
+      gysereruption_10: -2741441536680015703
+      gysereruption_2: 161032984868891926
+      gysereruption_3: 5819087238656892706
+      gysereruption_4: 2886258658720855073
+      gysereruption_5: 5046539172034141923
+      gysereruption_6: -3665924581305017210
+      gysereruption_7: -6052423803006257215
+      gysereruption_8: 4122336119585042553
+      gysereruption_9: 4361727689360956028
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
