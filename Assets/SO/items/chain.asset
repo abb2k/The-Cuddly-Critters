@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9047792ac72c0374a8b62615ff0876d9, type: 3}
   m_Name: chain
   m_EditorClassIdentifier: Assembly-CSharp::SpecialItem
-  description: Chain description
-  generalVisual: {fileID: 0}
+  itemName: Chain
+  description: The Chain will allow you to attack behind your back
+  generalVisual: {fileID: 1244476889673583485, guid: 1a2c4ff9b65eab940bcd8ef04821f4bb, type: 3}
   bodyVisual: {fileID: 0}
   bodyVisualSorting: 0
-  weponVisual: {fileID: 0}
+  weponVisual: {fileID: 1244476889673583485, guid: 1a2c4ff9b65eab940bcd8ef04821f4bb, type: 3}
   weponVisualSorting: 0
   modifyedStats:
     movementSpeed: 0

@@ -12,13 +12,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9047792ac72c0374a8b62615ff0876d9, type: 3}
   m_Name: CursedBoots
   m_EditorClassIdentifier: Assembly-CSharp::SpecialItem
+  itemName: Cursed Boots
+  description: The Cured Boots will only slow you down
+  generalVisual: {fileID: -586881307, guid: 4650691af5cff1b4d99b8fbd89c3bc39, type: 3}
+  bodyVisual: {fileID: 0}
+  bodyVisualSorting: 0
+  weponVisual: {fileID: 0}
+  weponVisualSorting: 0
   modifyedStats:
     movementSpeed: -5
-    jumpHight: 0
-    groundDiscludeMask:
-      serializedVersion: 2
-      m_Bits: 0
-    canDoubleJump: 0
+    jumpForce: 0
+    jumpTime: 0
+    airJumpsAllowed: 0
+    cyotieTime: 0
+    damage:
+      damageSource: {fileID: 0}
+      damage: 0
+      knockbackNormal: {x: 0, y: 0}
+      knockbackStrength: 0
     attackTime: 0
     attackCooldown: 0
     attackAngle: 0
+    maxHealth: 0

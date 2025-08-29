@@ -32,7 +32,10 @@ public class PlayerStats
             airJumpsAllowed = a.airJumpsAllowed + b.airJumpsAllowed,
             attackTime = a.attackTime + b.attackTime,
             attackCooldown = a.attackCooldown + b.attackCooldown,
-            attackAngle = a.attackAngle + b.attackAngle
+            attackAngle = a.attackAngle + b.attackAngle,
+            damage = a.damage + b.damage,
+            cyotieTime = a.cyotieTime + b.cyotieTime,
+            maxHealth = a.maxHealth + b.maxHealth
         };
     }
 }

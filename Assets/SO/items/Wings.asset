@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9047792ac72c0374a8b62615ff0876d9, type: 3}
   m_Name: Wings
   m_EditorClassIdentifier: Assembly-CSharp::SpecialItem
+  itemName: Wings
+  description: The Wings allow you to jump twice
+  generalVisual: {fileID: -162720302111601175, guid: 19e147c25aaa0d9408d4334754af0b78, type: 3}
   bodyVisual: {fileID: 0}
   bodyVisualSorting: 0
   weponVisual: {fileID: 0}
@@ -21,6 +24,13 @@ MonoBehaviour:
     jumpForce: 0
     jumpTime: 0
     airJumpsAllowed: 1
+    cyotieTime: 0
+    damage:
+      damageSource: {fileID: 0}
+      damage: 0
+      knockbackNormal: {x: 0, y: 0}
+      knockbackStrength: 0
     attackTime: 0
     attackCooldown: 0
     attackAngle: 0
+    maxHealth: 0

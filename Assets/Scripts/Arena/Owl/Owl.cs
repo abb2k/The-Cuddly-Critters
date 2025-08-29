@@ -404,6 +404,8 @@ public class Owl : BossEnemy, IHitReciever
 
         anim.Play("OwlDeath");
 
+        GameManager.Get().AddProgress();
+
         transform.eulerAngles = new Vector3(0, 0, 0);
 
         DOTween.Sequence()
@@ -417,6 +419,8 @@ public class Owl : BossEnemy, IHitReciever
         StopAll();
 
         anim.Play("OwlFly");
+
+        GameManager.Get().AddProgress();
 
         transform.DOKill();
 

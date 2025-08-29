@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using DG.Tweening;
 using Unity.Mathematics;
 using UnityEngine;
@@ -11,6 +12,7 @@ public class Player : Singleton<Player>, IHitReciever, IHittable
     private PlayerStats defaultStats;
     [SerializeField] private Transform weponTransform;
     [SerializeField] private SpecialItem itemEquipped;
+    public SpecialItem ItemEquipped => itemEquipped;
     [SerializeField] private LayerMask groundDiscludeMask;
     [SerializeField] private SpriteRenderer itemBodyVisual;
     [SerializeField] private SpriteRenderer itemWeponVisual;
@@ -24,6 +26,7 @@ public class Player : Singleton<Player>, IHitReciever, IHittable
     [SerializeField] private SpriteRenderer[] flashOnHurt;
 
     [SerializeField] private float health;
+    private List<IInteractable> interactions = new();
 
     private Rigidbody2D rb;
     private bool isOnGround = false;
@@ -58,7 +61,7 @@ public class Player : Singleton<Player>, IHitReciever, IHittable
             DOTween.To(() => myLight.intensity, x => myLight.intensity = x, 0, lightTransitionTime);
     }
 
-    void EquipItem(SpecialItem item)
+    public void EquipItem(SpecialItem item)
     {
         itemEquipped = item;
 
@@ -88,6 +91,11 @@ public class Player : Singleton<Player>, IHitReciever, IHittable
     }
     void Movement()
     {
+        if (DialogueManager.Get().getFreezePlayer())
+        {
+            rb.linearVelocityX = 0;
+            return;
+        }
         rb.linearVelocityX = movementVec.x * stats.movementSpeed;
 
         if (rb.linearVelocityX > 0)
@@ -100,6 +108,13 @@ public class Player : Singleton<Player>, IHitReciever, IHittable
 
     void OnJump(InputValue input)
     {
+        if (DialogueManager.Get().getFreezePlayer())
+        {
+            if (isHoldingJump)
+                JumpKeyReleased();
+            isHoldingJump = false;
+            return;
+        }
         isHoldingJump = input.isPressed;
         if (!input.isPressed)
             JumpKeyReleased();
@@ -109,6 +124,11 @@ public class Player : Singleton<Player>, IHitReciever, IHittable
     void Jumping()
     {
         if (currentJumpsLeft <= 0 || !isHoldingJump || isCurrentJumpOngoing <= 0) return;
+        if (DialogueManager.Get().getFreezePlayer())
+        {
+            isHoldingJump = false;
+            return;
+        }
 
         rb.linearVelocityY = stats.jumpForce;
         isCurrentJumpOngoing -= Time.fixedDeltaTime;
@@ -135,8 +155,33 @@ public class Player : Singleton<Player>, IHitReciever, IHittable
                 OnFeetHit(other.collider2D, type);
             else if (hitID == 1)
                 OnWeponHit(other.collider2D);
+            else if (hitID == 2 && other.collider2D.TryGetComponent(out IInteractable inter))
+                OnInteractionHit(inter, type == IHitReciever.HitType.Exit);
         }
 
+    }
+
+    void OnInteractionHit(IInteractable interactable, bool didExit)
+    {
+        if (didExit)
+        {
+            if (interactions.Contains(interactable))
+                interactions.Remove(interactable);
+        }
+        else
+        {
+            interactions.Add(interactable);
+        }
+    }
+
+    void OnInteract()
+    {
+        if (interactions.Count == 0 || DialogueManager.Get().getFreezePlayer()) return;
+
+        interactions[0].OnInteract();
+        var temp = interactions[0];
+        interactions.RemoveAt(0);
+        interactions.Add(temp);
     }
 
     void OnFeetHit(Collider2D other, IHitReciever.HitType type)
@@ -191,7 +236,7 @@ public class Player : Singleton<Player>, IHitReciever, IHittable
 
     void OnAttack()
     {
-        if (isAttacking || isAttackOnCooldown) return;
+        if (isAttacking || isAttackOnCooldown || DialogueManager.Get().getFreezePlayer()) return;
         isAttacking = true;
         isAttackOnCooldown = true;
         weponTransform.gameObject.SetActive(true);
@@ -209,7 +254,6 @@ public class Player : Singleton<Player>, IHitReciever, IHittable
         var seq = DOTween.Sequence();
         seq.Append(
             weponTransform.DORotate(Vector3.forward * rotationAngle, stats.attackTime, RotateMode.LocalAxisAdd)
-        //.SetEase(Ease.OutExpo)
         );
         seq.AppendCallback(() =>
         {
@@ -276,6 +320,12 @@ public class Player : Singleton<Player>, IHitReciever, IHittable
 
     void OnDeath()
     {
+        if (ItemEquipped != null)
+        {
+            GameManager.Get().RemoveItem(ItemEquipped);
+            EquipItem(null);
+        }
+        
         ArenaManager.Get().OpenUpArena("ItemPickupArena");
         health = stats.maxHealth;
     }

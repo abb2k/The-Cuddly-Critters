@@ -9,6 +9,7 @@ public enum ItemVisualSorting
 [CreateAssetMenu(fileName = "SpecialItem", menuName = "Scriptable Objects/SpecialItem")]
 public class SpecialItem : ScriptableObject
 {
+    public string itemName;
     [Multiline]
     public string description;
     public Sprite generalVisual;
