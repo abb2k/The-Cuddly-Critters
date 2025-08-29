@@ -11,6 +11,7 @@ public class GameManager : Singleton<GameManager>
 
     public List<SpecialItem> ItemsAvailable { get; private set; } = new();
     public bool isInSeqance;
+    public float Score { get; private set; }
 
     protected override void OnLoaded()
     {
@@ -20,6 +21,11 @@ public class GameManager : Singleton<GameManager>
     public void AddProgress()
     {
         progressIndex++;
+    }
+
+    public void ResetProgress()
+    {
+        progressIndex = 0;
     }
 
     public void SetAvailableItems(params SpecialItem[] items)
@@ -41,5 +47,15 @@ public class GameManager : Singleton<GameManager>
     public void FadeOut(float time, UnityAction callback = null)
     {
         canvas.FG.DOColor(Color.black, time).OnComplete(() => callback?.Invoke());
+    }
+
+    public void AddScore(float score)
+    {
+        Score += score;
+    }
+
+    public void ResetScore()
+    {
+        Score = 0;
     }
 }

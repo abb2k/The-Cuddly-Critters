@@ -88,6 +88,7 @@ public class Owl : BossEnemy, IHitReciever
     [SerializeField] private float escapeTime;
     [SerializeField] private float deathHeight;
     [SerializeField] private float deathTime;
+    [SerializeField] private DialogueSettings defeatDialogue;
 
     protected override void Start()
     {
@@ -140,6 +141,15 @@ public class Owl : BossEnemy, IHitReciever
         seq.Append(sr.DOColor(Color.white, .3f));
 
         seq.Play();
+
+        if (isWooshing)
+        {
+            GameManager.Get().AddScore(2);
+        }
+        else
+        {
+            GameManager.Get().AddScore(1);
+        }
     }
 
     public void NextAttack()
@@ -382,7 +392,7 @@ public class Owl : BossEnemy, IHitReciever
         seq.Play();
     }
 
-    async void StopAll()
+    async void StopAll(bool loadPickupArena)
     {
         invincible = true;
         didAttackLoopStart = false;
@@ -395,12 +405,13 @@ public class Owl : BossEnemy, IHitReciever
         if (currentSwoopFollow != null)
             StopCoroutine(currentSwoopFollow);
 
-        await ArenaManager.Get().OpenUpArena("ItemPickupArena");
+        if (loadPickupArena)
+            await ArenaManager.Get().OpenUpArena("ItemPickupArena", null, defeatDialogue);
     }
 
     protected override void OnDeath()
     {
-        StopAll();
+        StopAll(true);
 
         anim.Play("OwlDeath");
 
@@ -416,7 +427,7 @@ public class Owl : BossEnemy, IHitReciever
 
     void RunAway()
     {
-        StopAll();
+        StopAll(false);
 
         anim.Play("OwlFly");
 
@@ -440,7 +451,7 @@ public class Owl : BossEnemy, IHitReciever
 
     public void HitRecieved(int hitID, IHitReciever.HitType type, bool isTriggerHit, Colliders other)
     {
-        if (hitID == 0 && isTriggerHit && other.collider2D.TryGetComponent(out Player player))
+        if (hitID == 0 && isTriggerHit && other.collider2D.TryGetComponent(out Player player) && didAttackLoopStart)
         {
             DamageInfo damage;
 

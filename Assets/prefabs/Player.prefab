@@ -172,6 +172,42 @@ MonoBehaviour:
   - {fileID: 4777531943638282051}
   - {fileID: 8045554838920843008}
   health: 0
+  deathDialogue:
+    name: 
+    texts:
+    - text: It appears you have lost this battel..
+      startEvent:
+        m_PersistentCalls:
+          m_Calls: []
+      endEvent:
+        m_PersistentCalls:
+          m_Calls: []
+    - text: May the item you chose disappear
+      startEvent:
+        m_PersistentCalls:
+          m_Calls: []
+      endEvent:
+        m_PersistentCalls:
+          m_Calls: []
+    fontSize: 70
+    icon: {fileID: 0}
+    font: {fileID: 11400000, guid: a22779d3e0da4414685d90123902d080, type: 2}
+    startColor: {r: 1, g: 1, b: 1, a: 1}
+    BackgroundColor: {r: 0, g: 0, b: 0, a: 1}
+    hideBG: 0
+    alignment: 0
+    enterTransition: 2
+    exitTransition: 1
+    speakSound: {fileID: 0}
+    speakSoundVolume: 1
+    startSpeed: 0.05
+    unskippable: 0
+    autoSkip: 0
+    autoSkipSpeed: 0.5
+    freezePlayer: 1
+    colors: []
+    events: []
+    voices: []
 --- !u!50 &8594046773561912488
 Rigidbody2D:
   serializedVersion: 5
@@ -233,7 +269,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.07146454, y: -0.49541175}
+  m_Offset: {x: 0.07146454, y: -0.5134543}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -243,7 +279,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.8570709, y: 0.99031997}
+  m_Size: {x: 0.8570709, y: 0.95423484}
   m_EdgeRadius: 0
 --- !u!114 &3199372065058750585
 MonoBehaviour:
@@ -834,7 +870,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4773649876002357056
 Transform:
   m_ObjectHideFlags: 0

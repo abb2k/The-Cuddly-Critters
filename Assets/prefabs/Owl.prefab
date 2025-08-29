@@ -84,7 +84,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e33d496955801b42b8fc7a3f61c9618, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  maxHealth: 100
+  maxHealth: 1
   normalResistence: 10
   wooshResistence: 1
   currentAttack: 0
@@ -147,6 +147,42 @@ MonoBehaviour:
   escapeTime: 1.5
   deathHeight: -17
   deathTime: 2
+  defeatDialogue:
+    name: 
+    texts:
+    - text: You have successfuly defeated the Owl! Congrats!
+      startEvent:
+        m_PersistentCalls:
+          m_Calls: []
+      endEvent:
+        m_PersistentCalls:
+          m_Calls: []
+    - text: You must prepare, pick your next item..
+      startEvent:
+        m_PersistentCalls:
+          m_Calls: []
+      endEvent:
+        m_PersistentCalls:
+          m_Calls: []
+    fontSize: 70
+    icon: {fileID: 0}
+    font: {fileID: 0}
+    startColor: {r: 1, g: 1, b: 1, a: 1}
+    BackgroundColor: {r: 0, g: 0, b: 0, a: 1}
+    hideBG: 0
+    alignment: 0
+    enterTransition: 2
+    exitTransition: 1
+    speakSound: {fileID: 0}
+    speakSoundVolume: 1
+    startSpeed: 0.05
+    unskippable: 0
+    autoSkip: 0
+    autoSkipSpeed: 0.5
+    freezePlayer: 1
+    colors: []
+    events: []
+    voices: []
 --- !u!50 &5664054814649799611
 Rigidbody2D:
   serializedVersion: 5
@@ -298,7 +334,7 @@ GameObject:
   - component: {fileID: 3747904861832121392}
   - component: {fileID: 4178833491879225759}
   - component: {fileID: 8898506534608780332}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: attackBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -149,6 +149,15 @@ public class Bunny : BossEnemy, IHitReciever
         seq.Append(sr.DOColor(Color.white, .3f));
 
         seq.Play();
+
+        if (currentState == BunnyStates.Tired)
+        {
+            GameManager.Get().AddScore(2);
+        }
+        else
+        {
+            GameManager.Get().AddScore(1);
+        }
     }
 
     public void NextState()
@@ -444,6 +453,8 @@ public class Bunny : BossEnemy, IHitReciever
             StopCoroutine(carrotSpawnRoutine);
         if (currentOngoingState != null)
             currentOngoingState.Kill();
+
+        GameManager.Get().AddProgress();
 
         await ArenaManager.Get().OpenUpArena("ItemPickupArena");
     }

@@ -45,12 +45,16 @@ public class Player : Singleton<Player>, IHitReciever, IHittable
 
     private readonly object cyotieObjLock = new();
 
+    [SerializeField] private DialogueSettings deathDialogue;
+
     void Start()
     {
         defaultStats = stats;
         EquipItem(itemEquipped);
         rb = GetComponent<Rigidbody2D>();
         health = stats.maxHealth;
+
+        ArenaManager.Get();
     }
 
     public void TurnLight(bool on)
@@ -326,7 +330,7 @@ public class Player : Singleton<Player>, IHitReciever, IHittable
             EquipItem(null);
         }
         
-        ArenaManager.Get().OpenUpArena("ItemPickupArena");
+        ArenaManager.Get().OpenUpArena("ItemPickupArena", null, deathDialogue);
         health = stats.maxHealth;
     }
 }

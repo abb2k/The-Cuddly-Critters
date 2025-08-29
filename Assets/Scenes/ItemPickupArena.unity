@@ -313,6 +313,37 @@ MonoBehaviour:
     colors: []
     events: []
     voices: []
+  finalDialogues:
+  - scoreMinimum: 0
+    dialogue:
+      name: 
+      texts:
+      - text: aaaa
+        startEvent:
+          m_PersistentCalls:
+            m_Calls: []
+        endEvent:
+          m_PersistentCalls:
+            m_Calls: []
+      fontSize: 70
+      icon: {fileID: 0}
+      font: {fileID: 11400000, guid: a22779d3e0da4414685d90123902d080, type: 2}
+      startColor: {r: 1, g: 1, b: 1, a: 1}
+      BackgroundColor: {r: 0, g: 0, b: 0, a: 1}
+      hideBG: 0
+      alignment: 0
+      enterTransition: 2
+      exitTransition: 1
+      speakSound: {fileID: 0}
+      speakSoundVolume: 1
+      startSpeed: 0.05
+      unskippable: 0
+      autoSkip: 0
+      autoSkipSpeed: 0.5
+      freezePlayer: 1
+      colors: []
+      events: []
+      voices: []
 --- !u!4 &930558690
 Transform:
   m_ObjectHideFlags: 0
