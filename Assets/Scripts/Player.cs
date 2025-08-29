@@ -91,7 +91,7 @@ public class Player : Singleton<Player>, IHitReciever, IHittable
     }
     void Movement()
     {
-        if (DialogueManager.Get().getFreezePlayer())
+        if (DialogueManager.Get().getFreezePlayer() || GameManager.Get().isInSeqance)
         {
             rb.linearVelocityX = 0;
             return;
@@ -108,7 +108,7 @@ public class Player : Singleton<Player>, IHitReciever, IHittable
 
     void OnJump(InputValue input)
     {
-        if (DialogueManager.Get().getFreezePlayer())
+        if (DialogueManager.Get().getFreezePlayer() || GameManager.Get().isInSeqance)
         {
             if (isHoldingJump)
                 JumpKeyReleased();
@@ -124,7 +124,7 @@ public class Player : Singleton<Player>, IHitReciever, IHittable
     void Jumping()
     {
         if (currentJumpsLeft <= 0 || !isHoldingJump || isCurrentJumpOngoing <= 0) return;
-        if (DialogueManager.Get().getFreezePlayer())
+        if (DialogueManager.Get().getFreezePlayer() || GameManager.Get().isInSeqance)
         {
             isHoldingJump = false;
             return;
@@ -176,7 +176,7 @@ public class Player : Singleton<Player>, IHitReciever, IHittable
 
     void OnInteract()
     {
-        if (interactions.Count == 0 || DialogueManager.Get().getFreezePlayer()) return;
+        if (interactions.Count == 0 || DialogueManager.Get().getFreezePlayer() || GameManager.Get().isInSeqance) return;
 
         interactions[0].OnInteract();
         var temp = interactions[0];
@@ -236,7 +236,7 @@ public class Player : Singleton<Player>, IHitReciever, IHittable
 
     void OnAttack()
     {
-        if (isAttacking || isAttackOnCooldown || DialogueManager.Get().getFreezePlayer()) return;
+        if (isAttacking || isAttackOnCooldown || DialogueManager.Get().getFreezePlayer() || GameManager.Get().isInSeqance) return;
         isAttacking = true;
         isAttackOnCooldown = true;
         weponTransform.gameObject.SetActive(true);

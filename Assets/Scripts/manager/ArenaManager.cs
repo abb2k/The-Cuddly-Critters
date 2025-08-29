@@ -13,9 +13,13 @@ public class ArenaManager : Singleton<ArenaManager>
     public event UnityAction<string, string> OnArenaChangedStart;
     public bool IsLoadingArena { get; private set; }
     private Camera mainCam;
+    private Tweener currShake;
+    public SpriteRenderer templeBG;
     void Start()
     {
         enemyForArena = Resources.Load<EnemyForArena>("EnemyForArena");
+
+        templeBG = GameObject.FindGameObjectWithTag("TempleBG").GetComponent<SpriteRenderer>();
 
         SpawnBossWithArena("ItemPickupArena");
 
@@ -113,6 +117,13 @@ public class ArenaManager : Singleton<ArenaManager>
 
     public void RunCamChake(float duration, float strength, int vibrato = 10, float rando = 10)
     {
-        mainCam.DOShakeRotation(duration, new Vector3(0, 0, strength), vibrato, rando);
+        if (currShake != null && currShake.IsActive())
+        {
+            currShake.Kill();
+            mainCam.transform.rotation = Quaternion.identity;
+            mainCam.DOShakeRotation(duration, new Vector3(0, 0, strength), vibrato, rando);
+        }
+        if (currShake == null)
+            mainCam.DOShakeRotation(duration, new Vector3(0, 0, strength), vibrato, rando);
     }
 }

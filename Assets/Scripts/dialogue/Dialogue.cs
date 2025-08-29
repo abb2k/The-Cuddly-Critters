@@ -31,6 +31,8 @@ public class Dialogue : MonoBehaviour
 
     public List<DialogueEvent> currentEvents = new List<DialogueEvent>();
 
+    public event UnityAction OnDialogueComplete;
+
     /*
      * 0 = didnt start
      * 1 = opening
@@ -84,6 +86,11 @@ public class Dialogue : MonoBehaviour
         progressDialogue();
     }
 
+    void OnDestroy()
+    {
+        OnDialogueComplete?.Invoke();
+    }
+
     public void progressDialogue()
     {
         if (currentPage != -1 && currentPage != settings.texts.Count)
@@ -93,7 +100,7 @@ public class Dialogue : MonoBehaviour
 
         textArea.text = string.Empty;
         textArea.horizontalAlignment = settings.alignment;
-        effetcs.Refresh();
+        //effetcs.Refresh();
 
         if (currentPage > settings.texts.Count - 1)
         {
@@ -125,7 +132,8 @@ public class Dialogue : MonoBehaviour
             {
                 foundKeyPoint = false;
 
-                if (res.Length > 1) {
+                if (res.Length > 1)
+                {
                     DialogueEvent e = new DialogueEvent();
 
                     e.type = DialogueEvent.DialogueEventType.PublicText;
@@ -236,7 +244,7 @@ public class Dialogue : MonoBehaviour
                 stage = 3;
 
                 textArea.text = string.Empty;
-                effetcs.Refresh();
+                //effetcs.Refresh();
 
                 for (int eventIndex = 0; eventIndex < toWriteText.Length; eventIndex++)
                 {
@@ -320,7 +328,7 @@ public class Dialogue : MonoBehaviour
                     tempDisplayText += toWriteText[eventIndex];
 
                     textArea.text = tempDisplayText;
-                    effetcs.Refresh();
+                    //effetcs.Refresh();
                 }
 
                 if (settings.speakSound)
@@ -416,7 +424,7 @@ public class Dialogue : MonoBehaviour
 
                         case DialogueEvent.DialogueEventType.PublicText:
                             if (DialogueManager.Get().getPublicTextVars().ContainsKey(DEvent.publicTextKey))
-                            tempDisplayText += DialogueManager.Get().getPublicTextVars()[DEvent.publicTextKey];
+                                tempDisplayText += DialogueManager.Get().getPublicTextVars()[DEvent.publicTextKey];
 
                             break;
                     }
@@ -431,7 +439,7 @@ public class Dialogue : MonoBehaviour
                 AudioManager.PlayTemporarySource(settings.speakSound, settings.speakSoundVolume, 1, settings.name + " speak sound");
 
             textArea.text = tempDisplayText;
-            effetcs.Refresh();
+            //effetcs.Refresh();
 
             length--;
         }
@@ -473,6 +481,7 @@ public class Dialogue : MonoBehaviour
         }
         return eventt;
     }
+    
 }
 
 [System.Serializable]

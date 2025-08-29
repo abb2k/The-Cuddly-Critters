@@ -1,15 +1,26 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class ItemPickupArena : ArenaHolder
 {
     [SerializeField] private SpecialItem[] itemsAvailable;
     [SerializeField] private ItemPedestal[] pedestals;
+    [SerializeField] private Vector2 DoorPos;
+    [SerializeField] private DialogueSettings startDialogue;
+    public event UnityAction OnEntryTransitionEnded;
     void Start()
     {
         if (GameManager.Get().progressIndex == 0)
         {
             GameManager.Get().SetAvailableItems(itemsAvailable);
+
+            GameManager.Get().FadeOut(0);
+            GameManager.Get().isInSeqance = true;
+            DOTween.Sequence().AppendInterval(1).AppendCallback(() => GameManager.Get().FadeIn(2, StartDialogue));
+            OnEntryTransitionEnded += () => GameManager.Get().isInSeqance = true;
         }
 
         int index = 0;
@@ -22,13 +33,53 @@ public class ItemPickupArena : ArenaHolder
         }
     }
 
+    void StartDialogue()
+    {
+        ArenaManager.Get().RunCamChake(3, 1);
+        DialogueManager.Get().createDialogue(startDialogue).OnDialogueComplete += () => GameManager.Get().isInSeqance = false;
+    }
+
     public override async Task RunEntryAnim()
     {
-        await base.RunEntryAnim();
+        bool isInProgress = true;
+        GameManager.Get().isInSeqance = true;
+
+        Player.Get().transform.DOMove(DoorPos, 1).SetEase(Ease.OutSine).OnComplete(() => isInProgress = false);
+
+        DOTween.To(() => ArenaManager.Get().templeBG.color.a * 255, x =>
+        {
+            var color = ArenaManager.Get().templeBG.color;
+            color.a = x / 255f;
+            ArenaManager.Get().templeBG.color = color;
+        }, 255, 1);
+
+        foreach (var pedestal in pedestals)
+        {
+            var originalPos = pedestal.transform.position;
+
+            pedestal.transform.DOMoveY(-20, 0).SetRelative(true);
+            pedestal.transform.DOMoveY(20, 1).SetRelative(true).SetEase(Ease.OutSine);
+        }
+
+        while (isInProgress) await Task.Yield();
+
+        GameManager.Get().isInSeqance = false;
+        OnEntryTransitionEnded?.Invoke();
     }
 
     public override async Task RunExitAnim()
     {
-        await base.RunExitAnim();
+        DOTween.To(() => ArenaManager.Get().templeBG.color.a * 255, x =>
+        {
+            var color = ArenaManager.Get().templeBG.color;
+            color.a = x / 255f;
+            ArenaManager.Get().templeBG.color = color;
+        }, 50, 1);
+        foreach (var pedestal in pedestals)
+        {
+            pedestal.transform.DOMoveY(-20, 1).SetRelative(true).SetEase(Ease.InSine);
+        }
+
+        await Task.Delay(1000);
     }
 }
