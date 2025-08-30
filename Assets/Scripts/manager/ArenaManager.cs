@@ -15,9 +15,12 @@ public class ArenaManager : Singleton<ArenaManager>
     private Camera mainCam;
     private Tweener currShake;
     public SpriteRenderer templeBG;
+    private Sequence currVolumeSeq;
+    private AudioClip transitionAudio;
     void Start()
     {
         enemyForArena = Resources.Load<EnemyForArena>("EnemyForArena");
+        transitionAudio = Resources.Load<AudioClip>("TransitionClip");
 
         templeBG = GameObject.FindGameObjectWithTag("TempleBG").GetComponent<SpriteRenderer>();
 
@@ -30,6 +33,7 @@ public class ArenaManager : Singleton<ArenaManager>
 
     public async Task OpenUpArena(string arena, UnityAction sceneLoaded = null, params object[] payload)
     {
+        ArenaManager.Get().PlayGlobalArenaMusic(transitionAudio, .1f, 1);
         OnArenaChangedStart?.Invoke(currentArena == null ? null : currentArena.gameObject.scene.name, arena);
         if (currentArena != null)
         {
@@ -127,5 +131,48 @@ public class ArenaManager : Singleton<ArenaManager>
         }
         if (currShake == null)
             mainCam.DOShakeRotation(duration, new Vector3(0, 0, strength), vibrato, rando);
+    }
+
+    public void PlayGlobalArenaMusic(AudioClip clip, float fadeTime, float maxVolume)
+    {
+        if (currVolumeSeq != null)
+            currVolumeSeq.Kill();
+        currVolumeSeq = DOTween.Sequence();
+
+        AudioSource souce = AudioManager.GetStableSource("BGMusic");
+
+        if (souce == null)
+        {
+            souce = AudioManager.CreateStableSource("BGMusic");
+            souce.loop = true;
+            souce.Play();
+            souce.volume = 0;
+        }
+        else
+        {
+            currVolumeSeq.Append(DOTween.To(
+                () => souce.volume, x =>
+                {
+                    souce.volume = x;
+                },
+                0,
+                fadeTime
+            ));
+        }
+
+        currVolumeSeq.AppendCallback(() =>
+        {
+            souce.clip = clip;
+            souce.Play();
+        });
+        currVolumeSeq.Append(DOTween.To(
+            () => souce.volume, x =>
+            {
+                souce.volume = x;
+            },
+            maxVolume,
+            fadeTime
+        ));
+            
     }
 }

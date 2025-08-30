@@ -6,6 +6,7 @@ using UnityEngine;
 public class BunnyArena : ArenaHolder, IHitReciever
 {
     [SerializeField] private float downOffset;
+    [SerializeField] private AudioClip bgMusic;
     public BunnyDirtMound leftMound;
     public BunnyDirtMound rightMound;
     public Transform[] platforms;
@@ -73,6 +74,7 @@ public class BunnyArena : ArenaHolder, IHitReciever
         });
 
         while (!isTransitionDone) await Task.Yield();
+        ArenaManager.Get().PlayGlobalArenaMusic(bgMusic, .1f, 1);
     }
 
     public override async Task RunExitAnim()

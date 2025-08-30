@@ -81,7 +81,7 @@ public class AudioManager : Singleton<AudioManager>
         var createdSource = audioObject.GetComponent<AudioSource>();
         createdSource.clip = clip;
         createdSource.volume = 1;
-        //createdSource.outputAudioMixerGroup = Get()._mainMixer.FindMatchingGroups(group.ToString()).FirstOrDefault();
+        createdSource.outputAudioMixerGroup = Get()._mainMixer.FindMatchingGroups("Master").FirstOrDefault();
 
         audioObject.GetComponent<FollowObject>().target = audioOrigin.transform;
 
@@ -110,7 +110,8 @@ public class AudioManager : Singleton<AudioManager>
     public static void DeleteStableSource(string sourceName)
     {
         if (!Get()._stableSources.TryGetValue(sourceName, out var foundSource)) return;
-
+        if (foundSource == null) return;
+        
         Get()._audioPool.Release(foundSource.gameObject);
         Get()._stableSources.Remove(sourceName);
     }
@@ -144,7 +145,7 @@ public class AudioManager : Singleton<AudioManager>
         var createdSource = audioObject.GetComponent<AudioSource>();
         createdSource.clip = clip;
         createdSource.volume = volume;
-        //createdSource.outputAudioMixerGroup = Get()._mainMixer.FindMatchingGroups(group.ToString()).FirstOrDefault();
+        createdSource.outputAudioMixerGroup = Get()._mainMixer.FindMatchingGroups("Master").FirstOrDefault();
 
         audioObject.GetComponent<FollowObject>().target = audioOrigin.transform;
 

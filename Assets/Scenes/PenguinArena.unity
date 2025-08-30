@@ -8370,6 +8370,7 @@ MonoBehaviour:
   goUpOffset: 35
   goUpParent: {fileID: 1869220498}
   topCollider: {fileID: 1488264170}
+  bgMusic: {fileID: 8300000, guid: 6202880e072596c4f888876eb954378c, type: 3}
   didBattleStart: 0
 --- !u!1 &310388442
 GameObject:

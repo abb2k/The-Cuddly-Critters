@@ -20,6 +20,7 @@ public class ItemPickupArena : ArenaHolder
     [SerializeField] private Vector2 DoorPos;
     [SerializeField] private DialogueSettings startDialogue;
     [SerializeField] private DialogueForScore[] finalDialogues;
+    [SerializeField] private AudioClip bgMusic;
     public event UnityAction OnEntryTransitionEnded;
     void Start()
     {
@@ -77,6 +78,8 @@ public class ItemPickupArena : ArenaHolder
         GameManager.Get().isInSeqance = false;
         OnEntryTransitionEnded?.Invoke();
         Player.Get().RevivePlayer();
+
+        ArenaManager.Get().PlayGlobalArenaMusic(bgMusic, .2f, 1);
     }
 
     public override async Task RunExitAnim()
