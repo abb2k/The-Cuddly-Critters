@@ -100,11 +100,11 @@ public class Dialogue : MonoBehaviour
         progressDialogue();
     }
 
-    async void OnDestroy()
+    public void DialogueComplete()
     {
         forward.action.started -= ForwardDF;
-        await Task.Yield();
         OnDialogueComplete?.Invoke();
+        Destroy(gameObject);
     }
 
     public void progressDialogue()

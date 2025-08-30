@@ -396,7 +396,7 @@ public class Owl : BossEnemy, IHitReciever
         seq.Play();
     }
 
-    async void StopAll(bool loadPickupArena)
+    async Task StopAll(bool loadPickupArena)
     {
         invincible = true;
         didAttackLoopStart = false;

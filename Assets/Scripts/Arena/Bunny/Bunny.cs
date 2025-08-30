@@ -326,7 +326,7 @@ public class Bunny : BossEnemy, IHitReciever
             });
     }
 
-    async void JumpState(UnityAction callback = null)
+    async Task JumpState(UnityAction callback = null)
     {
         while (!isOnGround) await Task.Yield();
 
@@ -490,7 +490,7 @@ public class Bunny : BossEnemy, IHitReciever
             HitPlayer(player.GetComponent<IHittable>());
     }
 
-    async void StopAll(bool loadPickupArena)
+    async Task StopAll(bool loadPickupArena)
     {
         invincible = true;
         didAttackLoopStart = false;

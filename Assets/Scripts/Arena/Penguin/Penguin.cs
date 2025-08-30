@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Events;
@@ -247,7 +248,7 @@ public class Penguin : BossEnemy, IHitReciever
             });
     }
 
-    async void StopAll(bool loadPickupArena)
+    async Task StopAll(bool loadPickupArena)
     {
         invincible = true;
         didAttackLoopStart = false;
@@ -262,7 +263,7 @@ public class Penguin : BossEnemy, IHitReciever
 
     protected override void OnDeath()
     {
-        StopAll(true);
+        _ = StopAll(true);
 
         anim.Play("Death");
 
@@ -279,7 +280,7 @@ public class Penguin : BossEnemy, IHitReciever
 
     void RunAway()
     {
-        StopAll(false);
+        _ = StopAll(false);
 
         anim.Play("idle");
 

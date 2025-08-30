@@ -71,7 +71,7 @@ public class ArenaManager : Singleton<ArenaManager>
         await currentArena.RunEntryAnim();
     }
 
-    public async void SpawnBossWithArena(string arenaName)
+    public async Task SpawnBossWithArena(string arenaName)
     {
         await OpenUpArena(arenaName, () =>
         {
