@@ -6,8 +6,10 @@ public class PenguinArenaGyser : MonoBehaviour, IAnimCallbackReciever
 {
     [SerializeField] private Vector2 minMaxActivationTime;
     [SerializeField] private float eruptionForce;
+    [SerializeField] private GameObject fishPrefab;
 
     private bool isOngoing = false;
+    private bool spawnFishOnCurrentEruption = false;
 
     private Tween timer;
     private List<Rigidbody2D> bodiesInRange = new();
@@ -33,6 +35,8 @@ public class PenguinArenaGyser : MonoBehaviour, IAnimCallbackReciever
         if (timer != null)
             timer.Kill();
 
+        spawnFishOnCurrentEruption = fish;
+
         GetComponent<Animator>().Play("GyserErput");
     }
 
@@ -46,6 +50,16 @@ public class PenguinArenaGyser : MonoBehaviour, IAnimCallbackReciever
 
     public void OnErupt()
     {
+        if (spawnFishOnCurrentEruption)
+        {
+            spawnFishOnCurrentEruption = false;
+            var fishBody = Instantiate(fishPrefab).GetComponent<Rigidbody2D>();
+            fishBody.transform.position = transform.position;
+            fishBody.AddForceY(eruptionForce, ForceMode2D.Impulse);
+            fishBody.AddForceX(Random.value - .5f, ForceMode2D.Impulse);
+            fishBody.AddTorque(eruptionForce / 10, ForceMode2D.Impulse);
+        }
+
         bodiesInRange.ForEach(body =>
         {
             if (body.TryGetComponent(out Player player))

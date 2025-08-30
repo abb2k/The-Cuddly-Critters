@@ -19,8 +19,12 @@ public class PenguinArenaGround : MonoBehaviour
 
     private void OnHitAbove(GameObject hitter, float impactSpeed)
     {
-        if (minVerticalImpact > impactSpeed) return;
+        if (minVerticalImpact > impactSpeed || !ArenaManager.Get().GetCurrentArena<PenguinArena>().didBattleStart) return;
 
-        Debug.Log($"SHAKE");
+        foreach (var gyser in ArenaManager.Get().GetCurrentArena<PenguinArena>().gysers)
+        {
+            gyser.Activate(true);
+        }
+        ArenaManager.Get().RunCamChake(.3f, 2);
     }
 }

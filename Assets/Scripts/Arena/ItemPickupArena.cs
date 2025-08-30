@@ -32,8 +32,6 @@ public class ItemPickupArena : ArenaHolder
             GameManager.Get().isInSeqance = true;
             DOTween.Sequence().AppendInterval(1).AppendCallback(() => GameManager.Get().FadeIn(2, StartDialogue));
             OnEntryTransitionEnded += () => GameManager.Get().isInSeqance = true;
-            GameManager.Get().AddProgress();
-            GameManager.Get().AddProgress();
         }
 
         int index = 0;
@@ -83,6 +81,7 @@ public class ItemPickupArena : ArenaHolder
 
     public override async Task RunExitAnim()
     {
+        GameManager.Get().isInSeqance = true;
         DOTween.To(() => ArenaManager.Get().templeBG.color.a * 255, x =>
         {
             var color = ArenaManager.Get().templeBG.color;
@@ -95,6 +94,7 @@ public class ItemPickupArena : ArenaHolder
         }
 
         await Task.Delay(1000);
+        GameManager.Get().isInSeqance = false;
     }
 
     public override void OnPayloadRecieved(object[] payload)
@@ -104,7 +104,7 @@ public class ItemPickupArena : ArenaHolder
             dialogue.name = "exitDialogue";
             DialogueManager.Get().createDialogue(dialogue);
         }
-        if (GameManager.Get().progressIndex == 2)
+        if (GameManager.Get().progressIndex == 3)
         {
             StartCoroutine(WaitForEndingDialogue());
         }

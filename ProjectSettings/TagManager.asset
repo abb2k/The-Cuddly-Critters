@@ -6,6 +6,7 @@ TagManager:
   tags:
   - TempleBG
   - IceGround
+  - PenguinFish
   layers:
   - Default
   - TransparentFX

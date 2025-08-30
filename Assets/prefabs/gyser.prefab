@@ -47,8 +47,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6928b4e25a6b7a4a9d7ccd922c73c2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  minMaxActivationTime: {x: 1, y: 2}
+  minMaxActivationTime: {x: 8, y: 15}
   eruptionForce: 25
+  fishPrefab: {fileID: 6323939010002483124, guid: 32de7185155df5042a8569cf22d48ee8, type: 3}
 --- !u!212 &4523812652008634891
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -149,7 +149,7 @@ MonoBehaviour:
       damageSource: {fileID: 1542257898732142951}
       damage: 5
       knockbackNormal: {x: 0.9869756, y: -0.1608703}
-      knockbackStrength: 1
+      knockbackStrength: 3
     attackTime: 0.4
     attackCooldown: 0.1
     attackAngle: 180
@@ -176,7 +176,7 @@ MonoBehaviour:
   deathDialogue:
     name: 
     texts:
-    - text: It appears you have lost this battel..
+    - text: It appears you have lost this battle..
       startEvent:
         m_PersistentCalls:
           m_Calls: []
