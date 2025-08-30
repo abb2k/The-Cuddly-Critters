@@ -3,13 +3,16 @@ using System.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
 
-public class BunnyArena : ArenaHolder
+public class BunnyArena : ArenaHolder, IHitReciever
 {
     [SerializeField] private float downOffset;
     public BunnyDirtMound leftMound;
     public BunnyDirtMound rightMound;
     public Transform[] platforms;
+    public Transform ground;
     private Sequence platDisSeq = null;
+    public bool isPlayerInSky;
+    public Transform groundSpikesContainer;
     public override async Task RunEntryAnim()
     {
         float time = 2;
@@ -27,7 +30,9 @@ public class BunnyArena : ArenaHolder
         originalPoses.Add(rightMound.gameObject, rightMound.transform.position);
         rightMound.transform.DOMoveY(rightMound.transform.position.y - downOffset, 0);
 
-        
+        originalPoses.Add(ground.gameObject, ground.transform.position);
+        ground.transform.DOMoveY(ground.transform.position.y - downOffset, 0);
+
         float shakeStrength = 1;
 
         bool isTransitionDone = false;
@@ -35,6 +40,8 @@ public class BunnyArena : ArenaHolder
         var seq = DOTween.Sequence()
             .Append(rightMound.transform.DOShakePosition(time / 10, new Vector3(shakeStrength, 0, 0), 10, 0).SetLoops(10))
             .Join(rightMound.transform.DOMoveY(originalPoses[rightMound.gameObject].y, time))
+            .Join(ground.transform.DOShakePosition(time / 10, new Vector3(shakeStrength, 0, 0), 10, 0).SetLoops(10))
+            .Join(ground.transform.DOMoveY(originalPoses[ground.gameObject].y, time))
             .Join(leftMound.transform.DOShakePosition(time / 10, new Vector3(shakeStrength, 0, 0), 10, 0, false, false).SetLoops(10))
             .Join(leftMound.transform.DOMoveY(originalPoses[leftMound.gameObject].y, time));
 
@@ -63,6 +70,8 @@ public class BunnyArena : ArenaHolder
         var seq = DOTween.Sequence()
             .Append(rightMound.transform.DOShakePosition(time / 10, new Vector3(shakeStrength, 0, 0), 10, 0).SetLoops(10))
             .Join(rightMound.transform.DOMoveY(rightMound.transform.position.y - downOffset, time))
+            .Append(ground.transform.DOShakePosition(time / 10, new Vector3(shakeStrength, 0, 0), 10, 0).SetLoops(10))
+            .Join(ground.transform.DOMoveY(ground.transform.position.y - downOffset, time))
             .Join(leftMound.transform.DOShakePosition(time / 10, new Vector3(shakeStrength, 0, 0), 10, 0, false, false).SetLoops(10))
             .Join(leftMound.transform.DOMoveY(leftMound.transform.position.y - downOffset, time));
 
@@ -94,5 +103,11 @@ public class BunnyArena : ArenaHolder
                 .Append(plat.transform.DOShakeRotation(time, new Vector3(2, 2, 20), 10, 10))
                 .AppendCallback(() => {foreach (var col in colliders) col.enabled = true;});
         }    
+    }
+
+    public void HitRecieved(int hitID, IHitReciever.HitType type, bool isTriggerHit, Colliders other)
+    {
+        if (hitID == 0 && other.collider2D.TryGetComponent(out Player _))
+            isPlayerInSky = type == IHitReciever.HitType.Enter;
     }
 }

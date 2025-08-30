@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4149056489404160185}
   - component: {fileID: 8264128759475715155}
   - component: {fileID: 6118753808531330847}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: interaction
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -171,7 +171,45 @@ MonoBehaviour:
   flashOnHurt:
   - {fileID: 4777531943638282051}
   - {fileID: 8045554838920843008}
+  anim: {fileID: 2459954378835368413}
   health: 0
+  deathDialogue:
+    name: 
+    texts:
+    - text: It appears you have lost this battel..
+      startEvent:
+        m_PersistentCalls:
+          m_Calls: []
+      endEvent:
+        m_PersistentCalls:
+          m_Calls: []
+    - text: May the item you chose disappear
+      startEvent:
+        m_PersistentCalls:
+          m_Calls: []
+      endEvent:
+        m_PersistentCalls:
+          m_Calls: []
+    fontSize: 70
+    icon: {fileID: 0}
+    font: {fileID: 11400000, guid: a22779d3e0da4414685d90123902d080, type: 2}
+    startColor: {r: 1, g: 1, b: 1, a: 1}
+    BackgroundColor: {r: 0, g: 0, b: 0, a: 1}
+    hideBG: 0
+    alignment: 0
+    showAtTop: 1
+    enterTransition: 2
+    exitTransition: 1
+    speakSound: {fileID: 0}
+    speakSoundVolume: 1
+    startSpeed: 0.05
+    unskippable: 0
+    autoSkip: 0
+    autoSkipSpeed: 0.5
+    freezePlayer: 1
+    colors: []
+    events: []
+    voices: []
 --- !u!50 &8594046773561912488
 Rigidbody2D:
   serializedVersion: 5
@@ -233,7 +271,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.07146454, y: -0.49541175}
+  m_Offset: {x: 0.07146454, y: -0.5134543}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -243,7 +281,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.8570709, y: 0.99031997}
+  m_Size: {x: 0.8570709, y: 0.95423484}
   m_EdgeRadius: 0
 --- !u!114 &3199372065058750585
 MonoBehaviour:
@@ -465,6 +503,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1003304429801905308}
   - component: {fileID: 4777531943638282051}
+  - component: {fileID: 2459954378835368413}
   m_Layer: 6
   m_Name: Visual
   m_TagString: Untagged
@@ -546,6 +585,28 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &2459954378835368413
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5486700981549429851}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 14f8c185b6d31fd41b691ab4f1c65c5a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &6128463886049866281
 GameObject:
   m_ObjectHideFlags: 0
@@ -834,7 +895,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4773649876002357056
 Transform:
   m_ObjectHideFlags: 0

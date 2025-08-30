@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3062292725060508057}
   - component: {fileID: 6621746391482546535}
   - component: {fileID: 2358816551454495992}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: pedestal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -98,7 +98,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4535334509155869646}
   - component: {fileID: 298187130400167678}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: disp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -188,7 +188,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8650613544641518274}
   - component: {fileID: 7355129224912130333}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Triangle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -280,7 +280,7 @@ GameObject:
   - component: {fileID: 7971316493196002265}
   - component: {fileID: 8877065322490883977}
   - component: {fileID: 6592777079767484591}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}

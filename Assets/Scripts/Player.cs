@@ -24,6 +24,7 @@ public class Player : Singleton<Player>, IHitReciever, IHittable
     [SerializeField] private Collider2D feet;
     [SerializeField] private Transform visualsCont;
     [SerializeField] private SpriteRenderer[] flashOnHurt;
+    public Animator anim;
 
     [SerializeField] private float health;
     private List<IInteractable> interactions = new();
@@ -45,12 +46,18 @@ public class Player : Singleton<Player>, IHitReciever, IHittable
 
     private readonly object cyotieObjLock = new();
 
+    private bool isDead;
+
+    [SerializeField] private DialogueSettings deathDialogue;
+
     void Start()
     {
         defaultStats = stats;
         EquipItem(itemEquipped);
         rb = GetComponent<Rigidbody2D>();
-        health = stats.maxHealth;
+        RevivePlayer();
+
+        ArenaManager.Get();
     }
 
     public void TurnLight(bool on)
@@ -91,9 +98,10 @@ public class Player : Singleton<Player>, IHitReciever, IHittable
     }
     void Movement()
     {
-        if (DialogueManager.Get().getFreezePlayer() || GameManager.Get().isInSeqance)
+        if (DialogueManager.Get().getFreezePlayer() || GameManager.Get().isInSeqance || isDead)
         {
             rb.linearVelocityX = 0;
+            anim.SetBool("walking", false);
             return;
         }
         rb.linearVelocityX = movementVec.x * stats.movementSpeed;
@@ -103,12 +111,14 @@ public class Player : Singleton<Player>, IHitReciever, IHittable
         else if (rb.linearVelocityX < 0)
             lastMovedLeft = true;
 
+        anim.SetBool("walking", rb.linearVelocityX != 0);
+
         visualsCont.localEulerAngles = new Vector3(0, lastMovedLeft ? 180 : 0, 0);
     }
 
     void OnJump(InputValue input)
     {
-        if (DialogueManager.Get().getFreezePlayer() || GameManager.Get().isInSeqance)
+        if (DialogueManager.Get().getFreezePlayer() || GameManager.Get().isInSeqance || isDead)
         {
             if (isHoldingJump)
                 JumpKeyReleased();
@@ -124,7 +134,7 @@ public class Player : Singleton<Player>, IHitReciever, IHittable
     void Jumping()
     {
         if (currentJumpsLeft <= 0 || !isHoldingJump || isCurrentJumpOngoing <= 0) return;
-        if (DialogueManager.Get().getFreezePlayer() || GameManager.Get().isInSeqance)
+        if (DialogueManager.Get().getFreezePlayer() || GameManager.Get().isInSeqance || isDead)
         {
             isHoldingJump = false;
             return;
@@ -139,6 +149,9 @@ public class Player : Singleton<Player>, IHitReciever, IHittable
         isCurrentJumpOngoing = stats.jumpTime;
         if (isOnGround)
             currentJumpsLeft++;
+
+        if (currentJumpsLeft > 0)
+            anim.Play("Jumping");
     }
 
     void JumpKeyReleased()
@@ -176,7 +189,7 @@ public class Player : Singleton<Player>, IHitReciever, IHittable
 
     void OnInteract()
     {
-        if (interactions.Count == 0 || DialogueManager.Get().getFreezePlayer() || GameManager.Get().isInSeqance) return;
+        if (interactions.Count == 0 || DialogueManager.Get().getFreezePlayer() || GameManager.Get().isInSeqance || isDead) return;
 
         interactions[0].OnInteract();
         var temp = interactions[0];
@@ -236,7 +249,7 @@ public class Player : Singleton<Player>, IHitReciever, IHittable
 
     void OnAttack()
     {
-        if (isAttacking || isAttackOnCooldown || DialogueManager.Get().getFreezePlayer() || GameManager.Get().isInSeqance) return;
+        if (isAttacking || isAttackOnCooldown || DialogueManager.Get().getFreezePlayer() || GameManager.Get().isInSeqance || isDead) return;
         isAttacking = true;
         isAttackOnCooldown = true;
         weponTransform.gameObject.SetActive(true);
@@ -318,15 +331,29 @@ public class Player : Singleton<Player>, IHitReciever, IHittable
         }
     }
 
+    public void RevivePlayer()
+    {
+        if (isDead)
+        {
+            anim.Play("Revive");
+            DOTween.Sequence().AppendInterval(2).AppendCallback(() => isDead = false);
+        }
+        else anim.Play("Idle");
+
+        health = stats.maxHealth;
+    }
+
     void OnDeath()
     {
+        anim.Play("Death");
         if (ItemEquipped != null)
         {
             GameManager.Get().RemoveItem(ItemEquipped);
             EquipItem(null);
         }
+
+        isDead = true;
         
-        ArenaManager.Get().OpenUpArena("ItemPickupArena");
-        health = stats.maxHealth;
+        ArenaManager.Get().OpenUpArena("ItemPickupArena", null, deathDialogue);
     }
 }

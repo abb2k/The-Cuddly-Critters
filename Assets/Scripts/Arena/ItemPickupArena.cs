@@ -1,8 +1,17 @@
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Events;
+
+[System.Serializable]
+public struct DialogueForScore
+{
+    public float scoreMinimum;
+    public DialogueSettings dialogue;
+}
 
 public class ItemPickupArena : ArenaHolder
 {
@@ -10,12 +19,14 @@ public class ItemPickupArena : ArenaHolder
     [SerializeField] private ItemPedestal[] pedestals;
     [SerializeField] private Vector2 DoorPos;
     [SerializeField] private DialogueSettings startDialogue;
+    [SerializeField] private DialogueForScore[] finalDialogues;
     public event UnityAction OnEntryTransitionEnded;
     void Start()
     {
         if (GameManager.Get().progressIndex == 0)
         {
             GameManager.Get().SetAvailableItems(itemsAvailable);
+            GameManager.Get().ResetScore();
 
             GameManager.Get().FadeOut(0);
             GameManager.Get().isInSeqance = true;
@@ -65,6 +76,7 @@ public class ItemPickupArena : ArenaHolder
 
         GameManager.Get().isInSeqance = false;
         OnEntryTransitionEnded?.Invoke();
+        Player.Get().RevivePlayer();
     }
 
     public override async Task RunExitAnim()
@@ -81,5 +93,52 @@ public class ItemPickupArena : ArenaHolder
         }
 
         await Task.Delay(1000);
+    }
+
+    public override void OnPayloadRecieved(object[] payload)
+    {
+        if (GameManager.Get().progressIndex != 0 && payload.Length != 0 && payload[0] is DialogueSettings dialogue)
+        {
+            dialogue.name = "exitDialogue";
+            DialogueManager.Get().createDialogue(dialogue);
+        }
+        if (GameManager.Get().progressIndex == 2)
+        {
+            StartCoroutine(WaitForEndingDialogue());
+        }
+    }
+
+    IEnumerator WaitForEndingDialogue()
+    {
+        yield return null;
+        yield return null;
+        yield return new WaitUntil(() => DialogueManager.Get().getDialogue("exitDialogue") == null);
+
+        var orderedDialogues = finalDialogues.ToList().OrderBy(e => e.scoreMinimum).ToList();
+
+        foreach (var dialogue in orderedDialogues)
+        {
+            if (dialogue.scoreMinimum <= GameManager.Get().Score)
+            {
+                dialogue.dialogue.name = "endDia";
+                DialogueManager.Get().createDialogue(dialogue.dialogue).OnDialogueComplete += GameComplete;
+                break;
+            }
+        }
+
+    }
+
+    void GameComplete()
+    {
+        GameManager.Get().isInSeqance = true;
+        GameManager.Get().FadeOut(1, () =>
+        {
+            GameManager.Get().ResetScore();
+            GameManager.Get().ResetProgress();
+            Player.Get().EquipItem(null);
+            GameManager.Get().SetAvailableItems(itemsAvailable);
+
+            ArenaManager.Get().OpenUpArena("ItemPickupArena");
+        });
     }
 }

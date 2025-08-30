@@ -22,6 +22,7 @@ public class Bunny : BossEnemy, IHitReciever
     [SerializeField] private BunnyStates currentState;
     [SerializeField] private SpriteRenderer sr;
     [SerializeField] private Collider2D feet;
+    [SerializeField] private Animator anim;
     private bool didAttackLoopStart;
     private Rigidbody2D rb;
     private Collider2D hitbox;
@@ -37,6 +38,7 @@ public class Bunny : BossEnemy, IHitReciever
     [SerializeField] private Vector2 minMaxIdleTime;
     [SerializeField] private float idleTransitionTime;
     [SerializeField] private float idleWalkSpeed;
+    [SerializeField] private DamageInfo idleDamage;
 
     [Header("BurrowState")]
     [SerializeField] private Vector2 burrowBarageAmount;
@@ -51,6 +53,7 @@ public class Bunny : BossEnemy, IHitReciever
     [SerializeField] private Vector2 burrowExitForce;
     [SerializeField] private GameObject burrowWarning;
     [SerializeField] private float burrowExitDelay;
+    [SerializeField] private DamageInfo burrowDamage;
     private GameObject burrowHitboxFix;
 
     [Header("JumpState")]
@@ -62,6 +65,8 @@ public class Bunny : BossEnemy, IHitReciever
     [SerializeField] private float jumpExitDelayTime;
     [SerializeField] private float jumpPlatDisableTime;
     [SerializeField] private GameObject shockwavePrefab;
+    [SerializeField] private DamageInfo jumpDamage;
+    [SerializeField] private DamageInfo shockwaveDamage;
     private bool disPlatsOnNextHit;
     private BunnyArena bunnyArena;
 
@@ -75,7 +80,9 @@ public class Bunny : BossEnemy, IHitReciever
     [SerializeField] private float carrotMovementSpeed;
     [SerializeField] private Vector2 MinMaxCloudMovement;
     [SerializeField] private DamageInfo carrotDamage;
+    [SerializeField] private DamageInfo groundCarrotDamage;
     private Coroutine carrotSpawnRoutine;
+    private Tween carrSpwn = null;
 
     [Header("TiredState")]
     [SerializeField] private Vector2 attackToBeTired;
@@ -88,17 +95,24 @@ public class Bunny : BossEnemy, IHitReciever
 
     private Sequence currentOngoingState = null;
 
+    [Header("Death/Escape")]
+    [SerializeField] private float escapeXpos;
+    [SerializeField] private float escapeTime;
+    [SerializeField] private float deathHeight;
+    [SerializeField] private float deathTime;
+    [SerializeField] private DialogueSettings defeatDialogue;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         hitbox = GetComponent<Collider2D>();
     }
 
-    public bool IsOnPlats() => Player.Get().transform.position.y >= -4.5f;
+    public bool IsOnPlats() => bunnyArena.isPlayerInSky;
 
     protected override void Start()
     {
-        ArenaManager.Get().OnArenaChanged += OnArenaChanged;
+        ArenaManager.Get().OnArenaChangedStart += OnArenaChanged;
         base.Start();
 
         lastSelectedTirePoint = Random.Range((int)attackToBeTired.x, (int)attackToBeTired.y + 1);
@@ -136,6 +150,11 @@ public class Bunny : BossEnemy, IHitReciever
 
         bunnyArena = ArenaManager.Get().GetCurrentArena<BunnyArena>();
 
+        foreach (Transform groundCarrot in bunnyArena.groundSpikesContainer)
+        {
+            groundCarrot.GetComponent<FallingCarrot>().Setup(groundCarrotDamage, null, null, false);
+        }
+
         NextState();
         didAttackLoopStart = true;
         invincible = false;
@@ -149,6 +168,15 @@ public class Bunny : BossEnemy, IHitReciever
         seq.Append(sr.DOColor(Color.white, .3f));
 
         seq.Play();
+
+        if (currentState == BunnyStates.Tired)
+        {
+            GameManager.Get().AddScore(2);
+        }
+        else
+        {
+            GameManager.Get().AddScore(1);
+        }
     }
 
     public void NextState()
@@ -194,12 +222,15 @@ public class Bunny : BossEnemy, IHitReciever
 
     void OnStateEnded()
     {
+        if (!didAttackLoopStart) return;
+
         currentTirenessLevel++;
         NextState();
     }
 
     void IdleState()
     {
+        anim.Play("Idle");
         currentOngoingState = DOTween.Sequence()
             .Append(DOTween.To(() => rb.linearVelocityX, x => rb.linearVelocityX = x, idleWalkSpeed * (Random.value > 0.5f ? -1 : 1), idleTransitionTime))
             .AppendInterval(Random.Range(minMaxIdleTime.x, minMaxIdleTime.y))
@@ -232,15 +263,16 @@ public class Bunny : BossEnemy, IHitReciever
         rb.bodyType = RigidbodyType2D.Kinematic;
         hitbox.isTrigger = true;
         rb.linearVelocity = Vector2.zero;
-        
+
         currentOngoingState = DOTween.Sequence()
             .AppendCallback(() =>
             {
-                
+
             })
             .AppendCallback(() =>
             {
                 transform.DOMoveY(burrowPrepMoveAMount, burrowPrepTime).SetRelative(true).SetEase(Ease.OutSine);
+                anim.Play("DigDown");
             })
             .AppendInterval(burrowPrepTime)
             .Append(transform.DOMoveY(burrowUndergroundYLevel, burrowEntryTime).SetEase(Ease.OutExpo))
@@ -284,6 +316,7 @@ public class Bunny : BossEnemy, IHitReciever
                 rb.WakeUp();
                 rb.AddForce(dir.normalized * Random.Range(burrowExitForce.x, burrowExitForce.y));
                 burrowHitboxFix = hitGround;
+                anim.Play("PopUp");
                 if (!burrowHitboxFix) hitbox.isTrigger = false;
             })
             .AppendInterval(burrowExitDelay)
@@ -306,6 +339,7 @@ public class Bunny : BossEnemy, IHitReciever
                 rb.linearVelocity = Vector2.zero;
             })
             .AppendInterval(jumpPrepTime)
+            .AppendCallback(() => anim.Play("Jump"))
             .Append(transform.DOMoveY(jumpHeightOffset, jumpEntryTime).SetRelative(true).SetEase(Ease.OutExpo))
             .AppendInterval(jumpStayTime)
             .AppendCallback(() =>
@@ -329,7 +363,11 @@ public class Bunny : BossEnemy, IHitReciever
         rb.bodyType = RigidbodyType2D.Kinematic;
         rb.linearVelocity = Vector2.zero;
 
-        Tween carrSpwn = null;
+        anim.Play("RainCarrots");
+
+        invincible = true;
+
+        float spikesStartPos = bunnyArena.groundSpikesContainer.position.y;
 
         currentOngoingState = DOTween.Sequence()
             .Append(transform.DOMoveY(CSPos.y, CSEntryTime))
@@ -345,6 +383,7 @@ public class Bunny : BossEnemy, IHitReciever
                 })
                 .AppendInterval(SpawnCarrotPer).SetLoops(-1);
             })
+            .Join(bunnyArena.groundSpikesContainer.DOMoveY(0, CSEntryTime).SetEase(Ease.OutSine))
             .AppendInterval(CSStayTime)
             .AppendCallback(() =>
             {
@@ -352,7 +391,10 @@ public class Bunny : BossEnemy, IHitReciever
                 carrotSpawnRoutine = null;
                 rb.bodyType = RigidbodyType2D.Dynamic;
                 carrSpwn.Kill();
+                anim.Play("Idle");
+                invincible = false;
             })
+            .Join(bunnyArena.groundSpikesContainer.DOMoveY(spikesStartPos, CSEntryTime).SetEase(Ease.InSine))
             .AppendCallback(OnStateEnded);
     }
 
@@ -381,6 +423,8 @@ public class Bunny : BossEnemy, IHitReciever
         lastSelectedTirePoint = Random.Range((int)attackToBeTired.x, (int)attackToBeTired.y + 1);
         currentTirenessLevel = 0;
 
+        anim.Play("EnterTired");
+
         resistence = tiredResistence;
 
         currentOngoingState = DOTween.Sequence()
@@ -395,6 +439,14 @@ public class Bunny : BossEnemy, IHitReciever
 
     void Update()
     {
+        if (didAttackLoopStart && currentState != BunnyStates.Tired)
+        {
+            if ((Player.Get().transform.position - transform.position).x > 0)
+                sr.transform.localEulerAngles = new Vector3(0, 180, 0);
+            else
+                sr.transform.localEulerAngles = new Vector3(0, 0, 0);
+        }
+
         if (disPlatsOnNextHit && isOnGround)
         {
             disPlatsOnNextHit = false;
@@ -407,7 +459,9 @@ public class Bunny : BossEnemy, IHitReciever
 
     void RunShockwave()
     {
-        Instantiate(shockwavePrefab).transform.position = transform.position;
+        var sheck = Instantiate(shockwavePrefab).GetComponent<CarrotShockwave>();
+        sheck.transform.position = transform.position + Vector3.up;
+        sheck.damage = shockwaveDamage;
     }
 
     public void HitRecieved(int hitID, IHitReciever.HitType type, bool isTriggerHit, Colliders other)
@@ -432,9 +486,11 @@ public class Bunny : BossEnemy, IHitReciever
 
             isOnGround = type != IHitReciever.HitType.Exit;
         }
+        else if (hitID == 1 && other.collider2D.TryGetComponent(out Player player))
+            HitPlayer(player.GetComponent<IHittable>());
     }
 
-    protected override async void OnDeath()
+    async void StopAll(bool loadPickupArena)
     {
         invincible = true;
         didAttackLoopStart = false;
@@ -444,14 +500,46 @@ public class Bunny : BossEnemy, IHitReciever
             StopCoroutine(carrotSpawnRoutine);
         if (currentOngoingState != null)
             currentOngoingState.Kill();
+        if (carrSpwn != null)
+            carrSpwn.Kill();
 
-        await ArenaManager.Get().OpenUpArena("ItemPickupArena");
+        if (loadPickupArena)
+            await ArenaManager.Get().OpenUpArena("ItemPickupArena", null, defeatDialogue);
+    }
+
+    protected override void OnDeath()
+    {
+        StopAll(true);
+
+        anim.Play("Death");
+
+        GameManager.Get().AddProgress();
+
+        DOTween.Sequence()
+            .Append(transform.DOMoveY(deathHeight, deathTime).SetEase(Ease.InBack))
+            .Join(transform.DORotateQuaternion(Quaternion.identity, .5f))
+            .AppendCallback(() => Destroy(gameObject));
+    }
+
+    void RunAway()
+    {
+        StopAll(false);
+
+        anim.Play("Idle");
+
+        GameManager.Get().AddProgress();
+
+        transform.DOKill();
+
+        DOTween.Sequence()
+            .Append(transform.DOMoveX(escapeXpos, escapeTime).SetEase(Ease.InSine))
+            .AppendCallback(() => Destroy(gameObject));
     }
 
     void OnArenaChanged(string oldArena, string newArena)
     {
         if (didAttackLoopStart && oldArena.Equals("BunnyArena"))
-            OnDeath();
+            RunAway();
     }
 
     void OnTriggerExit2D(Collider2D collision)
@@ -459,7 +547,28 @@ public class Bunny : BossEnemy, IHitReciever
         if (burrowHitboxFix == collision.gameObject)
         {
             burrowHitboxFix = null;
-            hitbox.isTrigger = false;        
+            hitbox.isTrigger = false;
+        }
+    }
+
+    void HitPlayer(IHittable hittable)
+    {
+        if (!didAttackLoopStart) return;
+
+        switch (currentState)
+        {
+            case BunnyStates.CarrotShower:
+            case BunnyStates.Idle:
+                hittable.OnHit(idleDamage);
+                break;
+            case BunnyStates.burrow:
+                hittable.OnHit(burrowDamage);
+                break;
+            case BunnyStates.Jump:
+                hittable.OnHit(jumpDamage);
+                break;
+            case BunnyStates.Tired:
+                break;
         }
     }
 }

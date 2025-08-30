@@ -28,7 +28,7 @@ public class ArenaManager : Singleton<ArenaManager>
         BossbarManager.Get();
     }
 
-    public async Task OpenUpArena(string arena, UnityAction sceneLoaded = null)
+    public async Task OpenUpArena(string arena, UnityAction sceneLoaded = null, params object[] payload)
     {
         OnArenaChangedStart?.Invoke(currentArena == null ? null : currentArena.gameObject.scene.name, arena);
         if (currentArena != null)
@@ -57,6 +57,8 @@ public class ArenaManager : Singleton<ArenaManager>
         currentArena = arenaHolder;
 
         IsLoadingArena = false;
+
+        arenaHolder.OnPayloadRecieved(payload);
 
         OnArenaChanged?.Invoke(currentArena == null ? null : currentArena.gameObject.scene.name, arena);
 

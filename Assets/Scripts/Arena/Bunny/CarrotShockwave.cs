@@ -5,11 +5,14 @@ public class CarrotShockwave : MonoBehaviour
 {
     [SerializeField] private GameObject carrotPrefab;
     [SerializeField] private float distPerCarrot;
+    [SerializeField] private float carrotSize;
     [SerializeField] private float timePerCarrot;
     [SerializeField] private float maxHight;
     [SerializeField] private float maxDist;
     [SerializeField] private float carrotStayTime;
-    [SerializeField] private DamageInfo damage;
+    [SerializeField] private float carrotDownOffset;
+    [SerializeField] private float carrotTransitionTime;
+    public DamageInfo damage;
 
     private int carrotsSpawned;
 
@@ -32,11 +35,13 @@ public class CarrotShockwave : MonoBehaviour
             {
                 var carrotRight = Instantiate(carrotPrefab).GetComponent<FallingCarrot>();
                 carrotRight.Setup(damage, transform.position + Vector3.right * distPerCarrot * i + Vector3.up * heightStep * i - Vector3.up, Vector2.zero, false);
-                carrotRight.transform.eulerAngles = new Vector3(0, 0, 180);
+                carrotRight.transform.eulerAngles = new Vector3(0, 0, 0);
+                carrotRight.transform.localScale = Vector3.one * carrotSize;
 
                 var carrotLeft = Instantiate(carrotPrefab).GetComponent<FallingCarrot>();
                 carrotLeft.Setup(damage, transform.position + Vector3.left * distPerCarrot * i + Vector3.up * heightStep * i - Vector3.up, Vector2.zero, false);
-                carrotLeft.transform.eulerAngles = new Vector3(0, 0, 180);
+                carrotLeft.transform.eulerAngles = new Vector3(0, 0, 0);
+                carrotLeft.transform.localScale = Vector3.one * carrotSize;
 
                 RunStaySeq(carrotRight);
                 RunStaySeq(carrotLeft);
@@ -47,8 +52,11 @@ public class CarrotShockwave : MonoBehaviour
 
     void RunStaySeq(FallingCarrot carrot)
     {
+        carrot.transform.position -= Vector3.up * carrotDownOffset;
         DOTween.Sequence()
+            .Append(carrot.transform.DOMoveY(carrotDownOffset, carrotTransitionTime).SetRelative(true).SetEase(Ease.OutSine))
             .AppendInterval(carrotStayTime)
+            .Append(carrot.transform.DOMoveY(-carrotDownOffset, carrotTransitionTime).SetRelative(true).SetEase(Ease.InSine))
             .AppendCallback(() =>
             {
                 Destroy(carrot.gameObject);
