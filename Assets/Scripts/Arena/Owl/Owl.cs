@@ -117,10 +117,14 @@ public class Owl : BossEnemy, IHitReciever
 
     void FixedUpdate()
     {
-        if ((Player.Get().transform.position - transform.position).x > 0)
-            sr.transform.localEulerAngles = new Vector3(0, 180, 0);
-        else
-            sr.transform.localEulerAngles = new Vector3(0, 0, 0);
+        if (didAttackLoopStart)
+        {
+            if ((Player.Get().transform.position - transform.position).x > 0)
+                sr.transform.localEulerAngles = new Vector3(0, 180, 0);
+            else
+                sr.transform.localEulerAngles = new Vector3(0, 0, 0);
+        }
+        
 
         if (isWooshing)
         {

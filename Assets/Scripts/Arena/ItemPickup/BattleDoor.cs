@@ -17,6 +17,11 @@ public class BattleDoor : MonoBehaviour, IInteractable
                 ArenaManager.Get().SpawnBossWithArena("BunnyArena");
                 break;
         }
+
+        if (curr != null) {
+            var a = DialogueManager.Get();
+            a.StopDialogue(curr);
+        }
     }
 
     void OnTriggerEnter2D(Collider2D collision)

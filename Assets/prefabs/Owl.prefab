@@ -84,7 +84,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e33d496955801b42b8fc7a3f61c9618, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  maxHealth: 1
+  maxHealth: 150
   normalResistence: 10
   wooshResistence: 1
   currentAttack: 0
@@ -166,7 +166,7 @@ MonoBehaviour:
           m_Calls: []
     fontSize: 70
     icon: {fileID: 0}
-    font: {fileID: 0}
+    font: {fileID: 11400000, guid: a22779d3e0da4414685d90123902d080, type: 2}
     startColor: {r: 1, g: 1, b: 1, a: 1}
     BackgroundColor: {r: 0, g: 0, b: 0, a: 1}
     hideBG: 0
