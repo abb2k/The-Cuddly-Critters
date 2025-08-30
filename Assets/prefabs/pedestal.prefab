@@ -51,6 +51,29 @@ MonoBehaviour:
   item: {fileID: 11400000, guid: f306c83b21836ef4eb5d5928a9b21b71, type: 2}
   display: {fileID: 6447740683003110926}
   myCanvas: {fileID: 7971316493196002265}
+  dialogueSettings:
+    name: 
+    texts: []
+    fontSize: 70
+    icon: {fileID: 0}
+    font: {fileID: 11400000, guid: 33271129f12b05d48ae7750fe693c544, type: 2}
+    startColor: {r: 1, g: 1, b: 1, a: 1}
+    BackgroundColor: {r: 1, g: 1, b: 1, a: 1}
+    hideBG: 0
+    alignment: 0
+    showAtTop: 0
+    enterTransition: 2
+    exitTransition: 1
+    speakSound: {fileID: 0}
+    speakSoundVolume: 1
+    startSpeed: 0.05
+    unskippable: 0
+    autoSkip: 0
+    autoSkipSpeed: 0.5
+    freezePlayer: 1
+    colors: []
+    events: []
+    voices: []
 --- !u!70 &2358816551454495992
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -166,7 +189,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -343,7 +366,7 @@ TilemapRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -411,7 +434,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_TargetDisplay: 0
 --- !u!114 &8877065322490883977
 MonoBehaviour:

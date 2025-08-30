@@ -4,21 +4,28 @@ using UnityEngine.UI;
 
 public class HPBar : MonoBehaviour
 {
-    [SerializeField] private float tickValue;
+    [SerializeField] private int tickAmount;
     [SerializeField] private Vector2 tickPadding;
     [SerializeField] private float tickMargin;
+    [SerializeField] private float tickSize;
     [SerializeField] private Image ticksBox;
     [SerializeField] private Transform ticksContainer;
     [SerializeField] private GameObject tickPrefab;
     [SerializeField] private Sprite tickSprite;
+    private Vector2 originalSize;
 
     private Dictionary<float, Image> ticks = new();
 
+    void Awake()
+    {
+        originalSize = ticksBox.GetComponent<RectTransform>().sizeDelta;
+    }
+
     public void UpdateBar(float hp, float maxHP, bool refreshTicks = false)
     {
-        int maxTicks = (int)(maxHP / tickValue);
-        if (ticks.Count != maxTicks || refreshTicks)
-            RefreshTicks(maxTicks);
+        float tickValue = maxHP / tickAmount;
+        if (ticks.Count != tickAmount || refreshTicks)
+            RefreshTicks(tickValue);
 
         float currHPTickValue = hp;
 
@@ -34,14 +41,27 @@ public class HPBar : MonoBehaviour
                 tickImage.color = new Color(0, 0, 0, 0);
 
             tickImage.sprite = tickSprite;
+            tickImage.transform.localScale = Vector2.one * tickSize;
         }
 
-        ticksContainer.GetComponent<GridLayoutGroup>().spacing = Vector2.right * tickMargin;
+        float hpPrecent = hp / maxHP;
+
+        if (hpPrecent > 1f / 3f * 2)
+            ticksBox.color = Color.green;
+        else if (hpPrecent > 1f / 3f)
+            ticksBox.color = Color.orange;
+        else
+            ticksBox.color = Color.red;
+
+        ticksContainer.GetComponent<HorizontalLayoutGroup>().spacing = tickMargin;
+        ticksContainer.GetComponent<RectTransform>().sizeDelta = originalSize - tickPadding;
     }
 
-    private void RefreshTicks(int tickAmount)
+    private void RefreshTicks(float tickValue)
     {
         if (!Application.isPlaying) return;
+
+        ticks.Clear();
         
         foreach (Transform child in ticksContainer)
         {
@@ -51,14 +71,9 @@ public class HPBar : MonoBehaviour
         for (int i = 0; i < tickAmount; i++)
         {
             var newTick = Instantiate(tickPrefab, ticksContainer);
-            newTick.SetActive(true);
+            newTick.SetActive(true);        
 
-            ticksContainer.GetComponent<RectTransform>().sizeDelta -= Vector2.right * tickPadding.x + Vector2.up * tickPadding.y;
-
-            ticksContainer.GetComponent<GridLayoutGroup>().cellSize = Vector2.one * (ticksContainer.GetComponent<RectTransform>().sizeDelta.x / tickAmount - tickMargin - tickPadding.x);
-            
-
-            ticks.Add(tickValue * i, newTick.GetComponent<Image>());
+            ticks.Add(tickValue * i, newTick.GetComponent<HPTick>().image);
         }
     }
 
