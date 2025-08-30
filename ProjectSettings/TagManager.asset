@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 3
   tags:
   - TempleBG
+  - IceGround
   layers:
   - Default
   - TransparentFX

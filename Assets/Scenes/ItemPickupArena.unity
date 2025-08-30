@@ -1375,33 +1375,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2566379990224021273, guid: d6d76c5af177db34bb94c814d401b0f9, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 6.87
-      objectReference: {fileID: 0}
     - target: {fileID: 3569318097341296730, guid: d6d76c5af177db34bb94c814d401b0f9, type: 3}
       propertyPath: m_Name
       value: battleDoor
       objectReference: {fileID: 0}
-    - target: {fileID: 9142949981716470867, guid: d6d76c5af177db34bb94c814d401b0f9, type: 3}
-      propertyPath: m_Size.x
-      value: 2.7369866
-      objectReference: {fileID: 0}
-    - target: {fileID: 9142949981716470867, guid: d6d76c5af177db34bb94c814d401b0f9, type: 3}
-      propertyPath: m_Size.y
-      value: 4.8211174
-      objectReference: {fileID: 0}
-    - target: {fileID: 9142949981716470867, guid: d6d76c5af177db34bb94c814d401b0f9, type: 3}
-      propertyPath: m_Offset.x
-      value: 0.06730127
-      objectReference: {fileID: 0}
-    - target: {fileID: 9142949981716470867, guid: d6d76c5af177db34bb94c814d401b0f9, type: 3}
-      propertyPath: m_Offset.y
-      value: -0.82444155
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 752528214434688281, guid: d6d76c5af177db34bb94c814d401b0f9, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d6d76c5af177db34bb94c814d401b0f9, type: 3}
