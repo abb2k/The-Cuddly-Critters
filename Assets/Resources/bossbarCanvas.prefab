@@ -267,8 +267,16 @@ PrefabInstance:
       value: 1700
       objectReference: {fileID: 0}
     - target: {fileID: 2280419549582237551, guid: 8a4dbdbdbf31dcd4fa84e9800bb48ead, type: 3}
+      propertyPath: tickSize
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2280419549582237551, guid: 8a4dbdbdbf31dcd4fa84e9800bb48ead, type: 3}
       propertyPath: tickValue
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2280419549582237551, guid: 8a4dbdbdbf31dcd4fa84e9800bb48ead, type: 3}
+      propertyPath: tickAmount
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 2280419549582237551, guid: 8a4dbdbdbf31dcd4fa84e9800bb48ead, type: 3}
       propertyPath: tickSprite

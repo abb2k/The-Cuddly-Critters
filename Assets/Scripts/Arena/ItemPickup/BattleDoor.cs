@@ -3,6 +3,7 @@ using UnityEngine;
 public class BattleDoor : MonoBehaviour, IInteractable
 {
     [SerializeField] private Canvas myCanvas;
+    [SerializeField] private DialogueSettings dialogueSettings;
     private Dialogue curr;
     public void OnInteract()
     {
@@ -35,21 +36,15 @@ public class BattleDoor : MonoBehaviour, IInteractable
         if (Player.Get().ItemEquipped != null)
             currDialogue = new DialogueText($"You have chosen the {Player.Get().ItemEquipped.itemName}.\nEnter if you are ready...");
 
-        DialogueSettings settings = new()
-        {
-            hideBG = true,
-            texts = new()
-            {
-                currDialogue
-            },
-            unskippable = true,
-            alignment = TMPro.HorizontalAlignmentOptions.Center,
-            autoSkip = true,
-            autoSkipSpeed = -1,
-            freezePlayer = false
-        };
+        dialogueSettings.texts.Clear();
+        dialogueSettings.texts.Add(currDialogue);
+        dialogueSettings.alignment = TMPro.HorizontalAlignmentOptions.Center;
+        dialogueSettings.autoSkip = true;
+        dialogueSettings.unskippable = true;
+        dialogueSettings.freezePlayer = false;
+        dialogueSettings.autoSkipSpeed = -1;
 
-        curr = DialogueManager.Get().createDialogue(settings, myCanvas.transform);
+        curr = DialogueManager.Get().createDialogue(dialogueSettings, myCanvas.transform);
     }
     
     void OnTriggerExit2D(Collider2D collision)

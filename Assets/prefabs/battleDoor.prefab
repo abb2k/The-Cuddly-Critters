@@ -59,7 +59,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_TargetDisplay: 0
 --- !u!114 &4394180426592709304
 MonoBehaviour:
@@ -148,6 +148,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   myCanvas: {fileID: 4724579669536515380}
+  dialogueSettings:
+    name: 
+    texts: []
+    fontSize: 70
+    icon: {fileID: 0}
+    font: {fileID: 11400000, guid: 33271129f12b05d48ae7750fe693c544, type: 2}
+    startColor: {r: 1, g: 1, b: 1, a: 1}
+    BackgroundColor: {r: 1, g: 1, b: 1, a: 1}
+    hideBG: 0
+    alignment: 0
+    showAtTop: 0
+    enterTransition: 2
+    exitTransition: 1
+    speakSound: {fileID: 0}
+    speakSoundVolume: 1
+    startSpeed: 0.05
+    unskippable: 0
+    autoSkip: 0
+    autoSkipSpeed: 0.5
+    freezePlayer: 1
+    colors: []
+    events: []
+    voices: []
 --- !u!61 &9142949981716470867
 BoxCollider2D:
   m_ObjectHideFlags: 0
