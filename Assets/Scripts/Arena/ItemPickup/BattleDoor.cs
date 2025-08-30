@@ -11,9 +11,12 @@ public class BattleDoor : MonoBehaviour, IInteractable
         switch (GameManager.Get().progressIndex)
         {
             case 0:
-                ArenaManager.Get().SpawnBossWithArena("OwlArena");
+                ArenaManager.Get().SpawnBossWithArena("PenguinArena");
                 break;
             case 1:
+                ArenaManager.Get().SpawnBossWithArena("OwlArena");
+                break;
+            case 2:
                 ArenaManager.Get().SpawnBossWithArena("BunnyArena");
                 break;
         }

@@ -49,13 +49,13 @@ public class Penguin : BossEnemy
         base.Start();
 
         resistence = normalResistence;
-        StartAttackLoop();
     }
 
     public override void RunEntryAnim(UnityAction<string> showName, UnityAction onEnded)
     {
         var seq = DOTween.Sequence();
 
+        seq.AppendInterval(2);
         seq.AppendCallback(() => showName?.Invoke("Penguin"));
         seq.AppendCallback(() =>
         {

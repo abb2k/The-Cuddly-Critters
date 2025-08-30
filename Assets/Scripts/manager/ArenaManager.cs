@@ -21,7 +21,7 @@ public class ArenaManager : Singleton<ArenaManager>
 
         templeBG = GameObject.FindGameObjectWithTag("TempleBG").GetComponent<SpriteRenderer>();
 
-        //SpawnBossWithArena("ItemPickupArena");
+        SpawnBossWithArena("ItemPickupArena");
 
         mainCam = Camera.main;
 

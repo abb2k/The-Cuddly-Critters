@@ -17,3 +17,5 @@ MonoBehaviour:
     bossPrefab: {fileID: 1333736031344954063, guid: 5dee91a35d365c24e8404380c1f56caa, type: 3}
   - sceneName: BunnyArena
     bossPrefab: {fileID: 5837321509025390847, guid: 457fe3a30f1e69b4db88d6eed096474e, type: 3}
+  - sceneName: PenguinArena
+    bossPrefab: {fileID: 3514345889048704185, guid: b948617dfa984444988ce0905c0b7ddc, type: 3}

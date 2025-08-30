@@ -17,6 +17,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ItemPickupArena.unity
     guid: fa18dd84ea27a0541b750c1c7b767047
+  - enabled: 1
+    path: Assets/Scenes/PenguinArena.unity
+    guid: 520ff3bc607800240abb849952e83d9d
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

@@ -143,6 +143,10 @@ public class Player : Singleton<Player>, IHitReciever, IHittable
         rb.linearVelocityY = stats.jumpForce;
         isCurrentJumpOngoing -= Time.fixedDeltaTime;
     }
+    public void CancleJump()
+    {
+        isCurrentJumpOngoing = 0;
+    }
 
     void JumpKeyPressed()
     {
