@@ -10,6 +10,7 @@ public class BunnyArena : ArenaHolder, IHitReciever
     public BunnyDirtMound rightMound;
     public Transform[] platforms;
     public Transform ground;
+    public Rigidbody2D groundBody;
     private Sequence platDisSeq = null;
     public bool isPlayerInSky;
     public Transform groundSpikesContainer;
@@ -33,6 +34,10 @@ public class BunnyArena : ArenaHolder, IHitReciever
         originalPoses.Add(ground.gameObject, ground.transform.position);
         ground.transform.DOMoveY(ground.transform.position.y - downOffset, 0);
 
+        originalPoses.Add(groundBody.gameObject, groundBody.position);
+        groundBody.position -= Vector2.up * downOffset;
+        groundBody.MovePosition(groundBody.position);
+
         float shakeStrength = 1;
 
         bool isTransitionDone = false;
@@ -40,10 +45,22 @@ public class BunnyArena : ArenaHolder, IHitReciever
         var seq = DOTween.Sequence()
             .Append(rightMound.transform.DOShakePosition(time / 10, new Vector3(shakeStrength, 0, 0), 10, 0).SetLoops(10))
             .Join(rightMound.transform.DOMoveY(originalPoses[rightMound.gameObject].y, time))
-            .Join(ground.transform.DOShakePosition(time / 10, new Vector3(shakeStrength, 0, 0), 10, 0).SetLoops(10))
+            //.Join(ground.transform.DOShakePosition(time / 10, new Vector3(shakeStrength, 0, 0), 10, 0).SetLoops(10))
             .Join(ground.transform.DOMoveY(originalPoses[ground.gameObject].y, time))
             .Join(leftMound.transform.DOShakePosition(time / 10, new Vector3(shakeStrength, 0, 0), 10, 0, false, false).SetLoops(10))
-            .Join(leftMound.transform.DOMoveY(originalPoses[leftMound.gameObject].y, time));
+            .Join(leftMound.transform.DOMoveY(originalPoses[leftMound.gameObject].y, time))
+            //.Join(groundBody.transform.DOShakePosition(time / 10, new Vector3(shakeStrength, 0, 0), 10, 0, false, false).SetLoops(10))
+            .Join(DOTween.To(
+                    () => groundBody.position.y, x =>
+                    {
+                        var pos = groundBody.position;
+                        pos.y = x;
+                        groundBody.MovePosition(pos);
+                    },
+                    originalPoses[groundBody.gameObject].y,
+                    time
+                )
+            );
 
         foreach (var plat in platforms)
         {
@@ -70,10 +87,23 @@ public class BunnyArena : ArenaHolder, IHitReciever
         var seq = DOTween.Sequence()
             .Append(rightMound.transform.DOShakePosition(time / 10, new Vector3(shakeStrength, 0, 0), 10, 0).SetLoops(10))
             .Join(rightMound.transform.DOMoveY(rightMound.transform.position.y - downOffset, time))
-            .Append(ground.transform.DOShakePosition(time / 10, new Vector3(shakeStrength, 0, 0), 10, 0).SetLoops(10))
+            //.Join(ground.transform.DOShakePosition(time / 10, new Vector3(shakeStrength, 0, 0), 10, 0).SetLoops(10))
             .Join(ground.transform.DOMoveY(ground.transform.position.y - downOffset, time))
             .Join(leftMound.transform.DOShakePosition(time / 10, new Vector3(shakeStrength, 0, 0), 10, 0, false, false).SetLoops(10))
-            .Join(leftMound.transform.DOMoveY(leftMound.transform.position.y - downOffset, time));
+            .Join(leftMound.transform.DOMoveY(leftMound.transform.position.y - downOffset, time))
+            //.Join(groundBody.transform.DOShakePosition(time / 10, new Vector3(shakeStrength, 0, 0), 10, 0, false, false).SetLoops(10))
+            .Join(DOTween.To(
+                    () => groundBody.position.y, x =>
+                    {
+                        var pos = groundBody.position;
+                        pos.y = x;
+                        groundBody.MovePosition(pos);
+                    },
+                    groundBody.transform.position.y - downOffset,
+                    time
+                )
+            );
+            
 
         foreach (var plat in platforms)
         {

@@ -717,6 +717,51 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
+--- !u!1 &412176977
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 412176979}
+  - component: {fileID: 412176978}
+  m_Layer: 0
+  m_Name: walkables
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!156049354 &412176978
+Grid:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 412176977}
+  m_Enabled: 1
+  m_CellSize: {x: 1, y: 1, z: 0}
+  m_CellGap: {x: 0, y: 0, z: 0}
+  m_CellLayout: 0
+  m_CellSwizzle: 0
+--- !u!4 &412176979
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 412176977}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1929227308}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &427308950
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1395,7 +1440,6 @@ Transform:
   m_Children:
   - {fileID: 1521340908}
   - {fileID: 1570289600}
-  - {fileID: 1929227308}
   - {fileID: 994687529}
   - {fileID: 1094221428}
   m_Father: {fileID: 0}
@@ -10815,6 +10859,7 @@ MonoBehaviour:
   - {fileID: 220507029}
   - {fileID: 7520916881672001515}
   ground: {fileID: 721707970}
+  groundBody: {fileID: 1929227310}
   isPlayerInSky: 0
   groundSpikesContainer: {fileID: 1094221428}
 --- !u!1001 &1773848996
@@ -11097,7 +11142,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 721707970}
+  m_Father: {fileID: 412176979}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!66 &1929227309
 CompositeCollider2D:
@@ -11397,7 +11442,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1929227307}
-  m_BodyType: 2
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -11414,8 +11459,8 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
+  m_CollisionDetection: 1
+  m_Constraints: 4
 --- !u!19719996 &1929227311
 TilemapCollider2D:
   m_ObjectHideFlags: 0
@@ -12631,6 +12676,7 @@ SceneRoots:
   - {fileID: 386414786}
   - {fileID: 120258147}
   - {fileID: 721707970}
+  - {fileID: 412176979}
   - {fileID: 55254565}
   - {fileID: 982168211}
   - {fileID: 427308950}

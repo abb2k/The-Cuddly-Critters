@@ -313,7 +313,7 @@ public class Player : Singleton<Player>, IHitReciever, IHittable
 
     public void OnHit(DamageInfo info)
     {
-        if (health == 0) return;
+        if (health == 0 || info == null) return;
         
         health -= info.damage;
         if (health < 0) health = 0;
