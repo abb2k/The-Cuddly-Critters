@@ -12419,6 +12419,7 @@ MonoBehaviour:
   - {fileID: 1704794950}
   - {fileID: 1676095159}
   downDistance: 32
+  bgMusic: {fileID: 8300000, guid: ef36d4149236f004dbbe49f70221d847, type: 3}
 --- !u!4 &1920846010 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5471490772307139287, guid: cbdf4eb597521b849946828063b99e4b, type: 3}

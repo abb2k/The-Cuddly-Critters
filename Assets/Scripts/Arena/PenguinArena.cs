@@ -9,6 +9,7 @@ public class PenguinArena : ArenaHolder
     [SerializeField] private float goUpOffset;
     [SerializeField] private Rigidbody2D goUpParent;
     [SerializeField] private BoxCollider2D topCollider;
+    [SerializeField] private AudioClip bgMusic;
     public bool didBattleStart = false;
     public override async Task RunEntryAnim()
     {
@@ -32,6 +33,7 @@ public class PenguinArena : ArenaHolder
         await Task.Delay((int)(goUpTime * 1000));
         topCollider.enabled = true;
         didBattleStart = true;
+        ArenaManager.Get().PlayGlobalArenaMusic(bgMusic, .1f, 1);
     }
     public override async Task RunExitAnim()
     {
@@ -40,7 +42,7 @@ public class PenguinArena : ArenaHolder
         DOTween.To(
             () => goUpParent.position.y, x =>
             {
-                
+
                 var pos = goUpParent.position;
                 pos.y = x;
                 goUpParent.MovePosition(pos);

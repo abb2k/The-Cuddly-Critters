@@ -149,7 +149,7 @@ MonoBehaviour:
       damageSource: {fileID: 1542257898732142951}
       damage: 5
       knockbackNormal: {x: 0.9869756, y: -0.1608703}
-      knockbackStrength: 3
+      knockbackStrength: 8
     attackTime: 0.4
     attackCooldown: 0.1
     attackAngle: 180

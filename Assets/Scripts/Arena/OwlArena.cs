@@ -10,6 +10,7 @@ public class OwlArena : ArenaHolder
     public TreeBranch[] branches;
     [SerializeField] private Transform[] riseWithBranches;
     [SerializeField] private float downDistance;
+    [SerializeField] private AudioClip bgMusic;
     private Light2D globalLight;
     public override async Task RunEntryAnim()
     {
@@ -51,7 +52,7 @@ public class OwlArena : ArenaHolder
                 DOTween.To(
                     () => rb.position.y, x =>
                     {
-                        
+
                         var pos = rb.position;
                         pos.y = x;
                         rb.MovePosition(pos);
@@ -67,7 +68,7 @@ public class OwlArena : ArenaHolder
         }
 
         float additionalTime = 0;
-        
+
         foreach (var branch in branches)
         {
             branch.ShakeFor(t);
@@ -77,6 +78,7 @@ public class OwlArena : ArenaHolder
         }
 
         await Task.Delay((int)(additionalTime * 1000));
+        ArenaManager.Get().PlayGlobalArenaMusic(bgMusic, .1f, 1);
     }
 
     public override async Task RunExitAnim()

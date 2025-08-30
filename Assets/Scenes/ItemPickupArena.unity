@@ -410,6 +410,7 @@ MonoBehaviour:
       colors: []
       events: []
       voices: []
+  bgMusic: {fileID: 8300000, guid: 26aee497381d5904aaf8342f1a30be23, type: 3}
 --- !u!4 &930558690
 Transform:
   m_ObjectHideFlags: 0
