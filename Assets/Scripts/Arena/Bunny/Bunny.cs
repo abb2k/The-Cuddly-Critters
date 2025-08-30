@@ -326,9 +326,14 @@ public class Bunny : BossEnemy, IHitReciever
             });
     }
 
-    async Task JumpState(UnityAction callback = null)
+    void JumpState(UnityAction callback = null)
     {
-        while (!isOnGround) await Task.Yield();
+        StartCoroutine(JumpStateCoroutine(callback));
+    }
+
+    IEnumerator JumpStateCoroutine(UnityAction callback = null)
+    {
+        while (!isOnGround) yield return null;
 
         var playerPos = Player.Get().transform.position;
 
@@ -490,7 +495,7 @@ public class Bunny : BossEnemy, IHitReciever
             HitPlayer(player.GetComponent<IHittable>());
     }
 
-    async Task StopAll(bool loadPickupArena)
+    void StopAll(bool loadPickupArena)
     {
         invincible = true;
         didAttackLoopStart = false;
@@ -504,7 +509,7 @@ public class Bunny : BossEnemy, IHitReciever
             carrSpwn.Kill();
 
         if (loadPickupArena)
-            await ArenaManager.Get().OpenUpArena("ItemPickupArena", null, defeatDialogue);
+            ArenaManager.Get().OpenUpArena("ItemPickupArena", null, defeatDialogue);
     }
 
     protected override void OnDeath()

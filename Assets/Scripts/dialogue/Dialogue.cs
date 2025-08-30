@@ -358,7 +358,7 @@ public class Dialogue : MonoBehaviour
                 break;
 
             case 4:
-                Destroy(gameObject);
+                DialogueComplete();
                 break;
 
             default:

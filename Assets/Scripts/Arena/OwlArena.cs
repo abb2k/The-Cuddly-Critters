@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,7 +13,7 @@ public class OwlArena : ArenaHolder
     [SerializeField] private float downDistance;
     [SerializeField] private AudioClip bgMusic;
     private Light2D globalLight;
-    public override async Task RunEntryAnim()
+    public override IEnumerator RunEntryAnim()
     {
         Dictionary<Transform, Vector3> originalPoses = new();
         foreach (var branch in branches)
@@ -46,7 +47,7 @@ public class OwlArena : ArenaHolder
         float t = 1.5f;
         foreach (var other in riseWithBranches)
         {
-            if (!Application.isPlaying) return;
+            if (!Application.isPlaying) yield break;
             if (other.TryGetComponent(out Rigidbody2D rb))
             {
                 DOTween.To(
@@ -72,16 +73,16 @@ public class OwlArena : ArenaHolder
         foreach (var branch in branches)
         {
             branch.ShakeFor(t);
-            if (!Application.isPlaying) return;
+            if (!Application.isPlaying) yield break;
             branch.transform.DOMoveY(originalPoses[branch.transform].y, t + additionalTime).SetEase(Ease.OutQuad);
             additionalTime += .1f;
         }
 
-        await Task.Delay((int)(additionalTime * 1000));
+        yield return new WaitForSeconds(additionalTime);
         ArenaManager.Get().PlayGlobalArenaMusic(bgMusic, .1f, 1);
     }
 
-    public override async Task RunExitAnim()
+    public override IEnumerator RunExitAnim()
     {
         Player.Get().TurnLight(false);
 
@@ -96,7 +97,7 @@ public class OwlArena : ArenaHolder
         {
             branch.ShakeFor(t);
             doEnd++;
-            if (!Application.isPlaying) return;
+            if (!Application.isPlaying) yield break;
             var seq = DOTween.Sequence();
             seq.Append(branch.transform.DOMoveY(branch.transform.position.y - downDistance, t + additionalTime).SetEase(Ease.InQuad));
             seq.AppendCallback(() => doEnd--);
@@ -107,7 +108,7 @@ public class OwlArena : ArenaHolder
         foreach (var other in riseWithBranches)
         {
             doEnd++;
-            if (!Application.isPlaying) return;
+            if (!Application.isPlaying) yield break;
 
             
             var seq = DOTween.Sequence();
@@ -135,9 +136,9 @@ public class OwlArena : ArenaHolder
         {
             if (doEnd <= 0) break;
 
-            if (!Application.isPlaying) return;
+            if (!Application.isPlaying) yield break;
 
-            await Task.Yield();
+            yield return null;
         }
     }
 }

@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
@@ -11,7 +12,7 @@ public class PenguinArena : ArenaHolder
     [SerializeField] private BoxCollider2D topCollider;
     [SerializeField] private AudioClip bgMusic;
     public bool didBattleStart = false;
-    public override async Task RunEntryAnim()
+    public override IEnumerator RunEntryAnim()
     {
         topCollider.enabled = false;
 
@@ -30,12 +31,12 @@ public class PenguinArena : ArenaHolder
             goUpTime
         ).SetEase(Ease.OutQuad);
 
-        await Task.Delay((int)(goUpTime * 1000));
+        yield return new WaitForSeconds(goUpTime);
         topCollider.enabled = true;
         didBattleStart = true;
         ArenaManager.Get().PlayGlobalArenaMusic(bgMusic, .1f, 1);
     }
-    public override async Task RunExitAnim()
+    public override IEnumerator RunExitAnim()
     {
         topCollider.enabled = false;
 
@@ -51,7 +52,7 @@ public class PenguinArena : ArenaHolder
             goUpTime
         ).SetEase(Ease.InQuad);
 
-        await Task.Delay((int)(goUpTime * 1000));
+        yield return new WaitForSeconds(goUpTime);
         topCollider.enabled = true;
     }
 }
