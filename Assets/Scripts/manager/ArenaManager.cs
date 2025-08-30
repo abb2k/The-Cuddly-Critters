@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using DG.Tweening;
@@ -31,35 +32,38 @@ public class ArenaManager : Singleton<ArenaManager>
         BossbarManager.Get();
     }
 
-    public async Task OpenUpArena(string arena, UnityAction sceneLoaded = null, params object[] payload)
+    public void OpenUpArena(string arena, UnityAction sceneLoaded = null, params object[] payload)
+    {
+        StartCoroutine(OpenUpArenaCoroutine(arena, sceneLoaded, payload));
+    }
+
+    private IEnumerator OpenUpArenaCoroutine(string arena, UnityAction sceneLoaded, object[] payload)
     {
         ArenaManager.Get().PlayGlobalArenaMusic(transitionAudio, .1f, 1);
         OnArenaChangedStart?.Invoke(currentArena == null ? null : currentArena.gameObject.scene.name, arena);
+
         if (currentArena != null)
         {
-            await currentArena.RunExitAnim();
+            yield return StartCoroutine(currentArena.RunExitAnim());
 
-            await SceneManager.UnloadSceneAsync(currentArena.gameObject.scene);
+            yield return SceneManager.UnloadSceneAsync(currentArena.gameObject.scene);
         }
 
         if (string.IsNullOrEmpty(arena) || !Application.CanStreamedLevelBeLoaded(arena))
-        {
-            return;
-        }
+            yield break;
 
         IsLoadingArena = true;
 
-        await SceneManager.LoadSceneAsync(arena, LoadSceneMode.Additive);
+        yield return SceneManager.LoadSceneAsync(arena, LoadSceneMode.Additive);
 
         var arenaHolder = GetObjectOfTypeInScene<ArenaHolder>(arena);
         if (arenaHolder == null)
         {
             IsLoadingArena = false;
-            return;
+            yield break;
         }
 
         currentArena = arenaHolder;
-
         IsLoadingArena = false;
 
         arenaHolder.OnPayloadRecieved(payload);
@@ -68,12 +72,12 @@ public class ArenaManager : Singleton<ArenaManager>
 
         sceneLoaded?.Invoke();
 
-        await currentArena.RunEntryAnim();
+        yield return StartCoroutine(currentArena.RunEntryAnim());
     }
 
-    public async Task SpawnBossWithArena(string arenaName)
+    public void SpawnBossWithArena(string arenaName)
     {
-        await OpenUpArena(arenaName, () =>
+        OpenUpArena(arenaName, () =>
         {
             if (!enemyForArena.Contains(arenaName)) return;
 

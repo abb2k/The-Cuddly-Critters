@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using DG.Tweening;
@@ -15,7 +16,7 @@ public class BunnyArena : ArenaHolder, IHitReciever
     private Sequence platDisSeq = null;
     public bool isPlayerInSky;
     public Transform groundSpikesContainer;
-    public override async Task RunEntryAnim()
+    public override IEnumerator RunEntryAnim()
     {
         float time = 2;
 
@@ -73,11 +74,11 @@ public class BunnyArena : ArenaHolder, IHitReciever
             isTransitionDone = true;
         });
 
-        while (!isTransitionDone) await Task.Yield();
+        while (!isTransitionDone) yield return null;
         ArenaManager.Get().PlayGlobalArenaMusic(bgMusic, .1f, 1);
     }
 
-    public override async Task RunExitAnim()
+    public override IEnumerator RunExitAnim()
     {
         float time = 2;
         DisablePlats(time);
@@ -117,7 +118,7 @@ public class BunnyArena : ArenaHolder, IHitReciever
             isTransitionDone = true;
         });
 
-        while (!isTransitionDone) await Task.Yield();
+        while (!isTransitionDone) yield return null;
     }
 
     public void DisablePlats(float time)

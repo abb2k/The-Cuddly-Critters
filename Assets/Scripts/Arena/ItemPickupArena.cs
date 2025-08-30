@@ -51,7 +51,7 @@ public class ItemPickupArena : ArenaHolder
         DialogueManager.Get().createDialogue(startDialogue).OnDialogueComplete += () => GameManager.Get().isInSeqance = false;
     }
 
-    public override async Task RunEntryAnim()
+    public override IEnumerator RunEntryAnim()
     {
         bool isInProgress = true;
         GameManager.Get().isInSeqance = true;
@@ -73,7 +73,7 @@ public class ItemPickupArena : ArenaHolder
             pedestal.transform.DOMoveY(20, 1).SetRelative(true).SetEase(Ease.OutSine);
         }
 
-        while (isInProgress) await Task.Yield();
+        while (isInProgress) yield return null;
 
         GameManager.Get().isInSeqance = false;
         OnEntryTransitionEnded?.Invoke();
@@ -82,7 +82,7 @@ public class ItemPickupArena : ArenaHolder
         ArenaManager.Get().PlayGlobalArenaMusic(bgMusic, .2f, 1);
     }
 
-    public override async Task RunExitAnim()
+    public override IEnumerator RunExitAnim()
     {
         GameManager.Get().isInSeqance = true;
         DOTween.To(() => ArenaManager.Get().templeBG.color.a * 255, x =>
@@ -96,7 +96,7 @@ public class ItemPickupArena : ArenaHolder
             pedestal.transform.DOMoveY(-20, 1).SetRelative(true).SetEase(Ease.InSine);
         }
 
-        await Task.Delay(1000);
+        yield return new WaitForSeconds(1);
         GameManager.Get().isInSeqance = false;
     }
 

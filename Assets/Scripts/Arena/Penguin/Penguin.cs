@@ -248,7 +248,7 @@ public class Penguin : BossEnemy, IHitReciever
             });
     }
 
-    async Task StopAll(bool loadPickupArena)
+    void StopAll(bool loadPickupArena)
     {
         invincible = true;
         didAttackLoopStart = false;
@@ -258,12 +258,12 @@ public class Penguin : BossEnemy, IHitReciever
             currentSeq.Kill();
 
         if (loadPickupArena)
-            await ArenaManager.Get().OpenUpArena("ItemPickupArena", null, defeatDialogue);
+            ArenaManager.Get().OpenUpArena("ItemPickupArena", null, defeatDialogue);
     }
 
     protected override void OnDeath()
     {
-        _ = StopAll(true);
+        StopAll(true);
 
         anim.Play("Death");
 
@@ -280,7 +280,7 @@ public class Penguin : BossEnemy, IHitReciever
 
     void RunAway()
     {
-        _ = StopAll(false);
+        StopAll(false);
 
         anim.Play("idle");
 

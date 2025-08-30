@@ -244,11 +244,9 @@ public class Owl : BossEnemy, IHitReciever
 
         currentSeq.Append(transform.DOMove(decidedPos, wooshEnterTime).SetEase(Ease.InOutSine));
         currentSeq.AppendInterval(wooshTime);
-        currentSeq.JoinCallback(async () =>
+        currentSeq.JoinCallback(() =>
         {
-            isWooshing = true;
-            await Task.Delay(1000);
-            lightsInScene.ForEach(l => l.TurnOff());
+            StartCoroutine(WaitToTurnOffLights());
         });
         currentSeq.AppendInterval(wooshExitTime);
         currentSeq.JoinCallback(() =>
@@ -256,6 +254,13 @@ public class Owl : BossEnemy, IHitReciever
             isWooshing = false;
             OnAttackComplete();
         });
+    }
+
+    IEnumerator WaitToTurnOffLights()
+    {
+        isWooshing = true;
+        yield return new WaitForSeconds(1);
+        lightsInScene.ForEach(l => l.TurnOff());
     }
 
     void WooshUpdate()
@@ -396,7 +401,7 @@ public class Owl : BossEnemy, IHitReciever
         seq.Play();
     }
 
-    async Task StopAll(bool loadPickupArena)
+    void StopAll(bool loadPickupArena)
     {
         invincible = true;
         didAttackLoopStart = false;
@@ -410,7 +415,7 @@ public class Owl : BossEnemy, IHitReciever
             StopCoroutine(currentSwoopFollow);
 
         if (loadPickupArena)
-            await ArenaManager.Get().OpenUpArena("ItemPickupArena", null, defeatDialogue);
+            ArenaManager.Get().OpenUpArena("ItemPickupArena", null, defeatDialogue);
     }
 
     protected override void OnDeath()
