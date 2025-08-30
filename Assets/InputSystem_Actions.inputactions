@@ -500,7 +500,7 @@
                     "path": "<Keyboard>/anyKey",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";Keyboard&Mouse",
                     "action": "DialogueForward",
                     "isComposite": false,
                     "isPartOfComposite": false
