@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: burrow bg
   m_EditorClassIdentifier: UnityEngine.dll::UnityEngine.Tilemaps.Tile
   m_Sprite: {fileID: 1595050227, guid: 0f926f0ed4be2364c9ef2a3bb1adf979, type: 3}
-  m_Color: {r: 0.13404964, g: 0.088999644, b: 0.1509434, a: 1}
+  m_Color: {r: 0.096837185, g: 0.04062834, b: 0.103773594, a: 1}
   m_Transform:
     e00: 1
     e01: 0
