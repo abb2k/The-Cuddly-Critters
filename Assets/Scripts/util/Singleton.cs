@@ -27,10 +27,11 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     {
         lock (_objLock)
         {
-            if (_instance == null)
+            if (_instance == null && Application.isPlaying)
             {
                 _instance ??= new GameObject().AddComponent<T>();
                 var me = _instance.GetComponent<Singleton<T>>();
+                
                 DontDestroyOnLoad(_instance);
                 if (me.SingletonName != null)
                 {

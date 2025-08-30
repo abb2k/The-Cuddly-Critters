@@ -7,7 +7,7 @@ public class BossbarManager : Singleton<BossbarManager>
     protected override void Awake()
     {
         bossbarCanvas = Instantiate(Resources.Load<GameObject>("bossbarCanvas"), transform).GetComponent<BossbarCanvas>();
-        bossbarCanvas.bossbarContainer.SetActive(false);
+        bossbarCanvas.HPBar.gameObject.SetActive(false);
     }
 
     private Enemy attachedEnemy;
@@ -15,14 +15,14 @@ public class BossbarManager : Singleton<BossbarManager>
     {
         attachedEnemy = e;
         e.OnHurtEvent += UpdateBar;
-        bossbarCanvas.bossbarContainer.SetActive(true);
+        bossbarCanvas.HPBar.gameObject.SetActive(true);
         UpdateBar(e);
     }
 
     void Update()
     {
         if (attachedEnemy == null)
-            bossbarCanvas.bossbarContainer.SetActive(false);
+            bossbarCanvas.HPBar.gameObject.SetActive(false);
     }
 
     void UpdateBar(Enemy e)

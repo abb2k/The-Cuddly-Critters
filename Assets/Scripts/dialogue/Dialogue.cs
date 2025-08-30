@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using EasyTextEffects;
 using TMPro;
 using Unity.VisualScripting;
@@ -89,8 +90,9 @@ public class Dialogue : MonoBehaviour
         progressDialogue();
     }
 
-    void OnDestroy()
+    async void OnDestroy()
     {
+        await Task.Yield();
         OnDialogueComplete?.Invoke();
     }
 

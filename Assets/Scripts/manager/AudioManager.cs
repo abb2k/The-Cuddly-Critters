@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.Events;
@@ -109,6 +110,7 @@ public class AudioManager : Singleton<AudioManager>
     /// <param name="sourceName">The name of the source to delete</param>
     public static void DeleteStableSource(string sourceName)
     {
+        if (Get() == null) return;
         if (!Get()._stableSources.TryGetValue(sourceName, out var foundSource)) return;
         if (foundSource == null) return;
         
@@ -201,11 +203,5 @@ public class AudioManager : Singleton<AudioManager>
 
         return _currentActiveLisener;
     }
-
-    protected override void OnSingletonDestroyed()
-    {
-        //clean up all stable sources if this AudioManager is somehow destroyed
-        while (_stableSources.Count > 0)
-            DeleteStableSource(_stableSources.Keys.First());
-    }
 }
+

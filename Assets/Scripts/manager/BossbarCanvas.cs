@@ -5,16 +5,12 @@ using UnityEngine.UI;
 
 public class BossbarCanvas : MonoBehaviour
 {
-    public GameObject bossbarContainer;
-    [SerializeField] private Slider HPBar;
-    [SerializeField] private TextMeshProUGUI barText;
+    public HPBar HPBar;
     [SerializeField] private TextMeshProUGUI bossName;
 
     public void SetValue(float value, float maxValue)
     {
-        HPBar.value = value / maxValue;
-
-        barText.text = $"{value:F2}/{maxValue:F2}";
+        HPBar.UpdateBar(value, maxValue);
     }
 
     public void ShowName(string name, float fadeInTime = .5f, float fadeStayTime = 1.5f, float fadeOutTime = 1)

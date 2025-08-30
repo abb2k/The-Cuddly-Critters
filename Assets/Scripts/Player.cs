@@ -24,6 +24,7 @@ public class Player : Singleton<Player>, IHitReciever, IHittable
     [SerializeField] private Collider2D feet;
     [SerializeField] private Transform visualsCont;
     [SerializeField] private SpriteRenderer[] flashOnHurt;
+    [SerializeField] private HPBar hpBar;
     public Animator anim;
 
     [SerializeField] private float health;
@@ -314,7 +315,7 @@ public class Player : Singleton<Player>, IHitReciever, IHittable
     public void OnHit(DamageInfo info)
     {
         if (health == 0 || info == null) return;
-        
+
         health -= info.damage;
         if (health < 0) health = 0;
 
@@ -323,6 +324,8 @@ public class Player : Singleton<Player>, IHitReciever, IHittable
         {
             OnDeath();
         }
+
+        hpBar.UpdateBar(health, stats.maxHealth);
     }
 
     void OnDamaged()
@@ -345,6 +348,7 @@ public class Player : Singleton<Player>, IHitReciever, IHittable
         else anim.Play("Idle");
 
         health = stats.maxHealth;
+        hpBar.UpdateBar(health, stats.maxHealth);
     }
 
     void OnDeath()
