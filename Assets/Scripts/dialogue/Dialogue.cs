@@ -6,6 +6,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class Dialogue : MonoBehaviour
@@ -30,6 +31,8 @@ public class Dialogue : MonoBehaviour
 
     int currentPage = -1;
 
+    [SerializeField] private InputActionReference forward;
+
     public List<DialogueEvent> currentEvents = new List<DialogueEvent>();
 
     public event UnityAction OnDialogueComplete;
@@ -42,6 +45,13 @@ public class Dialogue : MonoBehaviour
      * 4 = colsing
      */
     int stage = 0;
+
+    void Start()
+    {
+        forward.action.started += ForwardDF;
+    }
+
+    void ForwardDF(InputAction.CallbackContext context) { OnDialogueForward(); }
 
     public void startDialogue(DialogueSettings _settings)
     {
@@ -92,6 +102,7 @@ public class Dialogue : MonoBehaviour
 
     async void OnDestroy()
     {
+        forward.action.started -= ForwardDF;
         await Task.Yield();
         OnDialogueComplete?.Invoke();
     }
