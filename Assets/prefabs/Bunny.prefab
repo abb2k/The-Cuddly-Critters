@@ -385,7 +385,7 @@ MonoBehaviour:
     knockbackStrength: 0
   jumpPrepTime: 0.2
   jumpEntryTime: 1
-  jumpHeightOffset: 3.5
+  jumpHeightOffset: 2.5
   jumpStayTime: 0
   jumpBoomForce: 30
   jumpExitDelayTime: 1
@@ -443,6 +443,7 @@ MonoBehaviour:
     BackgroundColor: {r: 0, g: 0, b: 0, a: 1}
     hideBG: 0
     alignment: 0
+    showAtTop: 1
     enterTransition: 2
     exitTransition: 1
     speakSound: {fileID: 0}

@@ -112,7 +112,7 @@ public class Bunny : BossEnemy, IHitReciever
 
     protected override void Start()
     {
-        ArenaManager.Get().OnArenaChanged += OnArenaChanged;
+        ArenaManager.Get().OnArenaChangedStart += OnArenaChanged;
         base.Start();
 
         lastSelectedTirePoint = Random.Range((int)attackToBeTired.x, (int)attackToBeTired.y + 1);
@@ -222,6 +222,8 @@ public class Bunny : BossEnemy, IHitReciever
 
     void OnStateEnded()
     {
+        if (!didAttackLoopStart) return;
+
         currentTirenessLevel++;
         NextState();
     }
@@ -369,7 +371,6 @@ public class Bunny : BossEnemy, IHitReciever
 
         currentOngoingState = DOTween.Sequence()
             .Append(transform.DOMoveY(CSPos.y, CSEntryTime))
-            .Join(bunnyArena.groundSpikesContainer.DOMoveY(0, CSEntryTime).SetEase(Ease.OutSine))
             .AppendCallback(() =>
             {
                 carrotSpawnRoutine = StartCoroutine(SpawnSkyCarrots());
@@ -382,6 +383,7 @@ public class Bunny : BossEnemy, IHitReciever
                 })
                 .AppendInterval(SpawnCarrotPer).SetLoops(-1);
             })
+            .Join(bunnyArena.groundSpikesContainer.DOMoveY(0, CSEntryTime).SetEase(Ease.OutSine))
             .AppendInterval(CSStayTime)
             .AppendCallback(() =>
             {
@@ -529,18 +531,15 @@ public class Bunny : BossEnemy, IHitReciever
 
         transform.DOKill();
 
-        transform.eulerAngles = new Vector3(0, 0, 0);
-
         DOTween.Sequence()
             .Append(transform.DOMoveX(escapeXpos, escapeTime).SetEase(Ease.InSine))
-            .Join(transform.DORotateQuaternion(Quaternion.identity, .5f))
             .AppendCallback(() => Destroy(gameObject));
     }
 
     void OnArenaChanged(string oldArena, string newArena)
     {
         if (didAttackLoopStart && oldArena.Equals("BunnyArena"))
-            OnDeath();
+            RunAway();
     }
 
     void OnTriggerExit2D(Collider2D collision)

@@ -171,6 +171,7 @@ MonoBehaviour:
     BackgroundColor: {r: 0, g: 0, b: 0, a: 1}
     hideBG: 0
     alignment: 0
+    showAtTop: 1
     enterTransition: 2
     exitTransition: 1
     speakSound: {fileID: 0}

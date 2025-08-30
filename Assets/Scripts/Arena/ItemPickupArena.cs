@@ -77,6 +77,7 @@ public class ItemPickupArena : ArenaHolder
 
         GameManager.Get().isInSeqance = false;
         OnEntryTransitionEnded?.Invoke();
+        Player.Get().RevivePlayer();
     }
 
     public override async Task RunExitAnim()
@@ -118,7 +119,7 @@ public class ItemPickupArena : ArenaHolder
 
         foreach (var dialogue in orderedDialogues)
         {
-            if (dialogue.scoreMinimum < GameManager.Get().Score)
+            if (dialogue.scoreMinimum <= GameManager.Get().Score)
             {
                 dialogue.dialogue.name = "endDia";
                 DialogueManager.Get().createDialogue(dialogue.dialogue).OnDialogueComplete += GameComplete;

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4149056489404160185}
   - component: {fileID: 8264128759475715155}
   - component: {fileID: 6118753808531330847}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: interaction
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -171,6 +171,7 @@ MonoBehaviour:
   flashOnHurt:
   - {fileID: 4777531943638282051}
   - {fileID: 8045554838920843008}
+  anim: {fileID: 2459954378835368413}
   health: 0
   deathDialogue:
     name: 
@@ -196,6 +197,7 @@ MonoBehaviour:
     BackgroundColor: {r: 0, g: 0, b: 0, a: 1}
     hideBG: 0
     alignment: 0
+    showAtTop: 1
     enterTransition: 2
     exitTransition: 1
     speakSound: {fileID: 0}
@@ -501,6 +503,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1003304429801905308}
   - component: {fileID: 4777531943638282051}
+  - component: {fileID: 2459954378835368413}
   m_Layer: 6
   m_Name: Visual
   m_TagString: Untagged
@@ -582,6 +585,28 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &2459954378835368413
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5486700981549429851}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 14f8c185b6d31fd41b691ab4f1c65c5a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &6128463886049866281
 GameObject:
   m_ObjectHideFlags: 0

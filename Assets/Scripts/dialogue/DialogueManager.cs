@@ -114,6 +114,7 @@ public class DialogueSettings
     public Color BackgroundColor = Color.black;
     public bool hideBG;
     public HorizontalAlignmentOptions alignment;
+    public bool showAtTop = false;
 
     public DialogueEnterTransition enterTransition = DialogueEnterTransition.Expand;
     public DialogueEnterTransition exitTransition = DialogueEnterTransition.Scale;

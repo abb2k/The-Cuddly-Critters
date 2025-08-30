@@ -46,6 +46,9 @@ public class Dialogue : MonoBehaviour
     {
         settings = _settings;
 
+        if (settings.showAtTop)
+            transform.localPosition += Vector3.up * (Mathf.Abs(transform.localPosition.y) * 2);
+
         stage = 1;
 
         if (settings.icon)
