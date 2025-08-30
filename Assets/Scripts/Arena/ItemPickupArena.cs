@@ -32,7 +32,6 @@ public class ItemPickupArena : ArenaHolder
             GameManager.Get().isInSeqance = true;
             DOTween.Sequence().AppendInterval(1).AppendCallback(() => GameManager.Get().FadeIn(2, StartDialogue));
             OnEntryTransitionEnded += () => GameManager.Get().isInSeqance = true;
-            GameManager.Get().AddProgress();
         }
 
         int index = 0;
