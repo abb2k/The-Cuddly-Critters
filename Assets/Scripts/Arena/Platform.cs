@@ -44,5 +44,6 @@ public class Platform : MonoBehaviour
     void OnDestroy()
     {
         movementAction.action.started -= OnClicked;
+        movementAction.action.canceled -= OnClicked;
     }
 }
