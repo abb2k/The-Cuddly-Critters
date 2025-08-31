@@ -159,6 +159,7 @@ MonoBehaviour:
     damage: 8
     knockbackNormal: {x: 0, y: 0}
     knockbackStrength: 0
+  slideSFX: {fileID: 8300000, guid: 2b861ba855da51c42b9e8495cc66698f, type: 3}
   halfCirclePrepWaitTime: 0.5
   halfCircleForce: 100
   halfCircleWaitTime: 4
@@ -177,6 +178,7 @@ MonoBehaviour:
     knockbackNormal: {x: 0, y: 0}
     knockbackStrength: 0
   eatWaitTime: 8
+  eatSFX: {fileID: 8300000, guid: 00bca3ac3b94ee44e95e1eed512d3c51, type: 3}
   escapeHeight: -17
   escapeTime: 1.5
   deathHeight: -17

@@ -3,6 +3,7 @@ using UnityEngine;
 public class PenguinArenaGround : MonoBehaviour
 {
     [SerializeField] private float minVerticalImpact = 25f;
+    [SerializeField] private AudioClip hardHitSound;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -26,5 +27,7 @@ public class PenguinArenaGround : MonoBehaviour
             gyser.Activate(true);
         }
         ArenaManager.Get().RunCamChake(.3f, 2);
+
+        AudioManager.PlayTemporarySource(hardHitSound);
     }
 }

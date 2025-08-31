@@ -25,8 +25,15 @@ public class Player : Singleton<Player>, IHitReciever, IHittable
     [SerializeField] private Transform visualsCont;
     [SerializeField] private SpriteRenderer[] flashOnHurt;
     [SerializeField] private HPBar hpBar;
+    [Space]
+    [SerializeField] private AudioClip[] footstepSounds;
+    [SerializeField] private float stepPlayDelay;
+    [SerializeField] private AudioClip hurtSound;
+    [SerializeField] private AudioClip[] jumpSounds;
+    [SerializeField] private AudioClip[] attackSounds;
     public Animator anim;
 
+    [Space]
     [SerializeField] private float health;
     private List<IInteractable> interactions = new();
 
@@ -57,6 +64,8 @@ public class Player : Singleton<Player>, IHitReciever, IHittable
         EquipItem(itemEquipped);
         rb = GetComponent<Rigidbody2D>();
         RevivePlayer();
+
+        StartCoroutine(Footsteps());
 
         ArenaManager.Get();
     }
@@ -117,6 +126,16 @@ public class Player : Singleton<Player>, IHitReciever, IHittable
         visualsCont.localEulerAngles = new Vector3(0, lastMovedLeft ? 180 : 0, 0);
     }
 
+    IEnumerator Footsteps()
+    {
+        while (true)
+        {
+            if (rb.linearVelocityX != 0 && isOnGround)
+                AudioManager.PlayTemporarySource(footstepSounds[UnityEngine.Random.Range(0, footstepSounds.Length)], 1, 1, "footstep");
+            yield return new WaitForSeconds(stepPlayDelay);
+        }
+    }
+
     void OnJump(InputValue input)
     {
         if (DialogueManager.Get().getFreezePlayer() || GameManager.Get().isInSeqance || isDead)
@@ -156,7 +175,10 @@ public class Player : Singleton<Player>, IHitReciever, IHittable
             currentJumpsLeft++;
 
         if (currentJumpsLeft > 0)
+        {
             anim.Play("Jumping");
+            AudioManager.PlayTemporarySource(jumpSounds[UnityEngine.Random.Range(0, jumpSounds.Length)], 1, 1, "PlayerJump");
+        }
     }
 
     void JumpKeyReleased()
@@ -285,6 +307,8 @@ public class Player : Singleton<Player>, IHitReciever, IHittable
         });
 
         seq.Play();
+
+        AudioManager.PlayTemporarySource(attackSounds[UnityEngine.Random.Range(0, attackSounds.Length)], 1, 1, "PlayerWeponAttack");
     }
 
     void OnWeponHit(Collider2D other)
@@ -336,6 +360,8 @@ public class Player : Singleton<Player>, IHitReciever, IHittable
                 .Append(sr.DOColor(Color.red, 0))
                 .Append(sr.DOColor(Color.white, .5f));
         }
+
+        AudioManager.PlayTemporarySource(hurtSound, 1, 1, "PlayerHurt");
     }
 
     public void RevivePlayer()

@@ -8,7 +8,16 @@ public class PenguinArenaFish : MonoBehaviour, IHittable
     [SerializeField] private SpriteRenderer sr;
     [SerializeField] private float destroyHight;
     [SerializeField] private float fadeAfter;
+    [SerializeField] private AudioClip flapSound;
+    private AudioSource myFlapSource;
     public bool WasHit { get; private set; }
+
+    void Start()
+    {
+        myFlapSource = AudioManager.CreateUnnamedSource(flapSound);
+        myFlapSource.Play();
+        myFlapSource.loop = true;
+    }
 
     public void OnHit(DamageInfo info)
     {
@@ -33,5 +42,10 @@ public class PenguinArenaFish : MonoBehaviour, IHittable
     {
         if (transform.position.y < destroyHight)
             Destroy(gameObject);
+    }
+
+    void OnDestroy()
+    {
+        AudioManager.RemoveUnnamedSource(myFlapSource);
     }
 }

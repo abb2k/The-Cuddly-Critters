@@ -54,6 +54,8 @@ public class Bunny : BossEnemy, IHitReciever
     [SerializeField] private GameObject burrowWarning;
     [SerializeField] private float burrowExitDelay;
     [SerializeField] private DamageInfo burrowDamage;
+    [SerializeField] private AudioClip burrowEnterSFX;
+    [SerializeField] private AudioClip burrowExitSFX;
     private GameObject burrowHitboxFix;
 
     [Header("JumpState")]
@@ -67,6 +69,7 @@ public class Bunny : BossEnemy, IHitReciever
     [SerializeField] private GameObject shockwavePrefab;
     [SerializeField] private DamageInfo jumpDamage;
     [SerializeField] private DamageInfo shockwaveDamage;
+    [SerializeField] private AudioClip shockwaveSFX;
     private bool disPlatsOnNextHit;
     private BunnyArena bunnyArena;
 
@@ -81,6 +84,7 @@ public class Bunny : BossEnemy, IHitReciever
     [SerializeField] private Vector2 MinMaxCloudMovement;
     [SerializeField] private DamageInfo carrotDamage;
     [SerializeField] private DamageInfo groundCarrotDamage;
+    [SerializeField] private AudioClip carrotThrowSFX;
     private Coroutine carrotSpawnRoutine;
     private Tween carrSpwn = null;
 
@@ -88,6 +92,7 @@ public class Bunny : BossEnemy, IHitReciever
     [SerializeField] private Vector2 attackToBeTired;
     [SerializeField] private float tiredTime;
     [SerializeField] private float tiredRecoverTime;
+    [SerializeField] private AudioClip tiredSFX;
 
     private int currentTirenessLevel = 0;
     private int lastSelectedTirePoint;
@@ -276,6 +281,10 @@ public class Bunny : BossEnemy, IHitReciever
             })
             .AppendInterval(burrowPrepTime)
             .Append(transform.DOMoveY(burrowUndergroundYLevel, burrowEntryTime).SetEase(Ease.OutExpo))
+            .JoinCallback(() =>
+            {
+                AudioManager.PlayTemporarySource(burrowEnterSFX);
+            })
             .AppendInterval(Random.Range(burrowStayTime.x, burrowStayTime.y))
             .AppendCallback(() =>
             {
@@ -312,6 +321,7 @@ public class Bunny : BossEnemy, IHitReciever
             .AppendInterval(warnTime)
             .AppendCallback(() =>
             {
+                AudioManager.PlayTemporarySource(burrowExitSFX);
                 rb.bodyType = RigidbodyType2D.Dynamic;
                 rb.WakeUp();
                 rb.AddForce(dir.normalized * Random.Range(burrowExitForce.x, burrowExitForce.y));
@@ -344,7 +354,11 @@ public class Bunny : BossEnemy, IHitReciever
                 rb.linearVelocity = Vector2.zero;
             })
             .AppendInterval(jumpPrepTime)
-            .AppendCallback(() => anim.Play("Jump"))
+            .AppendCallback(() =>
+            {
+                anim.Play("Jump");
+                AudioManager.PlayTemporarySource(burrowExitSFX);
+            })
             .Append(transform.DOMoveY(jumpHeightOffset, jumpEntryTime).SetRelative(true).SetEase(Ease.OutExpo))
             .AppendInterval(jumpStayTime)
             .AppendCallback(() =>
@@ -387,6 +401,11 @@ public class Bunny : BossEnemy, IHitReciever
                     carrot.Setup(carrotDamage, transform.position, dir * carrotMovementSpeed);
                 })
                 .AppendInterval(SpawnCarrotPer).SetLoops(-1);
+
+                foreach (Transform child in bunnyArena.groundSpikesContainer)
+                {
+                    child.GetComponent<FallingCarrot>().doPlaySound = true;
+                }
             })
             .Join(bunnyArena.groundSpikesContainer.DOMoveY(0, CSEntryTime).SetEase(Ease.OutSine))
             .AppendInterval(CSStayTime)
@@ -398,6 +417,10 @@ public class Bunny : BossEnemy, IHitReciever
                 carrSpwn.Kill();
                 anim.Play("Idle");
                 invincible = false;
+                foreach (Transform child in bunnyArena.groundSpikesContainer)
+                {
+                    child.GetComponent<FallingCarrot>().doPlaySound = false;
+                }
             })
             .Join(bunnyArena.groundSpikesContainer.DOMoveY(spikesStartPos, CSEntryTime).SetEase(Ease.InSine))
             .AppendCallback(OnStateEnded);
@@ -431,6 +454,8 @@ public class Bunny : BossEnemy, IHitReciever
         anim.Play("EnterTired");
 
         resistence = tiredResistence;
+
+        AudioManager.PlayTemporarySource(tiredSFX);
 
         currentOngoingState = DOTween.Sequence()
             .AppendInterval(tiredTime)
@@ -467,6 +492,8 @@ public class Bunny : BossEnemy, IHitReciever
         var sheck = Instantiate(shockwavePrefab).GetComponent<CarrotShockwave>();
         sheck.transform.position = transform.position + Vector3.up;
         sheck.damage = shockwaveDamage;
+
+        AudioManager.PlayTemporarySource(shockwaveSFX);
     }
 
     public void HitRecieved(int hitID, IHitReciever.HitType type, bool isTriggerHit, Colliders other)

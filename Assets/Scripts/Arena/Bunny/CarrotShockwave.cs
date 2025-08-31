@@ -12,6 +12,7 @@ public class CarrotShockwave : MonoBehaviour
     [SerializeField] private float carrotStayTime;
     [SerializeField] private float carrotDownOffset;
     [SerializeField] private float carrotTransitionTime;
+    [SerializeField] private AudioClip carrotPopup;
     public DamageInfo damage;
 
     private int carrotsSpawned;
@@ -55,6 +56,7 @@ public class CarrotShockwave : MonoBehaviour
         carrot.transform.position -= Vector3.up * carrotDownOffset;
         DOTween.Sequence()
             .Append(carrot.transform.DOMoveY(carrotDownOffset, carrotTransitionTime).SetRelative(true).SetEase(Ease.OutSine))
+            .AppendCallback(() => AudioManager.PlayTemporarySource(carrotPopup))
             .AppendInterval(carrotStayTime)
             .Append(carrot.transform.DOMoveY(-carrotDownOffset, carrotTransitionTime).SetRelative(true).SetEase(Ease.InSine))
             .AppendCallback(() =>

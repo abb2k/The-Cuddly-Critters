@@ -8,6 +8,7 @@ public class TreeBranch : MonoBehaviour
     private Coroutine disableRoutine = null;
     private readonly object objLock = new();
     [SerializeField] private TreeBranchLight myLight;
+    [SerializeField] private AudioClip shakeSFX;
     private Tweener shake;
     void Awake()
     {
@@ -25,6 +26,8 @@ public class TreeBranch : MonoBehaviour
 
                 if (shake == null || !shake.IsActive())
                     shake = transform.DOShakeRotation(time, new Vector3(2, 2, 20), 10, 10, true, ShakeRandomnessMode.Harmonic);
+
+                AudioManager.PlayTemporarySource(shakeSFX);
             }
         }
     }

@@ -6,6 +6,8 @@ using UnityEngine.Rendering.Universal;
 public class TreeBranchLight : MonoBehaviour, IHittable
 {
     [SerializeField] private Light2D myLight;
+    [SerializeField] private AudioClip turnOnSFX;
+    [SerializeField] private AudioClip turnOffSFX;
     private Tween tunTween = null;
     public bool isOn;
 
@@ -31,6 +33,8 @@ public class TreeBranchLight : MonoBehaviour, IHittable
         if (mySprite != null) mySprite.enabled = true;
 
         OnLightStateChanged?.Invoke(this, true);
+
+        AudioManager.PlayTemporarySource(turnOnSFX);
     }
 
     public void TurnOff()
@@ -43,5 +47,7 @@ public class TreeBranchLight : MonoBehaviour, IHittable
         if (mySprite != null) mySprite.enabled = false;
 
         OnLightStateChanged?.Invoke(this, false);
+
+        AudioManager.PlayTemporarySource(turnOffSFX);
     }
 }

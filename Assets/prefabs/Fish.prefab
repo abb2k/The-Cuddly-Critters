@@ -131,6 +131,7 @@ MonoBehaviour:
   sr: {fileID: 4128025569654300680}
   destroyHight: -14
   fadeAfter: 8
+  flapSound: {fileID: 8300000, guid: 19f0114b9aa004c469e58209b86fda1d, type: 3}
 --- !u!58 &1546148743769932232
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -71,8 +71,6 @@ public class HPBar : MonoBehaviour
             Destroy(child.gameObject);
         }
 
-        Debug.Log($"initilizing HP Bar, tickValue: {tickValue}, tickAmount: {tickAmount}");
-
         for (int i = 0; i < tickAmount; i++)
         {
             var newTick = Instantiate(tickPrefab, ticksContainer);
