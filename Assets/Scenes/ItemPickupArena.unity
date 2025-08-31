@@ -365,20 +365,6 @@ MonoBehaviour:
       endEvent:
         m_PersistentCalls:
           m_Calls: []
-    - text: "Use WASD and Space to move\r"
-      startEvent:
-        m_PersistentCalls:
-          m_Calls: []
-      endEvent:
-        m_PersistentCalls:
-          m_Calls: []
-    - text: Left click to attack and E to take/place items
-      startEvent:
-        m_PersistentCalls:
-          m_Calls: []
-      endEvent:
-        m_PersistentCalls:
-          m_Calls: []
     - text: The strongest item might be tempting.
       startEvent:
         m_PersistentCalls:
@@ -408,6 +394,20 @@ MonoBehaviour:
         m_PersistentCalls:
           m_Calls: []
     - text: "Find the moment they are most vulnerable\u2026 then strike true.\r"
+      startEvent:
+        m_PersistentCalls:
+          m_Calls: []
+      endEvent:
+        m_PersistentCalls:
+          m_Calls: []
+    - text: "Use WASD and Space to move\r"
+      startEvent:
+        m_PersistentCalls:
+          m_Calls: []
+      endEvent:
+        m_PersistentCalls:
+          m_Calls: []
+    - text: Left click to attack and E to take/place items
       startEvent:
         m_PersistentCalls:
           m_Calls: []

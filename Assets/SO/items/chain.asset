@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: chain
   m_EditorClassIdentifier: Assembly-CSharp::SpecialItem
   itemName: Chain
-  description: "The Chain will allow you to attack behind your back \n[E]"
+  description: 'The Chain will allow you to attack with 360 range
+
+    [E]'
   generalVisual: {fileID: 1244476889673583485, guid: 1a2c4ff9b65eab940bcd8ef04821f4bb, type: 3}
   bodyVisual: {fileID: 0}
   bodyVisualSorting: 0
@@ -33,4 +35,5 @@ MonoBehaviour:
     attackTime: 0
     attackCooldown: 0.2
     attackAngle: 180
+    IFrames: 0
     maxHealth: 0

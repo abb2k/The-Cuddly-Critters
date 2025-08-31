@@ -86,12 +86,16 @@ public class Owl : BossEnemy, IHitReciever
 
     private OwlArena owlArena;
 
+    public ParticleSystem vfx;
+
     [Header("Death/Escape")]
     [SerializeField] private float escapeHeight;
     [SerializeField] private float escapeTime;
     [SerializeField] private float deathHeight;
     [SerializeField] private float deathTime;
     [SerializeField] private DialogueSettings defeatDialogue;
+
+    
 
     protected override void Start()
     {
@@ -252,12 +256,15 @@ public class Owl : BossEnemy, IHitReciever
         currentSeq.JoinCallback(() =>
         {
             StartCoroutine(WaitToTurnOffLights());
+            vfx.Play();
         });
         currentSeq.AppendInterval(wooshExitTime);
         currentSeq.JoinCallback(() =>
         {
             isWooshing = false;
             OnAttackComplete();
+            vfx.Stop();
+            
         });
     }
 

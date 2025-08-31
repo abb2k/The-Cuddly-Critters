@@ -34,6 +34,7 @@ Transform:
   m_Children:
   - {fileID: 8941133135877986821}
   - {fileID: 3747904861832121392}
+  - {fileID: 4681581981636095308}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!58 &6271518961698940759
@@ -148,6 +149,7 @@ MonoBehaviour:
     damage: 8
     knockbackNormal: {x: 0, y: 0}
     knockbackStrength: 0
+  vfx: {fileID: 1565952000444294705}
   escapeHeight: 18.2
   escapeTime: 1.5
   deathHeight: -17
@@ -430,3 +432,146 @@ MonoBehaviour:
   getStay: 0
   getExit: 0
   isTrigger: 1
+--- !u!1001 &7704892964299863875
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 7355384207542605231}
+    m_Modifications:
+    - target: {fileID: 133329698702673261, guid: c8980c481152be64fbf013b4ce679ee6, type: 3}
+      propertyPath: m_Name
+      value: OwlVFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 2837965729124601014, guid: c8980c481152be64fbf013b4ce679ee6, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2837965729124601014, guid: c8980c481152be64fbf013b4ce679ee6, type: 3}
+      propertyPath: moveWithTransform
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2837965729124601014, guid: c8980c481152be64fbf013b4ce679ee6, type: 3}
+      propertyPath: InitialModule.gravitySource
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2837965729124601014, guid: c8980c481152be64fbf013b4ce679ee6, type: 3}
+      propertyPath: InitialModule.startRotation.scalar
+      value: -0.2617994
+      objectReference: {fileID: 0}
+    - target: {fileID: 2837965729124601014, guid: c8980c481152be64fbf013b4ce679ee6, type: 3}
+      propertyPath: InitialModule.startRotation.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2837965729124601014, guid: c8980c481152be64fbf013b4ce679ee6, type: 3}
+      propertyPath: InitialModule.startRotationX.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2837965729124601014, guid: c8980c481152be64fbf013b4ce679ee6, type: 3}
+      propertyPath: InitialModule.startRotationY.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3032353384074451471, guid: c8980c481152be64fbf013b4ce679ee6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.76
+      objectReference: {fileID: 0}
+    - target: {fileID: 3032353384074451471, guid: c8980c481152be64fbf013b4ce679ee6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.37
+      objectReference: {fileID: 0}
+    - target: {fileID: 3032353384074451471, guid: c8980c481152be64fbf013b4ce679ee6, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3032353384074451471, guid: c8980c481152be64fbf013b4ce679ee6, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.92263395
+      objectReference: {fileID: 0}
+    - target: {fileID: 3032353384074451471, guid: c8980c481152be64fbf013b4ce679ee6, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3032353384074451471, guid: c8980c481152be64fbf013b4ce679ee6, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3032353384074451471, guid: c8980c481152be64fbf013b4ce679ee6, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.38567692
+      objectReference: {fileID: 0}
+    - target: {fileID: 3032353384074451471, guid: c8980c481152be64fbf013b4ce679ee6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3032353384074451471, guid: c8980c481152be64fbf013b4ce679ee6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3032353384074451471, guid: c8980c481152be64fbf013b4ce679ee6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -45.372
+      objectReference: {fileID: 0}
+    - target: {fileID: 4458223249640524731, guid: c8980c481152be64fbf013b4ce679ee6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -4.09
+      objectReference: {fileID: 0}
+    - target: {fileID: 4458223249640524731, guid: c8980c481152be64fbf013b4ce679ee6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -3.16
+      objectReference: {fileID: 0}
+    - target: {fileID: 4458223249640524731, guid: c8980c481152be64fbf013b4ce679ee6, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.61145496
+      objectReference: {fileID: 0}
+    - target: {fileID: 4458223249640524731, guid: c8980c481152be64fbf013b4ce679ee6, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.7912793
+      objectReference: {fileID: 0}
+    - target: {fileID: 4458223249640524731, guid: c8980c481152be64fbf013b4ce679ee6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 255.39
+      objectReference: {fileID: 0}
+    - target: {fileID: 9175563450627428722, guid: c8980c481152be64fbf013b4ce679ee6, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9175563450627428722, guid: c8980c481152be64fbf013b4ce679ee6, type: 3}
+      propertyPath: moveWithTransform
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9175563450627428722, guid: c8980c481152be64fbf013b4ce679ee6, type: 3}
+      propertyPath: InitialModule.gravitySource
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9175563450627428722, guid: c8980c481152be64fbf013b4ce679ee6, type: 3}
+      propertyPath: InitialModule.startRotation.scalar
+      value: 0.2617994
+      objectReference: {fileID: 0}
+    - target: {fileID: 9175563450627428722, guid: c8980c481152be64fbf013b4ce679ee6, type: 3}
+      propertyPath: InitialModule.startRotation.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9175563450627428722, guid: c8980c481152be64fbf013b4ce679ee6, type: 3}
+      propertyPath: InitialModule.startRotationX.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9175563450627428722, guid: c8980c481152be64fbf013b4ce679ee6, type: 3}
+      propertyPath: InitialModule.startRotationY.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c8980c481152be64fbf013b4ce679ee6, type: 3}
+--- !u!198 &1565952000444294705 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 9175563450627428722, guid: c8980c481152be64fbf013b4ce679ee6, type: 3}
+  m_PrefabInstance: {fileID: 7704892964299863875}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4681581981636095308 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3032353384074451471, guid: c8980c481152be64fbf013b4ce679ee6, type: 3}
+  m_PrefabInstance: {fileID: 7704892964299863875}
+  m_PrefabAsset: {fileID: 0}
