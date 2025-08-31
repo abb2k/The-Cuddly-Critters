@@ -459,6 +459,7 @@ public class Bunny : BossEnemy, IHitReciever
 
         currentOngoingState = DOTween.Sequence()
             .AppendInterval(tiredTime)
+            .AppendCallback(() => anim.Play("Idle"))
             .AppendInterval(tiredRecoverTime)
             .AppendCallback(() =>
             {

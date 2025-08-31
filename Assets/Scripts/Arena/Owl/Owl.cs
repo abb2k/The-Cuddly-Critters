@@ -163,7 +163,7 @@ public class Owl : BossEnemy, IHitReciever
     {
         WeightedList<OwlAttacks> possibleAttacks = new();
 
-        if (Player.Get().transform.position.y > -4.5f) // on branch
+        if (!owlArena.isPlayerOnGround) // on branch
             possibleAttacks.Add(OwlAttacks.Swoop, 70);
 
         int lightsOn = lightsInScene.Sum(l => l.isOn ? 1 : 0);

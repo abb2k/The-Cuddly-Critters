@@ -154,6 +154,7 @@ MonoBehaviour:
     attackTime: 0.4
     attackCooldown: 0.1
     attackAngle: 180
+    IFrames: 0.75
     maxHealth: 100
   weponTransform: {fileID: 4773649876002357056}
   itemEquipped: {fileID: 0}

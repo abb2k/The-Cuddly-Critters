@@ -35,13 +35,9 @@ public class ItemPickupArena : ArenaHolder
             OnEntryTransitionEnded += () => GameManager.Get().isInSeqance = true;
         }
 
-        int index = 0;
-        foreach (var pedestal in pedestals)
+        for (int i = 0; i < GameManager.Get().ItemsAvailable.Count; i++)
         {
-            if (GameManager.Get().ItemsAvailable.Count == index || Player.Get().ItemEquipped == GameManager.Get().ItemsAvailable[index]) return;
-            pedestal.SetItem(GameManager.Get().ItemsAvailable[index]);
-
-            index++;
+            pedestals[i].SetItem(GameManager.Get().ItemsAvailable[i]);
         }
     }
 

@@ -14,6 +14,7 @@ public class PlayerStats
     public float attackTime;
     public float attackCooldown;
     public float attackAngle;
+    public float IFrames;
     [Header("Health")]
     public float maxHealth;
 

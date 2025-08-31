@@ -6,13 +6,21 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
-public class OwlArena : ArenaHolder
+public class OwlArena : ArenaHolder, IHitReciever
 {
     public TreeBranch[] branches;
     [SerializeField] private Transform[] riseWithBranches;
     [SerializeField] private float downDistance;
     [SerializeField] private AudioClip bgMusic;
     private Light2D globalLight;
+    public bool isPlayerOnGround;
+
+    public void HitRecieved(int hitID, IHitReciever.HitType type, bool isTriggerHit, Colliders other)
+    {
+        if (hitID == 0)
+            isPlayerOnGround = type == IHitReciever.HitType.Exit;
+    }
+
     public override IEnumerator RunEntryAnim()
     {
         Dictionary<Transform, Vector3> originalPoses = new();

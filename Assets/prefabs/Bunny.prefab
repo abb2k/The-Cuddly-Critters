@@ -424,8 +424,8 @@ MonoBehaviour:
     knockbackStrength: 0
   carrotThrowSFX: {fileID: 8300000, guid: 3cee69628795ec640a4b9bcb786570c9, type: 3}
   attackToBeTired: {x: 5, y: 8}
-  tiredTime: 5
-  tiredRecoverTime: 0
+  tiredTime: 6
+  tiredRecoverTime: 1
   tiredSFX: {fileID: 8300000, guid: 6a0d82932872e0944b821ce0b3a124b1, type: 3}
   escapeXpos: 24
   escapeTime: 1.5

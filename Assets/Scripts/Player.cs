@@ -55,6 +55,7 @@ public class Player : Singleton<Player>, IHitReciever, IHittable
     private readonly object cyotieObjLock = new();
 
     private bool isDead;
+    private bool isInvincible;
 
     [SerializeField] private DialogueSettings deathDialogue;
 
@@ -338,7 +339,7 @@ public class Player : Singleton<Player>, IHitReciever, IHittable
 
     public void OnHit(DamageInfo info)
     {
-        if (health == 0 || info == null) return;
+        if (health == 0 || info == null || isInvincible) return;
 
         health -= info.damage;
         if (health < 0) health = 0;
@@ -350,6 +351,10 @@ public class Player : Singleton<Player>, IHitReciever, IHittable
         }
 
         hpBar.UpdateBar(health, stats.maxHealth);
+        isInvincible = true;
+        DOTween.Sequence()
+            .AppendInterval(stats.IFrames)
+            .AppendCallback(() => isInvincible = false);
     }
 
     void OnDamaged()
