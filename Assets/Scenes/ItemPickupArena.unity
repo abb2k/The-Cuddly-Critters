@@ -358,6 +358,13 @@ MonoBehaviour:
       endEvent:
         m_PersistentCalls:
           m_Calls: []
+    - text: Be watchful, find the right moment to strike.
+      startEvent:
+        m_PersistentCalls:
+          m_Calls: []
+      endEvent:
+        m_PersistentCalls:
+          m_Calls: []
     fontSize: 70
     icon: {fileID: 0}
     font: {fileID: 11400000, guid: 33271129f12b05d48ae7750fe693c544, type: 2}
@@ -383,7 +390,162 @@ MonoBehaviour:
     dialogue:
       name: 
       texts:
-      - text: aaaa
+      - text: Pathetic. Were you even trying?
+        startEvent:
+          m_PersistentCalls:
+            m_Calls: []
+        endEvent:
+          m_PersistentCalls:
+            m_Calls: []
+      fontSize: 70
+      icon: {fileID: 0}
+      font: {fileID: 11400000, guid: 33271129f12b05d48ae7750fe693c544, type: 2}
+      startColor: {r: 1, g: 1, b: 1, a: 1}
+      BackgroundColor: {r: 1, g: 1, b: 1, a: 1}
+      hideBG: 0
+      alignment: 0
+      showAtTop: 1
+      enterTransition: 2
+      exitTransition: 1
+      speakSound: {fileID: 8300000, guid: 9717b64cc4d28224a9b7a3d48ff741bd, type: 3}
+      speakSoundVolume: 1
+      startSpeed: 0.05
+      unskippable: 0
+      autoSkip: 0
+      autoSkipSpeed: 0.5
+      freezePlayer: 1
+      colors: []
+      events: []
+      voices: []
+  - scoreMinimum: 37.1
+    dialogue:
+      name: 
+      texts:
+      - text: This is the best you can manage? Well at least you tried...
+        startEvent:
+          m_PersistentCalls:
+            m_Calls: []
+        endEvent:
+          m_PersistentCalls:
+            m_Calls: []
+      fontSize: 70
+      icon: {fileID: 0}
+      font: {fileID: 11400000, guid: 33271129f12b05d48ae7750fe693c544, type: 2}
+      startColor: {r: 1, g: 1, b: 1, a: 1}
+      BackgroundColor: {r: 1, g: 1, b: 1, a: 1}
+      hideBG: 0
+      alignment: 0
+      showAtTop: 1
+      enterTransition: 2
+      exitTransition: 1
+      speakSound: {fileID: 8300000, guid: 9717b64cc4d28224a9b7a3d48ff741bd, type: 3}
+      speakSoundVolume: 1
+      startSpeed: 0.05
+      unskippable: 0
+      autoSkip: 0
+      autoSkipSpeed: 0.5
+      freezePlayer: 1
+      colors: []
+      events: []
+      voices: []
+  - scoreMinimum: 74.2
+    dialogue:
+      name: 
+      texts:
+      - text: "Not a total loss\u2026 but hardly a victory to be proud of."
+        startEvent:
+          m_PersistentCalls:
+            m_Calls: []
+        endEvent:
+          m_PersistentCalls:
+            m_Calls: []
+      fontSize: 70
+      icon: {fileID: 0}
+      font: {fileID: 11400000, guid: 33271129f12b05d48ae7750fe693c544, type: 2}
+      startColor: {r: 1, g: 1, b: 1, a: 1}
+      BackgroundColor: {r: 1, g: 1, b: 1, a: 1}
+      hideBG: 0
+      alignment: 0
+      showAtTop: 1
+      enterTransition: 2
+      exitTransition: 1
+      speakSound: {fileID: 8300000, guid: 9717b64cc4d28224a9b7a3d48ff741bd, type: 3}
+      speakSoundVolume: 1
+      startSpeed: 0.05
+      unskippable: 0
+      autoSkip: 0
+      autoSkipSpeed: 0.5
+      freezePlayer: 1
+      colors: []
+      events: []
+      voices: []
+  - scoreMinimum: 111.3
+    dialogue:
+      name: 
+      texts:
+      - text: "You\u2019ve won\u2026 but I would not say you\u2019ve proven yourself."
+        startEvent:
+          m_PersistentCalls:
+            m_Calls: []
+        endEvent:
+          m_PersistentCalls:
+            m_Calls: []
+      fontSize: 70
+      icon: {fileID: 0}
+      font: {fileID: 11400000, guid: 33271129f12b05d48ae7750fe693c544, type: 2}
+      startColor: {r: 1, g: 1, b: 1, a: 1}
+      BackgroundColor: {r: 1, g: 1, b: 1, a: 1}
+      hideBG: 0
+      alignment: 0
+      showAtTop: 1
+      enterTransition: 2
+      exitTransition: 1
+      speakSound: {fileID: 8300000, guid: 9717b64cc4d28224a9b7a3d48ff741bd, type: 3}
+      speakSoundVolume: 1
+      startSpeed: 0.05
+      unskippable: 0
+      autoSkip: 0
+      autoSkipSpeed: 0.5
+      freezePlayer: 1
+      colors: []
+      events: []
+      voices: []
+  - scoreMinimum: 148.4
+    dialogue:
+      name: 
+      texts:
+      - text: Congratulations. A passing grade.
+        startEvent:
+          m_PersistentCalls:
+            m_Calls: []
+        endEvent:
+          m_PersistentCalls:
+            m_Calls: []
+      fontSize: 70
+      icon: {fileID: 0}
+      font: {fileID: 11400000, guid: 33271129f12b05d48ae7750fe693c544, type: 2}
+      startColor: {r: 1, g: 1, b: 1, a: 1}
+      BackgroundColor: {r: 1, g: 1, b: 1, a: 1}
+      hideBG: 0
+      alignment: 0
+      showAtTop: 1
+      enterTransition: 2
+      exitTransition: 1
+      speakSound: {fileID: 8300000, guid: 9717b64cc4d28224a9b7a3d48ff741bd, type: 3}
+      speakSoundVolume: 1
+      startSpeed: 0.05
+      unskippable: 0
+      autoSkip: 0
+      autoSkipSpeed: 0.5
+      freezePlayer: 1
+      colors: []
+      events: []
+      voices: []
+  - scoreMinimum: 185.5
+    dialogue:
+      name: 
+      texts:
+      - text: You stand victorious. Today, you have truly proven yourself.
         startEvent:
           m_PersistentCalls:
             m_Calls: []

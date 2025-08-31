@@ -148,9 +148,11 @@ public class ItemPickupArena : ArenaHolder
 
         foreach (var dialogue in orderedDialogues)
         {
-            if (dialogue.scoreMinimum <= GameManager.Get().Score)
+            if (dialogue.scoreMinimum >= GameManager.Get().Score)
             {
                 dialogue.dialogue.name = "endDia";
+                var guysManager = Object.FindAnyObjectByType<CouncilGuys>();
+                guysManager.PlayTalking();
                 DialogueManager.Get().createDialogue(dialogue.dialogue).OnDialogueComplete += GameComplete;
                 break;
             }
