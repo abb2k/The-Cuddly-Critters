@@ -7,6 +7,8 @@ public class PenguinArenaGyser : MonoBehaviour, IAnimCallbackReciever
     [SerializeField] private Vector2 minMaxActivationTime;
     [SerializeField] private float eruptionForce;
     [SerializeField] private GameObject fishPrefab;
+    [SerializeField] private AudioClip prepSound;
+    [SerializeField] private AudioClip eruptSound;
 
     private bool isOngoing = false;
     private bool spawnFishOnCurrentEruption = false;
@@ -38,6 +40,8 @@ public class PenguinArenaGyser : MonoBehaviour, IAnimCallbackReciever
         spawnFishOnCurrentEruption = fish;
 
         GetComponent<Animator>().Play("GyserErput");
+
+        AudioManager.PlayTemporarySource(prepSound, 1, 3);
     }
 
 
@@ -59,6 +63,8 @@ public class PenguinArenaGyser : MonoBehaviour, IAnimCallbackReciever
             fishBody.AddForceX(Random.value - .5f, ForceMode2D.Impulse);
             fishBody.AddTorque(eruptionForce / 10, ForceMode2D.Impulse);
         }
+
+        AudioManager.PlayTemporarySource(eruptSound);
 
         bodiesInRange.ForEach(body =>
         {

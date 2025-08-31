@@ -19,9 +19,11 @@ public class FallingCarrot : MonoBehaviour
     [SerializeField] private Vector2 openOffset;
     [SerializeField] private Vector2 openSize;
     [SerializeField] private BoxCollider2D hitbox;
+    [SerializeField] private AudioClip carrotPopup;
     private Vector2 closedOffset;
     private Vector2 closedSize;
     Sequence upDownLoop = null;
+    public bool doPlaySound;
 
     void Start()
     {
@@ -85,6 +87,9 @@ public class FallingCarrot : MonoBehaviour
 
         hitbox.size = isClosed ? closedSize : openSize;
         hitbox.offset = isClosed ? closedOffset : openOffset;
+
+        if (!isClosed && doPlaySound)
+            AudioManager.PlayTemporarySource(carrotPopup, 1, 1, "LowerCarrotWoosh");
     }
 
     void OnTriggerEnter2D(Collider2D collision)

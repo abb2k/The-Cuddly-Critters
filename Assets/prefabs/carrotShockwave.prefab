@@ -53,6 +53,7 @@ MonoBehaviour:
   carrotStayTime: 0.5
   carrotDownOffset: 10
   carrotTransitionTime: 0.2
+  carrotPopup: {fileID: 8300000, guid: 8a034cdb0a574464a9f896f5c614f33e, type: 3}
   damage:
     damageSource: {fileID: 0}
     damage: 0

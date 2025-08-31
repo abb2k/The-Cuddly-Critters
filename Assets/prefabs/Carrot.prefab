@@ -198,6 +198,7 @@ MonoBehaviour:
   openOffset: {x: 0, y: -0.45}
   openSize: {x: 0.85, y: 2.77}
   hitbox: {fileID: 1441774693267464963}
+  carrotPopup: {fileID: 8300000, guid: 8a034cdb0a574464a9f896f5c614f33e, type: 3}
 --- !u!50 &1219809126548118037
 Rigidbody2D:
   serializedVersion: 5

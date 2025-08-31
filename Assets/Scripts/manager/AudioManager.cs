@@ -13,6 +13,7 @@ public class AudioManager : Singleton<AudioManager>
 {
     private readonly Dictionary<string, AudioSource> _stableSources = new();
     private readonly Dictionary<string, (Coroutine, AudioSource)> _temporarySources = new();
+    private readonly List<AudioSource> _unnamedSources = new();
     private readonly ObjectPool<GameObject> _audioPool = new ObjectPool<GameObject>(
         createFunc: () =>
         {
@@ -26,17 +27,26 @@ public class AudioManager : Singleton<AudioManager>
 
             return obj;
         },
-        actionOnGet: obj => obj.SetActive(true),
+        actionOnGet: obj =>
+        {
+            obj.SetActive(true);
+            var audio = obj.AddComponent<AudioSource>();
+            audio.loop = false;
+            audio.volume = 1;
+        },
         actionOnRelease: obj =>
         {
             OnSourceReleased?.Invoke(obj.GetComponent<AudioSource>());
             obj.SetActive(false);
-            obj.GetComponent<AudioSource>().Stop();
+            var audio = obj.AddComponent<AudioSource>();
+            audio.Stop();
+            audio.loop = false;
+            audio.volume = 1;
             obj.GetComponent<FollowObject>().target = null;
         }
     );
 
-    private static readonly int _maxAudioPoolSize = 50;
+    private static readonly int _maxAudioPoolSize = 150;
 
     private static AudioListener _currentActiveLisener = null;
 
@@ -81,6 +91,7 @@ public class AudioManager : Singleton<AudioManager>
 
         var createdSource = audioObject.GetComponent<AudioSource>();
         createdSource.clip = clip;
+        createdSource.loop = false;
         createdSource.volume = 1;
         createdSource.outputAudioMixerGroup = Get()._mainMixer.FindMatchingGroups("Master").FirstOrDefault();
 
@@ -89,6 +100,36 @@ public class AudioManager : Singleton<AudioManager>
         Get()._stableSources.Add(sourceName, createdSource);
 
         return createdSource;
+    }
+
+    public static AudioSource CreateUnnamedSource(AudioClip clip = null, GameObject audioOrigin = null)
+    {
+        GameObject audioObject = null;
+
+        audioObject ??= Get()._audioPool.TryGet(_maxAudioPoolSize);
+        if (audioObject == null) return null;
+
+        audioOrigin ??= (GetActiveLisener().gameObject ?? null);
+
+        var createdSource = audioObject.GetComponent<AudioSource>();
+        createdSource.clip = clip;
+        createdSource.loop = false;
+        createdSource.volume = 1;
+        createdSource.outputAudioMixerGroup = Get()._mainMixer.FindMatchingGroups("Master").FirstOrDefault();
+
+        audioObject.GetComponent<FollowObject>().target = audioOrigin.transform;
+
+        Get()._unnamedSources.Add(createdSource);
+
+        return createdSource;
+    }
+
+    public static void RemoveUnnamedSource(AudioSource source)
+    {
+        if (!Get()._unnamedSources.Contains(source)) return;
+        
+        Get()._audioPool.Release(source.gameObject);
+        Get()._unnamedSources.Remove(source);
     }
 
     /// <summary>
@@ -147,6 +188,7 @@ public class AudioManager : Singleton<AudioManager>
         var createdSource = audioObject.GetComponent<AudioSource>();
         createdSource.clip = clip;
         createdSource.volume = volume;
+        createdSource.loop = false;
         createdSource.outputAudioMixerGroup = Get()._mainMixer.FindMatchingGroups("Master").FirstOrDefault();
 
         audioObject.GetComponent<FollowObject>().target = audioOrigin.transform;

@@ -173,6 +173,18 @@ MonoBehaviour:
   - {fileID: 4777531943638282051}
   - {fileID: 8045554838920843008}
   hpBar: {fileID: 6504091248965641954}
+  footstepSounds:
+  - {fileID: 8300000, guid: 93d53227e020ddb47b19d41ee0230f1b, type: 3}
+  - {fileID: 8300000, guid: 631beaefb063ea2478047e3fe8e3fabb, type: 3}
+  - {fileID: 8300000, guid: a0f24d2ecffce0d4fa37251b1ddaf4f4, type: 3}
+  stepPlayDelay: 0.3
+  hurtSound: {fileID: 8300000, guid: dfcf4eca4d2d4fe4b9b312ce78f450dc, type: 3}
+  jumpSounds:
+  - {fileID: 8300000, guid: 13f0041ac97d04f4f90cda3fe469f929, type: 3}
+  - {fileID: 8300000, guid: b8ba7b7be2bf7ac4591acccb8dfc0fbc, type: 3}
+  attackSounds:
+  - {fileID: 8300000, guid: ee392e8ada8064b4499029f255f75228, type: 3}
+  - {fileID: 8300000, guid: 77ee209e2e570f84aad72bfd65039ae4, type: 3}
   anim: {fileID: 2459954378835368413}
   health: 0
   deathDialogue:

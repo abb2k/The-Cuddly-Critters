@@ -92,6 +92,10 @@ MonoBehaviour:
   maxEdges: {x: -21.5, y: 21.5}
   sr: {fileID: 5422962804920549967}
   anim: {fileID: 5644086437345962854}
+  wingFlapSound:
+  - {fileID: 8300000, guid: f3710c56b4b436440a1001ea82f47e6a, type: 3}
+  - {fileID: 8300000, guid: e72a173713904bd4090d0da82d692f06, type: 3}
+  hootSFX: {fileID: 8300000, guid: 1be243c507e2d404e97769cefb367939, type: 3}
   entryPoint: {x: 0, y: 5}
   entryDownOffset: -20
   entryWaitTime: 0.5
@@ -115,6 +119,7 @@ MonoBehaviour:
     damage: 10
     knockbackNormal: {x: 0, y: 0}
     knockbackStrength: 0
+  diveWooshSFX: {fileID: 8300000, guid: 60ca895a454f4f9489c858c46f16c7cb, type: 3}
   swoopCenterPos: {x: 0, y: 0}
   swoopDistance: 8
   swoopEntryTime: 2
@@ -222,6 +227,7 @@ GameObject:
   - component: {fileID: 8941133135877986821}
   - component: {fileID: 5422962804920549967}
   - component: {fileID: 5644086437345962854}
+  - component: {fileID: 6116833400982559417}
   m_Layer: 7
   m_Name: visual
   m_TagString: Untagged
@@ -324,6 +330,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &6116833400982559417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4702310845811118701}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecc3b9cfeb4af2c49bfa85bf005cab19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  mainOwl: {fileID: 2794797493209240024}
 --- !u!1 &9130454863410757310
 GameObject:
   m_ObjectHideFlags: 0

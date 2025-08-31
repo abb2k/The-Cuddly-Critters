@@ -7894,6 +7894,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   minVerticalImpact: 38
+  hardHitSound: {fileID: 8300000, guid: 5aa0ea1f9b60d26419e777e4778df73d, type: 3}
 --- !u!1 &436556820
 GameObject:
   m_ObjectHideFlags: 0

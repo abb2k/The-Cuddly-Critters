@@ -383,6 +383,8 @@ MonoBehaviour:
     damage: 15
     knockbackNormal: {x: 0, y: 0}
     knockbackStrength: 0
+  burrowEnterSFX: {fileID: 8300000, guid: 26f64c6a86b855d4c8285d87e31dcbfc, type: 3}
+  burrowExitSFX: {fileID: 8300000, guid: 1215af7faacae59478a98c5315e4b5a2, type: 3}
   jumpPrepTime: 0.2
   jumpEntryTime: 1
   jumpHeightOffset: 2.5
@@ -401,6 +403,7 @@ MonoBehaviour:
     damage: 10
     knockbackNormal: {x: 0, y: 0}
     knockbackStrength: 0
+  shockwaveSFX: {fileID: 8300000, guid: c73886a43825fa4469404377a3730efa, type: 3}
   CSPos: {x: 0, y: 9.5}
   CSEntryTime: 1.5
   CSStayTime: 8
@@ -419,9 +422,11 @@ MonoBehaviour:
     damage: 4
     knockbackNormal: {x: 0, y: 0}
     knockbackStrength: 0
+  carrotThrowSFX: {fileID: 8300000, guid: 3cee69628795ec640a4b9bcb786570c9, type: 3}
   attackToBeTired: {x: 5, y: 8}
   tiredTime: 5
   tiredRecoverTime: 0
+  tiredSFX: {fileID: 8300000, guid: 6a0d82932872e0944b821ce0b3a124b1, type: 3}
   escapeXpos: 24
   escapeTime: 1.5
   deathHeight: -17

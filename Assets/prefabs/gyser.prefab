@@ -50,6 +50,8 @@ MonoBehaviour:
   minMaxActivationTime: {x: 8, y: 15}
   eruptionForce: 25
   fishPrefab: {fileID: 6323939010002483124, guid: 32de7185155df5042a8569cf22d48ee8, type: 3}
+  prepSound: {fileID: 8300000, guid: 1134387ba142ba345816abe2a220fcef, type: 3}
+  eruptSound: {fileID: 8300000, guid: 21896ef18ff22214ba5987083d8a17bd, type: 3}
 --- !u!212 &4523812652008634891
 SpriteRenderer:
   m_ObjectHideFlags: 0

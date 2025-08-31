@@ -671,6 +671,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TreeBranch
   myLight: {fileID: 2774524887638487380}
+  shakeSFX: {fileID: 8300000, guid: 5dc2f8c6a8b7b0247b65c71f82a37270, type: 3}
 --- !u!61 &4309630844296197544
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1043,6 +1044,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TreeBranchLight
   myLight: {fileID: 8943216810881977386}
+  turnOnSFX: {fileID: 8300000, guid: 69b2770b3ea48eb479972ac643dbba20, type: 3}
+  turnOffSFX: {fileID: 8300000, guid: f3710c56b4b436440a1001ea82f47e6a, type: 3}
   isOn: 0
   mySprite: {fileID: 6696367924498193710}
 --- !u!58 &6739970850426065843

@@ -41,6 +41,7 @@ public class Penguin : BossEnemy, IHitReciever
     [SerializeField] private Vector2 minMaxSlideForce;
     [SerializeField] private Vector2 slideTime;
     [SerializeField] private DamageInfo slideDamage;
+    [SerializeField] private AudioClip slideSFX;
 
     [Header("HalfCircleState")]
     [SerializeField] private float halfCirclePrepWaitTime;
@@ -57,6 +58,7 @@ public class Penguin : BossEnemy, IHitReciever
 
     [Header("EatState")]
     [SerializeField] private float eatWaitTime;
+    [SerializeField] private AudioClip eatSFX;
     private bool collectedFish;
 
     [Header("Death/Escape")]
@@ -74,6 +76,11 @@ public class Penguin : BossEnemy, IHitReciever
         rb = GetComponent<Rigidbody2D>();
         ArenaManager.Get().OnArenaChangedStart += OnArenaChanged;
         base.Start();
+
+        var source = AudioManager.CreateStableSource("PenguinSlide", slideSFX);
+        source.loop = true;
+        source.Play();
+        source.volume = 0;
 
         resistence = normalResistence;
     }
@@ -186,6 +193,7 @@ public class Penguin : BossEnemy, IHitReciever
         anim.Play("EatwFish");
         resistence = eatingResistence;
         faceTowardPlayer = false;
+        AudioManager.PlayTemporarySource(eatSFX);
         currentSeq = DOTween.Sequence().AppendInterval(eatWaitTime).AppendCallback(() =>
         {
             collectedFish = false;
@@ -202,10 +210,12 @@ public class Penguin : BossEnemy, IHitReciever
             .AppendInterval(slidePrepWaitTime)
             .AppendCallback(() =>
             {
+                AudioManager.GetStableSource("PenguinSlide").volume = 1;
                 rb.AddForceX(Random.Range(minMaxSlideForce.x, minMaxSlideForce.y) * GetDirToPlayer(), ForceMode2D.Impulse);
             })
             .AppendInterval(Random.Range(slideTime.x, slideTime.y)).AppendCallback(() =>
             {
+                AudioManager.GetStableSource("PenguinSlide").volume = 0;
                 anim.SetBool("isSliding", false);
                 OnStateEnded();
             });
@@ -219,10 +229,12 @@ public class Penguin : BossEnemy, IHitReciever
             .AppendInterval(halfCirclePrepWaitTime)
             .AppendCallback(() =>
             {
+                AudioManager.GetStableSource("PenguinSlide").volume = 1;
                 rb.AddForceX(halfCircleForce * GetDirToPlayer(), ForceMode2D.Impulse);
             })
             .AppendInterval(halfCircleWaitTime).AppendCallback(() =>
             {
+                AudioManager.GetStableSource("PenguinSlide").volume = 0;
                 anim.SetBool("isSliding", false);
                 OnStateEnded();
             });
@@ -237,12 +249,17 @@ public class Penguin : BossEnemy, IHitReciever
         FaceTowardPlayer();
 
         currentSeq = DOTween.Sequence()
-            .AppendCallback(() => rb.AddForceX(fullCirclePrepForce * (dir * -1), ForceMode2D.Impulse))
+            .AppendCallback(() =>
+            {
+                rb.AddForceX(fullCirclePrepForce * (dir * -1), ForceMode2D.Impulse);
+                AudioManager.GetStableSource("PenguinSlide").volume = 1;
+            })
             .AppendInterval(fullCirclePrepWaitTime)
             .AppendCallback(() => rb.AddForceX(fullCircleForce * dir, ForceMode2D.Impulse))
             .AppendInterval(fullCircleWaitTime)
             .AppendCallback(() =>
             {
+                AudioManager.GetStableSource("PenguinSlide").volume = 0;
                 anim.SetBool("isSliding", false);
                 OnStateEnded();
             });
@@ -256,6 +273,8 @@ public class Penguin : BossEnemy, IHitReciever
         transform.DOKill();
         if (currentSeq != null)
             currentSeq.Kill();
+
+        AudioManager.DeleteStableSource("PenguinSlide");
 
         if (loadPickupArena)
             ArenaManager.Get().OpenUpArena("ItemPickupArena", null, defeatDialogue);

@@ -28,6 +28,9 @@ public class Owl : BossEnemy, IHitReciever
 
     [SerializeField] private Animator anim;
 
+    [SerializeField] private AudioClip[] wingFlapSound;
+    [SerializeField] private AudioClip hootSFX;
+
     [Header("EntryAnimation")]
     [SerializeField] private Vector2 entryPoint;
     [SerializeField] private float entryDownOffset;
@@ -49,6 +52,7 @@ public class Owl : BossEnemy, IHitReciever
     [SerializeField] private float diveExitTime;
     [SerializeField] private Vector2 exitOffset;
     [SerializeField] private DamageInfo nosediveInfo;
+    [SerializeField] private AudioClip diveWooshSFX;
 
     [Header("Swoop")]
     [SerializeField] private Vector2 swoopCenterPos;
@@ -123,7 +127,7 @@ public class Owl : BossEnemy, IHitReciever
             else
                 sr.transform.localEulerAngles = new Vector3(0, 0, 0);
         }
-        
+
 
         if (isWooshing)
         {
@@ -212,6 +216,8 @@ public class Owl : BossEnemy, IHitReciever
         if (currentIdleAttack != null)
             StopCoroutine(currentIdleAttack);
         currentIdleAttack = StartCoroutine(IdleAttackTimer(idleTime, sideSpeed));
+
+        AudioManager.PlayTemporarySource(hootSFX);
     }
 
     IEnumerator IdleAttackTimer(float idleTime, float sideSpeed)
@@ -303,6 +309,8 @@ public class Owl : BossEnemy, IHitReciever
         {
             foreach (var branch in owlArena.branches) branch.ShakeFor(swoopBranchShakeTime);
 
+            AudioManager.PlayTemporarySource(diveWooshSFX);
+
             currentSwoopFollow = StartCoroutine(FollowSwoopPos());
         });
         currentSeq.AppendCallback(() =>
@@ -351,9 +359,11 @@ public class Owl : BossEnemy, IHitReciever
             transform.DOMoveX(playerPos.x, diveEntryTime)
                 .SetEase(Ease.InBack)
         );
-        currentSeq.JoinCallback(() => {
+        currentSeq.JoinCallback(() =>
+        {
             transform.eulerAngles = (Player.Get().transform.position - transform.position).x > 0 ? new Vector3(0, 0, 90) : new Vector3(0, 0, -90);
             anim.Play("OwlDive");
+            AudioManager.PlayTemporarySource(diveWooshSFX);
         });
         currentSeq.Join(
             transform.DOMoveY(playerPos.y, diveEntryTime / 1.1f)
@@ -368,7 +378,8 @@ public class Owl : BossEnemy, IHitReciever
                 .SetEase(Ease.InOutSine)
         );
         currentSeq.Join(transform.DORotate(Vector3.zero, diveExitTime / 2f).SetEase(Ease.InOutSine));
-        currentSeq.JoinCallback(() => {
+        currentSeq.JoinCallback(() =>
+        {
             transform.eulerAngles = new Vector3(0, 0, 0);
             anim.Play("OwlOpenWings");
         });
@@ -385,9 +396,11 @@ public class Owl : BossEnemy, IHitReciever
         seq.AppendInterval(entryWaitTime);
         seq.Append(transform.DOMove(entryPoint, entryFlyTime).SetEase(Ease.OutBack));
         seq.AppendInterval(entryStayTime);
-        seq.JoinCallback(() => {
+        seq.JoinCallback(() =>
+        {
             anim.Play("OwlLookAround");
             showName?.Invoke("Owl");
+            AudioManager.PlayTemporarySource(hootSFX);
         });
         seq.AppendCallback(() =>
         {
@@ -479,5 +492,10 @@ public class Owl : BossEnemy, IHitReciever
 
             player.GetComponent<IHittable>().OnHit(damage);
         }
+    }
+
+    public void OnWingFlap()
+    {
+        AudioManager.PlayTemporarySource(wingFlapSound[Random.Range(0, wingFlapSound.Length)], 1, 1, "OwlWingFlap");
     }
 }
