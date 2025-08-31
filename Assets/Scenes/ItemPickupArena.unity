@@ -365,6 +365,20 @@ MonoBehaviour:
       endEvent:
         m_PersistentCalls:
           m_Calls: []
+    - text: "Use WASD and Space to move\r"
+      startEvent:
+        m_PersistentCalls:
+          m_Calls: []
+      endEvent:
+        m_PersistentCalls:
+          m_Calls: []
+    - text: Left click to attack and E to take/place items
+      startEvent:
+        m_PersistentCalls:
+          m_Calls: []
+      endEvent:
+        m_PersistentCalls:
+          m_Calls: []
     - text: The strongest item might be tempting.
       startEvent:
         m_PersistentCalls:
@@ -844,6 +858,7 @@ GameObject:
   - component: {fileID: 2075624750}
   - component: {fileID: 2075624755}
   - component: {fileID: 2075624754}
+  - component: {fileID: 2075624756}
   m_Layer: 8
   m_Name: hitboxes
   m_TagString: Untagged
@@ -1621,6 +1636,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.7887039, y: 26.629543}
   m_EdgeRadius: 0
+--- !u!114 &2075624756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2075624737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20ba9c6dc1f14f44b8bc72429e79eced, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Platform
+  movementAction: {fileID: -1680190386980627800, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
 --- !u!1001 &91583400064694203
 PrefabInstance:
   m_ObjectHideFlags: 0

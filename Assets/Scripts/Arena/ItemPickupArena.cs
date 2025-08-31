@@ -37,6 +37,7 @@ public class ItemPickupArena : ArenaHolder
 
         for (int i = 0; i < GameManager.Get().ItemsAvailable.Count; i++)
         {
+            if (GameManager.Get().ItemsAvailable[i] == Player.Get().ItemEquipped) continue;
             pedestals[i].SetItem(GameManager.Get().ItemsAvailable[i]);
         }
     }

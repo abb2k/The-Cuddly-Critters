@@ -89,11 +89,12 @@ public class ArenaManager : Singleton<ArenaManager>
     void OnBossName(string name)
     {
         BossbarManager.Get().bossbarCanvas.ShowName(name);
+        Player.Get().GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
     }
 
     void OnBossStart()
     {
-
+        Player.Get().GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
     }
 
     public T GetCurrentArena<T>() where T : class

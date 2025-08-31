@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
 
-public class PenguinArena : ArenaHolder
+public class PenguinArena : ArenaHolder, IHitReciever
 {
     public PenguinArenaGyser[] gysers;
     [SerializeField] private float goUpTime;
@@ -36,6 +36,7 @@ public class PenguinArena : ArenaHolder
         didBattleStart = true;
         ArenaManager.Get().PlayGlobalArenaMusic(bgMusic, .1f, 1);
     }
+
     public override IEnumerator RunExitAnim()
     {
         topCollider.enabled = false;
@@ -54,5 +55,11 @@ public class PenguinArena : ArenaHolder
 
         yield return new WaitForSeconds(goUpTime);
         topCollider.enabled = true;
+    }
+
+    public void HitRecieved(int hitID, IHitReciever.HitType type, bool isTriggerHit, Colliders other)
+    {
+        if (hitID == 1 && other.collider2D.TryGetComponent(out Penguin _))
+            topCollider.enabled = true;
     }
 }
