@@ -66,8 +66,6 @@ public class Player : Singleton<Player>, IHitReciever, IHittable
         rb = GetComponent<Rigidbody2D>();
         RevivePlayer();
 
-        Application.targetFrameRate = 20;
-
         StartCoroutine(Footsteps());
 
         ArenaManager.Get();

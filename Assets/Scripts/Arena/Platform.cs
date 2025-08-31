@@ -23,7 +23,6 @@ public class Platform : MonoBehaviour
     public void OnClicked(InputAction.CallbackContext context)
     {
         Vector2 move = context.ReadValue<Vector2>();
-        Debug.Log(move);
 
         if (move.y < 0)
         {
