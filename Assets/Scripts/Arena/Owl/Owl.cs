@@ -425,7 +425,7 @@ public class Owl : BossEnemy, IHitReciever
             StopCoroutine(currentSwoopFollow);
 
         if (loadPickupArena)
-            ArenaManager.Get().OpenUpArena("ItemPickupArena", null, defeatDialogue);
+            ArenaManager.Get().OpenUpArena("ItemPickupArena", null, defeatDialogue, true);
     }
 
     protected override void OnDeath()

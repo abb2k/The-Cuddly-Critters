@@ -77,7 +77,7 @@ public class Penguin : BossEnemy, IHitReciever
         ArenaManager.Get().OnArenaChangedStart += OnArenaChanged;
         base.Start();
 
-        var source = AudioManager.CreateStableSource("PenguinSlide", slideSFX);
+        var source = AudioManager.CreateStableSource("PenguinSlide", slideSFX, false, "SFX");
         source.loop = true;
         source.Play();
         source.volume = 0;
@@ -277,7 +277,7 @@ public class Penguin : BossEnemy, IHitReciever
         AudioManager.DeleteStableSource("PenguinSlide");
 
         if (loadPickupArena)
-            ArenaManager.Get().OpenUpArena("ItemPickupArena", null, defeatDialogue);
+            ArenaManager.Get().OpenUpArena("ItemPickupArena", null, defeatDialogue, true);
     }
 
     protected override void OnDeath()

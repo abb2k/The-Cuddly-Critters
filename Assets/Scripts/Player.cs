@@ -388,6 +388,6 @@ public class Player : Singleton<Player>, IHitReciever, IHittable
 
         isDead = true;
         
-        ArenaManager.Get().OpenUpArena("ItemPickupArena", null, deathDialogue);
+        ArenaManager.Get().OpenUpArena("ItemPickupArena", null, deathDialogue, false);
     }
 }

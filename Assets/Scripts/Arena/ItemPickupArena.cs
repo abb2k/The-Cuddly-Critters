@@ -48,11 +48,22 @@ public class ItemPickupArena : ArenaHolder
     void StartDialogue()
     {
         ArenaManager.Get().RunCamChake(3, 1);
-        DialogueManager.Get().createDialogue(startDialogue).OnDialogueComplete += () => GameManager.Get().isInSeqance = false;
+        var guysManager = Object.FindAnyObjectByType<CouncilGuys>();
+        guysManager.PlayTalking();
+        DialogueManager.Get().createDialogue(startDialogue).OnDialogueComplete += () =>
+        {
+            GameManager.Get().isInSeqance = false;
+            var guysManager = Object.FindAnyObjectByType<CouncilGuys>();
+            guysManager.PlayIdle();
+        };
     }
 
     public override IEnumerator RunEntryAnim()
     {
+        var guysManager = Object.FindAnyObjectByType<CouncilGuys>();
+        guysManager.EnableAll();
+        guysManager.PlayIdle();
+
         bool isInProgress = true;
         GameManager.Get().isInSeqance = true;
 
@@ -84,6 +95,9 @@ public class ItemPickupArena : ArenaHolder
 
     public override IEnumerator RunExitAnim()
     {
+        var guysManager = Object.FindAnyObjectByType<CouncilGuys>();
+        guysManager.DisableAll();
+
         GameManager.Get().isInSeqance = true;
         DOTween.To(() => ArenaManager.Get().templeBG.color.a * 255, x =>
         {
@@ -110,6 +124,17 @@ public class ItemPickupArena : ArenaHolder
         if (GameManager.Get().progressIndex == 3)
         {
             StartCoroutine(WaitForEndingDialogue());
+        }
+
+        if (payload.Length >= 2)
+        {
+            var didWin = (bool)payload[1];
+            var guysManager = Object.FindAnyObjectByType<CouncilGuys>();
+            guysManager.EnableAll();
+            if (didWin)
+                guysManager.PlayWin();
+            else
+                guysManager.PlayLose();
         }
     }
 

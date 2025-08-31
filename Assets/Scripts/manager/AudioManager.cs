@@ -71,7 +71,7 @@ public class AudioManager : Singleton<AudioManager>
     /// if this is false the function will return null when finding a source with the same name</param>
     /// <param name="audioOrigin">The origin of the audio, when null the source is the found audio listener</param>
     /// <returns>the newly created audio source</returns>
-    public static AudioSource CreateStableSource(string sourceName, AudioClip clip = null, bool overrideExistingSource = false, GameObject audioOrigin = null)
+    public static AudioSource CreateStableSource(string sourceName, AudioClip clip = null, bool overrideExistingSource = false, string mixerChannel = "Music", GameObject audioOrigin = null)
     {
         if (Get()._stableSources.TryGetValue(sourceName, out var sameNamedSource) && !overrideExistingSource)
             return null;
@@ -93,7 +93,7 @@ public class AudioManager : Singleton<AudioManager>
         createdSource.clip = clip;
         createdSource.loop = false;
         createdSource.volume = 1;
-        createdSource.outputAudioMixerGroup = Get()._mainMixer.FindMatchingGroups("Master").FirstOrDefault();
+        createdSource.outputAudioMixerGroup = Get()._mainMixer.FindMatchingGroups(mixerChannel).FirstOrDefault();
 
         audioObject.GetComponent<FollowObject>().target = audioOrigin.transform;
 
@@ -102,7 +102,7 @@ public class AudioManager : Singleton<AudioManager>
         return createdSource;
     }
 
-    public static AudioSource CreateUnnamedSource(AudioClip clip = null, GameObject audioOrigin = null)
+    public static AudioSource CreateUnnamedSource(AudioClip clip = null, string mixerChannel = "SFX", GameObject audioOrigin = null)
     {
         GameObject audioObject = null;
 
@@ -115,7 +115,7 @@ public class AudioManager : Singleton<AudioManager>
         createdSource.clip = clip;
         createdSource.loop = false;
         createdSource.volume = 1;
-        createdSource.outputAudioMixerGroup = Get()._mainMixer.FindMatchingGroups("Master").FirstOrDefault();
+        createdSource.outputAudioMixerGroup = Get()._mainMixer.FindMatchingGroups(mixerChannel).FirstOrDefault();
 
         audioObject.GetComponent<FollowObject>().target = audioOrigin.transform;
 
@@ -168,7 +168,7 @@ public class AudioManager : Singleton<AudioManager>
     /// <param name="overrideExistingSource">If you play a temporary source when an already playing source has this the overrideKey, The playing source will be overwirtten by the new one</param>
     /// <param name="audioOrigin">The origin of the audio, when null the source is the found audio listener</param>
     /// <returns>The created audio source</returns>
-    public static AudioSource PlayTemporarySource(AudioClip clip, float volume = 1, uint repeats = 1, string overrideExistingSource = null, GameObject audioOrigin = null)
+    public static AudioSource PlayTemporarySource(AudioClip clip, float volume = 1, uint repeats = 1, string overrideExistingSource = null, string mixerChannel = "SFX", GameObject audioOrigin = null)
     {
         if (clip == null) return null;
 
@@ -189,7 +189,7 @@ public class AudioManager : Singleton<AudioManager>
         createdSource.clip = clip;
         createdSource.volume = volume;
         createdSource.loop = false;
-        createdSource.outputAudioMixerGroup = Get()._mainMixer.FindMatchingGroups("Master").FirstOrDefault();
+        createdSource.outputAudioMixerGroup = Get()._mainMixer.FindMatchingGroups(mixerChannel).FirstOrDefault();
 
         audioObject.GetComponent<FollowObject>().target = audioOrigin.transform;
 

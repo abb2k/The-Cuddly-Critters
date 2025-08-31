@@ -214,7 +214,7 @@ MonoBehaviour:
     showAtTop: 1
     enterTransition: 2
     exitTransition: 1
-    speakSound: {fileID: 0}
+    speakSound: {fileID: 8300000, guid: 9717b64cc4d28224a9b7a3d48ff741bd, type: 3}
     speakSoundVolume: 1
     startSpeed: 0.05
     unskippable: 0

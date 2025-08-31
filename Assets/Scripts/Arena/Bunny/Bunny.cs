@@ -536,7 +536,7 @@ public class Bunny : BossEnemy, IHitReciever
             carrSpwn.Kill();
 
         if (loadPickupArena)
-            ArenaManager.Get().OpenUpArena("ItemPickupArena", null, defeatDialogue);
+            ArenaManager.Get().OpenUpArena("ItemPickupArena", null, defeatDialogue, true);
     }
 
     protected override void OnDeath()

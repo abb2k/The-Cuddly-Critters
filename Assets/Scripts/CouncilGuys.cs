@@ -6,6 +6,8 @@ public class CouncilGuys : MonoBehaviour
   
     public Animator mainCouncilGuy; 
     private Animator[] allCouncil;
+    [SerializeField] private AudioClip yaySound;
+    [SerializeField] private AudioClip booSound;
 
     void Awake()
     {
@@ -42,10 +44,18 @@ public class CouncilGuys : MonoBehaviour
     public void PlayTalking() { if (mainCouncilGuy) mainCouncilGuy.Play("MainCouncilGuyTalking"); }
 
     //should play shake head animation ater you lose along with boo sounds
-    public void PlayLose()    { if (mainCouncilGuy) mainCouncilGuy.Play("MainCouncilGuyShakeHead"); }
+    public void PlayLose()
+    {
+        if (mainCouncilGuy) mainCouncilGuy.Play("MainCouncilGuyShakeHead");
+        AudioManager.PlayTemporarySource(booSound);
+    }
 
     //should play win animation when you win along with applause sounds
-    public void PlayWin()     { if (mainCouncilGuy) mainCouncilGuy.Play("MainCouncilGuyCheering"); }
+    public void PlayWin()
+    {
+        if (mainCouncilGuy) mainCouncilGuy.Play("MainCouncilGuyCheering");
+        AudioManager.PlayTemporarySource(yaySound);
+    }
 
 
    

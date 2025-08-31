@@ -715,6 +715,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   mainCouncilGuy: {fileID: 687488723}
+  yaySound: {fileID: 8300000, guid: 7c18c78abd5655a4d9b2c1570b10315f, type: 3}
+  booSound: {fileID: 8300000, guid: e57f8f9e529142040ad23058b12609f5, type: 3}
 --- !u!4 &475956536
 Transform:
   m_ObjectHideFlags: 0
