@@ -358,7 +358,42 @@ MonoBehaviour:
       endEvent:
         m_PersistentCalls:
           m_Calls: []
-    - text: Be watchful, find the right moment to strike.
+    - text: "I\u2019ll offer you this advice...\r\r"
+      startEvent:
+        m_PersistentCalls:
+          m_Calls: []
+      endEvent:
+        m_PersistentCalls:
+          m_Calls: []
+    - text: The strongest item might be tempting.
+      startEvent:
+        m_PersistentCalls:
+          m_Calls: []
+      endEvent:
+        m_PersistentCalls:
+          m_Calls: []
+    - text: "Win, and victory may be well within your grasp.\r"
+      startEvent:
+        m_PersistentCalls:
+          m_Calls: []
+      endEvent:
+        m_PersistentCalls:
+          m_Calls: []
+    - text: Fall, and greater foes await with only curses at your side
+      startEvent:
+        m_PersistentCalls:
+          m_Calls: []
+      endEvent:
+        m_PersistentCalls:
+          m_Calls: []
+    - text: No enemy is without flaw. Watch closely.
+      startEvent:
+        m_PersistentCalls:
+          m_Calls: []
+      endEvent:
+        m_PersistentCalls:
+          m_Calls: []
+    - text: "Find the moment they are most vulnerable\u2026 then strike true.\r"
       startEvent:
         m_PersistentCalls:
           m_Calls: []
