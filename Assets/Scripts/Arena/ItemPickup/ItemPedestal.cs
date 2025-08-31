@@ -6,7 +6,8 @@ public class ItemPedestal : MonoBehaviour, IInteractable
     [SerializeField] private SpecialItem item;
     [SerializeField] private SpriteRenderer display;
     [SerializeField] private Canvas myCanvas;
-    [SerializeField] private DialogueSettings dialogueSettings;
+    [SerializeField] private DialogueSettings dialogueSettings; 
+    [SerializeField] private DialogueSettings cantPickupDia; 
     private Dialogue curr;
 
     private bool isCollidingWithPlayer;
@@ -75,6 +76,10 @@ public class ItemPedestal : MonoBehaviour, IInteractable
             Player.Get().EquipItem(null);
             if (isCollidingWithPlayer)
                 RunDialogue();
+        }
+        else if (item != null && Player.Get().ItemEquipped != null)
+        {
+            DialogueManager.Get().createDialogue(cantPickupDia);
         }
     }
 }

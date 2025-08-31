@@ -74,6 +74,36 @@ MonoBehaviour:
     colors: []
     events: []
     voices: []
+  cantPickupDia:
+    name: cant pick
+    texts:
+    - text: Return your current item to claim a new one...
+      startEvent:
+        m_PersistentCalls:
+          m_Calls: []
+      endEvent:
+        m_PersistentCalls:
+          m_Calls: []
+    fontSize: 70
+    icon: {fileID: 0}
+    font: {fileID: 11400000, guid: 33271129f12b05d48ae7750fe693c544, type: 2}
+    startColor: {r: 1, g: 1, b: 1, a: 1}
+    BackgroundColor: {r: 1, g: 1, b: 1, a: 1}
+    hideBG: 0
+    alignment: 0
+    showAtTop: 1
+    enterTransition: 2
+    exitTransition: 1
+    speakSound: {fileID: 8300000, guid: 9717b64cc4d28224a9b7a3d48ff741bd, type: 3}
+    speakSoundVolume: 1
+    startSpeed: 0.05
+    unskippable: 0
+    autoSkip: 0
+    autoSkipSpeed: 0.5
+    freezePlayer: 1
+    colors: []
+    events: []
+    voices: []
 --- !u!70 &2358816551454495992
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
