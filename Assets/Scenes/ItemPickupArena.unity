@@ -316,14 +316,14 @@ MonoBehaviour:
       endEvent:
         m_PersistentCalls:
           m_Calls: []
-    - text: You will face three foes
+    - text: You will face three foes.
       startEvent:
         m_PersistentCalls:
           m_Calls: []
       endEvent:
         m_PersistentCalls:
           m_Calls: []
-    - text: each stronger than the last.
+    - text: Each stronger than the last.
       startEvent:
         m_PersistentCalls:
           m_Calls: []
