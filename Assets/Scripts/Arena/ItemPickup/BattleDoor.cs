@@ -34,7 +34,7 @@ public class BattleDoor : MonoBehaviour, IInteractable
 
         DialogueText currDialogue = new DialogueText("You have not chosen an item,\nan item must be chosen to enter the arena.");
         if (Player.Get().ItemEquipped != null)
-            currDialogue = new DialogueText($"You have chosen the {Player.Get().ItemEquipped.itemName}.\nEnter if you are ready...");
+            currDialogue = new DialogueText($"You have chosen the {Player.Get().ItemEquipped.itemName}.\nEnter if you are ready...\n[E]");
 
         dialogueSettings.texts.Clear();
         dialogueSettings.texts.Add(currDialogue);

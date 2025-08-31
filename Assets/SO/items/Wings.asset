@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Wings
   m_EditorClassIdentifier: Assembly-CSharp::SpecialItem
   itemName: Wings
-  description: The Wings allow you to jump twice
+  description: 'The Wings allow you to jump twice
+
+    [E]'
   generalVisual: {fileID: -162720302111601175, guid: 19e147c25aaa0d9408d4334754af0b78, type: 3}
   bodyVisual: {fileID: 0}
   bodyVisualSorting: 0

@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: CursedBoots
   m_EditorClassIdentifier: Assembly-CSharp::SpecialItem
   itemName: Cursed Boots
-  description: The Cured Boots will only slow you down
+  description: 'The Cured Boots will only slow you down
+
+    [E]'
   generalVisual: {fileID: -586881307, guid: 4650691af5cff1b4d99b8fbd89c3bc39, type: 3}
   bodyVisual: {fileID: 0}
   bodyVisualSorting: 0
