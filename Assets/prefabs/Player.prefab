@@ -190,14 +190,14 @@ MonoBehaviour:
   deathDialogue:
     name: 
     texts:
-    - text: It appears you have lost this battle..
+    - text: You have been struck down...
       startEvent:
         m_PersistentCalls:
           m_Calls: []
       endEvent:
         m_PersistentCalls:
           m_Calls: []
-    - text: May the item you chose disappear
+    - text: The item you chose is lost to you, never to be seen again
       startEvent:
         m_PersistentCalls:
           m_Calls: []
