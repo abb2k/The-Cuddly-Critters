@@ -15,6 +15,7 @@ public class HPBar : MonoBehaviour
     private Vector2 originalSize;
 
     private Dictionary<float, Image> ticks = new();
+    private float oldTickVal;
 
     void Awake()
     {
@@ -24,8 +25,10 @@ public class HPBar : MonoBehaviour
     public void UpdateBar(float hp, float maxHP, bool refreshTicks = false)
     {
         float tickValue = maxHP / tickAmount;
-        if (ticks.Count != tickAmount || refreshTicks)
+        if (ticks.Count != tickAmount || oldTickVal != tickValue || refreshTicks)
             RefreshTicks(tickValue);
+
+        oldTickVal = tickValue;
 
         float currHPTickValue = hp;
 
@@ -68,10 +71,12 @@ public class HPBar : MonoBehaviour
             Destroy(child.gameObject);
         }
 
+        Debug.Log($"initilizing HP Bar, tickValue: {tickValue}, tickAmount: {tickAmount}");
+
         for (int i = 0; i < tickAmount; i++)
         {
             var newTick = Instantiate(tickPrefab, ticksContainer);
-            newTick.SetActive(true);        
+            newTick.SetActive(true);
 
             ticks.Add(tickValue * i, newTick.GetComponent<HPTick>().image);
         }

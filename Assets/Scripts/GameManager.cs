@@ -21,7 +21,6 @@ public class GameManager : Singleton<GameManager>
     public void AddProgress()
     {
         progressIndex++;
-        Debug.Log($"progress is {progressIndex}");
     }
 
     public void ResetProgress()

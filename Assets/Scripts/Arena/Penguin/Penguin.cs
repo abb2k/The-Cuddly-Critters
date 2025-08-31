@@ -72,7 +72,7 @@ public class Penguin : BossEnemy, IHitReciever
     protected override void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        ArenaManager.Get().OnArenaChanged += OnArenaChanged;
+        ArenaManager.Get().OnArenaChangedStart += OnArenaChanged;
         base.Start();
 
         resistence = normalResistence;

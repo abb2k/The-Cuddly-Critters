@@ -60,7 +60,6 @@ public class Owl : BossEnemy, IHitReciever
 
     private GameObject swoopCenter;
     private Transform swoopPos;
-    private bool isSwooping;
 
     [Header("Woosh")]
     [SerializeField] private float lightDetectRadius;
@@ -303,13 +302,11 @@ public class Owl : BossEnemy, IHitReciever
         currentSeq.JoinCallback(() =>
         {
             foreach (var branch in owlArena.branches) branch.ShakeFor(swoopBranchShakeTime);
-            isSwooping = true;
 
             currentSwoopFollow = StartCoroutine(FollowSwoopPos());
         });
         currentSeq.AppendCallback(() =>
         {
-            isSwooping = false;
             transform.DORotateQuaternion(Quaternion.identity, .1f).SetEase(Ease.OutSine);
             OnAttackComplete();
         });
